@@ -1,7 +1,6 @@
 
-import 'package:cosmetologist/constants/app_images.dart';
-import 'package:cosmetologist/constants/app_svg.dart';
-import 'package:flutter/cupertino.dart';
+import '/constants/app_images.dart';
+import '/constants/app_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

@@ -1,6 +1,6 @@
 
-import 'package:cosmetologist/core/extensions/context_extension.dart';
-import 'package:cosmetologist/core/extensions/number_extension.dart';
+import '/core/extensions/context_extension.dart';
+import '/core/extensions/number_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

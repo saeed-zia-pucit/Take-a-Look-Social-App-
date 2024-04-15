@@ -1,9 +1,9 @@
 
-import 'package:cosmetologist/constants/app_colors.dart';
-import 'package:cosmetologist/constants/app_svg.dart';
-import 'package:cosmetologist/core/extensions/number_extension.dart';
-import 'package:cosmetologist/core/router/router.dart';
-import 'package:cosmetologist/pages/sign_up_screens/about_term_privacy/presentation/pages/about_term_privacy.dart';
+import '/constants/app_colors.dart';
+import '/constants/app_svg.dart';
+import '/core/extensions/number_extension.dart';
+import '/core/router/router.dart';
+import '/pages/sign_up_screens/about_term_privacy/presentation/pages/about_term_privacy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';

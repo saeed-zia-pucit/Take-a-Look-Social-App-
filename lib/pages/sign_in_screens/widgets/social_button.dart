@@ -1,8 +1,8 @@
 
-import 'package:cosmetologist/constants/app_colors.dart';
-import 'package:cosmetologist/constants/app_svg.dart';
-import 'package:cosmetologist/core/extensions/context_extension.dart';
-import 'package:cosmetologist/core/extensions/number_extension.dart';
+import '/constants/app_colors.dart';
+import '/constants/app_svg.dart';
+import '/core/extensions/context_extension.dart';
+import '/core/extensions/number_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -1,7 +1,7 @@
 
-import 'package:cosmetologist/core/extensions/number_extension.dart';
-import 'package:cosmetologist/core/router/router.dart';
-import 'package:cosmetologist/pages/sign_in_screens/widgets/social_button.dart';
+import '/core/extensions/number_extension.dart';
+import '/core/router/router.dart';
+import '/pages/sign_in_screens/widgets/social_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';

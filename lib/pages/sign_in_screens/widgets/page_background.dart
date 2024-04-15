@@ -1,5 +1,5 @@
 
-import 'package:cosmetologist/core/extensions/context_extension.dart';
+import '/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 class PageBackground extends StatelessWidget {

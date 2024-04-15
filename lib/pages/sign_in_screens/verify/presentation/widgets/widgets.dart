@@ -1,6 +1,6 @@
 
-import 'package:cosmetologist/core/extensions/number_extension.dart';
-import 'package:cosmetologist/core/router/router.dart';
+import '/core/extensions/number_extension.dart';
+import '/core/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';

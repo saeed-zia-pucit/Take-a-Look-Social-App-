@@ -1,12 +1,12 @@
 
-import 'package:cosmetologist/constants/app_colors.dart';
-import 'package:cosmetologist/constants/app_images.dart';
-import 'package:cosmetologist/constants/app_svg.dart';
-import 'package:cosmetologist/core/extensions/number_extension.dart';
-import 'package:cosmetologist/core/widgets/avatar.dart';
-import 'package:cosmetologist/pages/sign_up_screens/profile/presentation/widgets/item_of_profile_post.dart';
-import 'package:cosmetologist/pages/sign_up_screens/profile/presentation/widgets/menu_view.dart';
-import 'package:cosmetologist/pages/sign_up_screens/profile/view_model/profile_view_model.dart';
+import '/constants/app_colors.dart';
+import '/constants/app_images.dart';
+import '/constants/app_svg.dart';
+import '/core/extensions/number_extension.dart';
+import '/core/widgets/avatar.dart';
+import '/pages/sign_up_screens/profile/presentation/widgets/item_of_profile_post.dart';
+import '/pages/sign_up_screens/profile/presentation/widgets/menu_view.dart';
+import '/pages/sign_up_screens/profile/view_model/profile_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';

@@ -1,8 +1,8 @@
 
-import 'package:cosmetologist/constants/app_svg.dart';
-import 'package:cosmetologist/core/extensions/number_extension.dart';
-import 'package:cosmetologist/core/router/router.dart';
-import 'package:cosmetologist/core/widgets/text_field_with_title.dart';
+import '/constants/app_svg.dart';
+import '/core/extensions/number_extension.dart';
+import '/core/router/router.dart';
+import '/core/widgets/text_field_with_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';

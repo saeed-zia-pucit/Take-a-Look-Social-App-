@@ -13,7 +13,7 @@ class ButtonsOfForm extends StatelessWidget {
           ElevatedButton(
             onPressed: () => context.push(
               RouteNames.profileSetupEdit,
-              extra: ProfileType.setup,
+              extra: SetupEditProfileType.setup,
             ),
             child: const Text('Sign Up'),
           ),

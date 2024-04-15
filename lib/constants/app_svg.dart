@@ -31,4 +31,5 @@ class AppSVG {
   static String save = '${path}save.svg';
   static String squareStackIcon = '${path}square_stack_icon.svg';
   static String deleteIcon = '${path}delete_icon.svg';
+  static String trashBasketIcon = '${path}trash_basket_icon.svg';
 }

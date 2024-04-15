@@ -2,13 +2,24 @@
 part of 'pages.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({super.key, required this.profilePageType});
+
+  final ProfilePageType profilePageType;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  late ProfilePageType profilePageType;
+
+  @override
+  void initState() {
+    profilePageType = widget.profilePageType;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<ProfileViewModel>();
@@ -24,11 +35,16 @@ class _ProfilePageState extends State<ProfilePage> {
             title: const Text('Profile'),
             actions: [
               TextButton(
-                onPressed: () => context.push(
-                  RouteNames.profileSetupEdit,
-                  extra: ProfileType.edit,
-                ),
-                child: const Text('Edit'),
+                onPressed: (profilePageType.isMine) ?
+                    () {
+                  context.push(
+                    RouteNames.profileSetupEdit,
+                    extra: SetupEditProfileType.edit,
+                  );
+                } : (){},
+                child: (profilePageType.isMine) ?
+                const Text('Edit') :
+                const Text('Follow') ,
               ),
             ],
           ),
@@ -246,4 +262,14 @@ class _ProfilePageState extends State<ProfilePage> {
       ],
     );
   }
+}
+
+enum ProfilePageType {
+  mine,
+  cosmetologist,
+}
+
+extension ProfilePageTypeExtension on ProfilePageType {
+  bool get isMine => ProfilePageType.mine == this;
+  bool get isCosmetologist => ProfilePageType.cosmetologist == this;
 }

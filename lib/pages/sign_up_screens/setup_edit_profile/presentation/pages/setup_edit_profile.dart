@@ -4,7 +4,7 @@ part of 'pages.dart';
 class SetupEditProfilePage extends StatefulWidget {
   const SetupEditProfilePage({super.key, required this.profileType});
 
-  final ProfileType profileType;
+  final SetupEditProfileType profileType;
 
   @override
   State<SetupEditProfilePage> createState() => _SetupEditProfilePageState();
@@ -12,7 +12,7 @@ class SetupEditProfilePage extends StatefulWidget {
 
 class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
 
-  late ProfileType profileType;
+  late SetupEditProfileType profileType;
 
   @override
   void initState() {
@@ -129,7 +129,10 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
               ElevatedButton(
                 onPressed: () =>
                 (profileType.isSetup) ?
-                context.pushReplacement(RouteNames.profile) :
+                context.pushReplacement(
+                  RouteNames.profile,
+                  extra: ProfilePageType.mine,
+                ) :
                 context.pop(),
                 child: const Text('Submit'),
               ),
@@ -142,11 +145,11 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
   }
 }
 
-enum ProfileType {
+enum SetupEditProfileType {
   setup, edit,
 }
 
-extension ProfileTypeExtension on ProfileType {
-  bool get isSetup => ProfileType.setup == this;
-  bool get isEdit => ProfileType.edit == this;
+extension SetupEditProfileTypeExtension on SetupEditProfileType {
+  bool get isSetup => SetupEditProfileType.setup == this;
+  bool get isEdit => SetupEditProfileType.edit == this;
 }

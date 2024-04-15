@@ -17,6 +17,8 @@ sealed class RouteNames {
   static const miscellaneous = '/miscellaneous';
   static const aboutTermPrivacy = '/aboutTermPrivacy';
   static const settings = '/settings';
+  static const note = '/note';
+  static const addNote = '/addNote';
 
 }
 
@@ -80,7 +82,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.profileSetupEdit,
       builder: (context, state) {
-        ProfileType profileType = state.extra as ProfileType;
+        SetupEditProfileType profileType = state.extra as SetupEditProfileType;
         return SetupEditProfilePage(
           profileType: profileType,
         );
@@ -89,7 +91,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.profile,
       builder: (context, state) {
-        return const ProfilePage();
+        ProfilePageType profilePageType = state.extra as ProfilePageType;
+        return ProfilePage(
+          profilePageType: profilePageType,
+        );
       },
     ),
     GoRoute(
@@ -111,6 +116,18 @@ final GoRouter router = GoRouter(
       path: RouteNames.settings,
       builder: (context, state) {
         return const SettingsPage();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.note,
+      builder: (context, state) {
+        return const NotePage();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.addNote,
+      builder: (context, state) {
+        return const AddNotePage();
       },
     ),
   ],

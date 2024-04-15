@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:take_a_look/core/extensions/number_extension.dart';
 import 'package:take_a_look/pages/sign_up_screens/miscellaneous/view_model/miscellaneous_view_model.dart';
+import 'package:take_a_look/pages/sign_up_screens/note/view_model/note_view_model.dart';
 
 import 'constants/app_colors.dart';
 import 'core/router/router.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => MiscellaneousViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => NoteViewModel(),
         ),
       ],
       builder: (context, _) {
@@ -87,6 +91,13 @@ class MyApp extends StatelessWidget {
                   )
                 )
               )
+            ),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+              foregroundColor: AppColors.primaryColor,
+              backgroundColor: AppColors.whiteColor,
             ),
             scaffoldBackgroundColor: AppColors.whiteColor,
           ),

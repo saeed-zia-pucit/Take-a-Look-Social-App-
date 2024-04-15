@@ -1,4 +1,6 @@
 
+import 'package:take_a_look/pages/sign_up_screens/note/presentation/pages/add_note_page.dart';
+import 'package:take_a_look/pages/sign_up_screens/note/presentation/pages/note_page.dart';
 import 'package:take_a_look/pages/sign_up_screens/settings/presentation/pages/settings_page.dart';
 
 import '/pages/sign_in_screens/enable_location/presentation/pages/pages.dart';

@@ -86,7 +86,7 @@ class MenuView extends StatelessWidget {
                       text: 'Followings',
                     ),
                     ItemOfProfileMenu(
-                      onPressed: (){},
+                      onPressed: () => context.push(RouteNames.note),
                       text: 'Note',
                     ),
                     ItemOfProfileMenu(

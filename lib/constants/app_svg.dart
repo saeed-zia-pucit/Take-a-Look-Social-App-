@@ -30,4 +30,5 @@ class AppSVG {
   static String instaIcon = '${path}insta_icon.svg';
   static String save = '${path}save.svg';
   static String squareStackIcon = '${path}square_stack_icon.svg';
+  static String deleteIcon = '${path}delete_icon.svg';
 }

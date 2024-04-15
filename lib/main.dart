@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:take_a_look/core/extensions/number_extension.dart';
+import 'package:take_a_look/pages/sign_up_screens/miscellaneous/view_model/miscellaneous_view_model.dart';
 
 import 'constants/app_colors.dart';
 import 'core/router/router.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => ProfileViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MiscellaneousViewModel(),
         ),
       ],
       builder: (context, _) {
@@ -50,6 +54,16 @@ class MyApp extends StatelessWidget {
                 backgroundColor: MaterialStatePropertyAll(AppColors.primaryColor),
                 foregroundColor: MaterialStatePropertyAll(AppColors.whiteColor),
               ),
+            ),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+              style: ButtonStyle(
+                side: MaterialStatePropertyAll(BorderSide(color: AppColors.primaryColor)),
+                shape: MaterialStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  )
+                ),
+              )
             ),
             textTheme: TextTheme(
               bodyMedium: GoogleFonts.nunito()

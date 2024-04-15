@@ -1,4 +1,6 @@
 
+import 'package:gap/gap.dart';
+
 import '/core/extensions/context_extension.dart';
 import '/core/extensions/number_extension.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +34,14 @@ class Header extends StatelessWidget {
         children: [
           (topPadding) ? context.statusBarHeight : const SizedBox.shrink(),
           Text(
-            '$title\n',
+            title,
             style: GoogleFonts.nunito(
               fontSize: 20,
               color: titleColor ?? AppColors.whiteColor,
               fontWeight: FontWeight.w600,
             ),
           ),
+          const Gap(10),
           Text.rich(
             textAlign: TextAlign.center,
             style: GoogleFonts.nunito(
@@ -62,15 +65,6 @@ class Header extends StatelessWidget {
               ]
             ),
           ),
-          // Text(
-          //   content1,
-          //   textAlign: TextAlign.center,
-          //   style: GoogleFonts.nunito(
-          //     fontSize: 14.h(context),
-          //     color: AppColors.whiteColor,
-          //     fontWeight: FontWeight.w400,
-          //   ),
-          // ),
         ],
       ),
     );

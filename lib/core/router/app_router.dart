@@ -16,10 +16,8 @@ sealed class RouteNames {
   static const profile = '/profile';
   static const miscellaneous = '/miscellaneous';
   static const aboutTermPrivacy = '/aboutTermPrivacy';
-  // static const navBar = '/nav_bar';
-  // static const detail = '/detail';
-  // static const tasks = '/tasks';
-  // static const taskDetail = '/tasks_detail';
+  static const settings = '/settings';
+
 }
 
 final GoRouter router = GoRouter(
@@ -110,36 +108,10 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: RouteNames.home,
+      path: RouteNames.settings,
       builder: (context, state) {
-        return const HomePage();
+        return const SettingsPage();
       },
     ),
-    // ShellRoute(
-    //   builder: (context, state, child) {
-    //     return NavBarPage(child: child);
-    //   },
-    //   routes: [
-    //     GoRoute(
-    //       path: RouteNames.home,
-    //       builder: (context, state) {
-    //         return const HomePage();
-    //       },
-    //     ),
-    //     GoRoute(
-    //       path: RouteNames.tasks,
-    //       builder: (BuildContext context, GoRouterState state) {
-    //         return const TasksPage();
-    //       },
-    //     ),
-    //     GoRoute(
-    //       path: RouteNames.taskDetail,
-    //       builder: (BuildContext context, GoRouterState state) {
-    //         final task = state.extra as TaskModel;
-    //         return TaskDetailsPage(taskModel: task,);
-    //       },
-    //     ),
-    //   ],
-    // ),
   ],
 );

@@ -1,5 +1,6 @@
 
-import '/pages/home/presentation/pages/home_page.dart';
+import 'package:take_a_look/pages/sign_up_screens/settings/presentation/pages/settings_page.dart';
+
 import '/pages/sign_in_screens/enable_location/presentation/pages/pages.dart';
 import '/pages/sign_in_screens/verify/presentation/pages/pages.dart';
 import '/pages/sign_up_screens/about_term_privacy/presentation/pages/about_term_privacy.dart';

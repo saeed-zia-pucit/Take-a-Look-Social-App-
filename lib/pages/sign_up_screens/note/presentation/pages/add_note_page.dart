@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:take_a_look/constants/app_colors.dart';
 
 class AddNotePage extends StatefulWidget {
   const AddNotePage({super.key});
@@ -11,6 +12,49 @@ class AddNotePage extends StatefulWidget {
 class _AddNotePageState extends State<AddNotePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Add New Note'
+        ),
+        actions: [
+          IconButton(
+            onPressed: (){},
+            icon: const Icon(Icons.bookmark_border),
+          ),
+        ],
+      ),
+
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Title',),
+            TextField(
+              style: TextStyle(
+                fontSize: 12,
+                color: AppColors.greyColor,
+              ),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+              ),
+            ),
+            const Text('Add Notes',),
+            TextField(
+              style: TextStyle(
+                fontSize: 12,
+                color: AppColors.greyColor,
+              ),
+              minLines: 10,
+              maxLines: null,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

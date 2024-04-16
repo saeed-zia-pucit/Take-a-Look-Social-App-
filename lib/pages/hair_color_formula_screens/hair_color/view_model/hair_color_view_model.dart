@@ -5,6 +5,7 @@ class HairColorViewModel extends ChangeNotifier {
   String pageTitle = 'Primary color';
   int currentPageIndex = 0;
   PageController pageController = PageController();
+  bool isLoadingFormula = false;
 
   List<Color> selectedColors = [
     Colors.white,
@@ -38,6 +39,13 @@ class HairColorViewModel extends ChangeNotifier {
   void onNextStep(int index) {
     if (index == 4) return;
     currentPageIndex = index;
+    pageTitle = (currentPageIndex == 0) ?
+    'Primary color' :
+    (currentPageIndex == 1) ?
+    'Natural Level' :
+    (currentPageIndex == 3) ?
+    'Desired Color' :
+    'Get Formula';
     pageController.animateToPage(
       currentPageIndex,
       duration: const Duration(milliseconds: 200),
@@ -48,6 +56,11 @@ class HairColorViewModel extends ChangeNotifier {
 
   void onTapColorItem(int index, Color color) {
     selectedColors[index] = color;
+    notifyListeners();
+  }
+
+  void onSubmit(bool isStart) {
+    isLoadingFormula = isStart;
     notifyListeners();
   }
 }

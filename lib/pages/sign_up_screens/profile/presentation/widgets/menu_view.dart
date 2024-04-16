@@ -1,4 +1,7 @@
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
+
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
 import '/core/extensions/context_extension.dart';
@@ -24,89 +27,91 @@ class MenuView extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                context.statusBarHeightGap,
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    onPressed: () => read.onTapMenu(false),
-                    icon: Icon(Icons.close, color: AppColors.whiteColor,),
+          context.statusBarHeightGap,
+          Align(
+            alignment: Alignment.topRight,
+            child: IconButton(
+              onPressed: () => read.onTapMenu(false),
+              icon: Icon(Icons.close, color: AppColors.whiteColor,),
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ProfileAvatar(image: AppImages.avatar, radius: 50),
+                  const Gap(10),
+                  Text(
+                    'Lavish Productline',
+                    style: GoogleFonts.nunito(
+                      fontSize: 16,
+                      color: AppColors.primaryColor,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                ProfileAvatar(image: AppImages.avatar, radius: 50),
-                const Gap(10),
-                Text(
-                  'Lavish Productline',
-                  style: GoogleFonts.nunito(
-                    fontSize: 16,
-                    color: AppColors.primaryColor,
-                    fontWeight: FontWeight.w600,
+                  Text(
+                    'lavishproductline@gmail.com | TL0548569 ',
+                    style: GoogleFonts.nunito(
+                      fontSize: 12,
+                      color: AppColors.whiteColor,
+                    ),
                   ),
-                ),
-                Text(
-                  'lavishproductline@gmail.com | TL0548569 ',
-                  style: GoogleFonts.nunito(
-                    fontSize: 12,
-                    color: AppColors.whiteColor,
+
+                  Divider(
+                    height: 50,
+                    indent: .15.wp(context),
+                    endIndent: .15.wp(context),
                   ),
-                ),
 
-                Divider(
-                  height: 50,
-                  indent: .15.wp(context),
-                  endIndent: .15.wp(context),
-                ),
+                  Column(
+                    children: [
+                      ItemOfProfileMenu(
+                        onPressed: (){},
+                        text: 'Home',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: (){},
+                        text: 'Profile',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: () {
+                          context.push(RouteNames.hairColor);
+                        },
+                        text: 'Take a Hair Formula',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: (){},
+                        text: 'E-learning',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: (){},
+                        text: 'Followers',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: (){},
+                        text: 'Followings',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: () => context.push(RouteNames.note),
+                        text: 'Note',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: () => context.push(RouteNames.notification),
+                        text: 'Notification',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: (){},
+                        text: 'Wishlist',
+                      ),
+                      ItemOfProfileMenu(
+                        onPressed: () => context.push(RouteNames.miscellaneous),
+                        text: 'Miscellaneous ',
+                      ),
+                    ],
+                  ),
 
-                Column(
-                  children: [
-                    ItemOfProfileMenu(
-                      onPressed: (){},
-                      text: 'Home',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: (){},
-                      text: 'Profile',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: () {
-                        context.push(RouteNames.hairColor);
-                      },
-                      text: 'Take a Hair Formula',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: (){},
-                      text: 'E-learning',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: (){},
-                      text: 'Followers',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: (){},
-                      text: 'Followings',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: () => context.push(RouteNames.note),
-                      text: 'Note',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: () => context.push(RouteNames.notification),
-                      text: 'Notification',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: (){},
-                      text: 'Wishlist',
-                    ),
-                    ItemOfProfileMenu(
-                      onPressed: () => context.push(RouteNames.miscellaneous),
-                      text: 'Miscellaneous ',
-                    ),
-                  ],
-                ),
-
-              ],
+                ],
+              ),
             ),
           ),
           Text(

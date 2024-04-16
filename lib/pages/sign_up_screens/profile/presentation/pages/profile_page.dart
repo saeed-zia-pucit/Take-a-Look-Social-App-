@@ -240,6 +240,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   const Gap(30),
 
                   GridView.builder(
+                    padding: const EdgeInsets.only(bottom: 20),
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       mainAxisSpacing: 10,

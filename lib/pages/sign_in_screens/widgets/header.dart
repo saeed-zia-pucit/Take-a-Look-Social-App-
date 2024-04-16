@@ -32,7 +32,7 @@ class Header extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          (topPadding) ? context.statusBarHeight : const SizedBox.shrink(),
+          (topPadding) ? context.statusBarHeightGap : const SizedBox.shrink(),
           Text(
             title,
             style: GoogleFonts.nunito(

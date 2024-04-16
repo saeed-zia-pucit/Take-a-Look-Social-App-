@@ -6,9 +6,10 @@ extension ContextExtension on BuildContext {
   double get height => MediaQuery.sizeOf(this).height;
   double get width => MediaQuery.sizeOf(this).width;
 
-  Widget get statusBarHeight => Gap(MediaQuery.of(this).padding.top);
+  Widget get statusBarHeightGap => Gap(MediaQuery.of(this).padding.top);
 
-  // bool get isKeyboardOpen => WidgetsBinding.instance.window.viewInsets.bottom == 0;
-  // bool get isKeyboardOpen => View.of(this).viewInsets.bottom == 0;
+  double get statusBarHeight => MediaQuery.of(this).padding.top;
+  double get bottomHeight => MediaQuery.of(this).padding.bottom;
+
   bool get isKeyboardOpen => MediaQuery.of(this).viewInsets.bottom == 0;
 }

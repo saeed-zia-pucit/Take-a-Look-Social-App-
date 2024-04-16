@@ -27,7 +27,7 @@ class MenuView extends StatelessWidget {
           SingleChildScrollView(
             child: Column(
               children: [
-                context.statusBarHeight,
+                context.statusBarHeightGap,
                 Align(
                   alignment: Alignment.topRight,
                   child: IconButton(
@@ -70,7 +70,9 @@ class MenuView extends StatelessWidget {
                       text: 'Profile',
                     ),
                     ItemOfProfileMenu(
-                      onPressed: (){},
+                      onPressed: () {
+                        context.push(RouteNames.hairColor);
+                      },
                       text: 'Take a Hair Formula',
                     ),
                     ItemOfProfileMenu(

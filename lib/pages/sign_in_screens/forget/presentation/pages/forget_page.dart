@@ -21,7 +21,7 @@ class _ForgetPageState extends State<ForgetPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                context.statusBarHeight,
+                context.statusBarHeightGap,
                 InkWell(
                   onTap: () => context.pop(),
                   child: SvgPicture.asset(AppSVG.backIcon,),

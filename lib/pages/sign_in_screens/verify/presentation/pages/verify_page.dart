@@ -21,7 +21,7 @@ class _VerifyPageState extends State<VerifyPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                context.statusBarHeight,
+                context.statusBarHeightGap,
                 InkWell(
                   onTap: () => context.pop(),
                   child: SvgPicture.asset(AppSVG.backIcon,),

@@ -19,6 +19,7 @@ sealed class RouteNames {
   static const settings = '/settings';
   static const note = '/note';
   static const addNote = '/addNote';
+  static const notification = '/notification';
 
 }
 
@@ -128,6 +129,12 @@ final GoRouter router = GoRouter(
       path: RouteNames.addNote,
       builder: (context, state) {
         return const AddNotePage();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.notification,
+      builder: (context, state) {
+        return const NotificationPage();
       },
     ),
   ],

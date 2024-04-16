@@ -56,7 +56,7 @@ ThemeData lightTheme(BuildContext context) {
 
     /// Text Theme
     textTheme: TextTheme(
-        bodyMedium: GoogleFonts.nunito()
+      bodyMedium: GoogleFonts.nunito(),
     ),
 
     /// TextButton Theme

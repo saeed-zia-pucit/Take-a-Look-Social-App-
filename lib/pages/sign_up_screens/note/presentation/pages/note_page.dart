@@ -47,7 +47,7 @@ class _NotePageState extends State<NotePage> {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 10,
-          crossAxisSpacing: 10
+          crossAxisSpacing: 10,
         ),
         itemCount: 6,
         itemBuilder: (context, index) {

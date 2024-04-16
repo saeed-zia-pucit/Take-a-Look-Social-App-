@@ -81,7 +81,7 @@ class _HairColorPageState extends State<HairColorPage> {
                 ),
                 child: ElevatedButton(
                   onPressed: (watch.currentPageIndex == 3) ? (){
-                    read.onSubmit(true);
+                    read.onSubmit(context, true);
                   } : () {
                     read.onNextStep(read.currentPageIndex+1);
                   },

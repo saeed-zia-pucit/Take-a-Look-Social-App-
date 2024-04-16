@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:take_a_look/core/router/router.dart';
 
 class HairColorViewModel extends ChangeNotifier {
   String pageTitle = 'Primary color';
@@ -59,8 +61,15 @@ class HairColorViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onSubmit(bool isStart) {
+  void onSubmit(BuildContext context, bool isStart) {
     isLoadingFormula = isStart;
+    Future.delayed(const Duration(seconds: 2)).then((value) {
+      isLoadingFormula = false;
+      context.push(
+        RouteNames.hairFormula,
+        extra: selectedColors
+      );
+    });
     notifyListeners();
   }
 }

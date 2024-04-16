@@ -23,7 +23,7 @@ class _FetchingHairFormulaState extends State<FetchingHairFormula> {
         actions: [
           TextButton(
             onPressed: (){
-              context.read<HairColorViewModel>().onSubmit(false);
+              context.read<HairColorViewModel>().onSubmit(context, false);
             },
             child: const Text('Cancel')
           ),

@@ -21,6 +21,7 @@ sealed class RouteNames {
   static const addNote = '/addNote';
   static const notification = '/notification';
   static const hairColor = '/hairColor';
+  static const hairFormula = '/hairFormula';
 
 }
 
@@ -142,6 +143,15 @@ final GoRouter router = GoRouter(
       path: RouteNames.hairColor,
       builder: (context, state) {
         return const HairColorPage();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.hairFormula,
+      builder: (context, state) {
+        List<Color> colors = state.extra as List<Color>;
+        return HairFormula(
+          colors: colors,
+        );
       },
     ),
   ],

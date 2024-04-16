@@ -1,9 +1,12 @@
 
+import 'dart:ui';
+
 import 'package:take_a_look/pages/sign_up_screens/note/presentation/pages/add_note_page.dart';
 import 'package:take_a_look/pages/sign_up_screens/note/presentation/pages/note_page.dart';
 import 'package:take_a_look/pages/sign_up_screens/settings/presentation/pages/settings_page.dart';
 
 import '../../pages/hair_color_formula_screens/hair_color/presentation/pages/hair_color_page.dart';
+import '../../pages/hair_color_formula_screens/hair_formula/presentation/pages/hair_formula_page.dart';
 import '../../pages/sign_up_screens/notification/presentation/pages/notification_page.dart';
 import '../../pages/splash_onboard_screens/presentation/pages/pages.dart';
 import '/pages/sign_in_screens/enable_location/presentation/pages/pages.dart';

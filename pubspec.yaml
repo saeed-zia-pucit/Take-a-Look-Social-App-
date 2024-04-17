@@ -43,6 +43,7 @@ dependencies:
   permission_handler: ^11.3.1
   dotted_border: ^2.1.0
   flutter_slidable: ^3.1.0
+  sliver_tools: ^0.2.12
 
 dev_dependencies:
   flutter_test:
@@ -70,7 +71,8 @@ flutter:
   assets:
     - assets/svg/
     - assets/svg/onboard/
-    - assets/svg/social_icons/
+    - assets/svg/social/
+    - assets/svg/tab_bar/
     - assets/images/
   #   - images/a_dot_ham.jpeg
 

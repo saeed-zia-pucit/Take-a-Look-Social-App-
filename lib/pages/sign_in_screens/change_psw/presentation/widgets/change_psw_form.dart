@@ -14,7 +14,7 @@ class ChangePswForm extends StatelessWidget {
           context.statusBarHeightGap,
           IconButton(
             onPressed: () => context.pop(),
-            icon: SvgPicture.asset(AppSVG.backIcon,),
+            icon: SvgPicture.asset(AppIcons.backIcon,),
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.zero,
           ),

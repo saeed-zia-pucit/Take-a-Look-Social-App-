@@ -23,7 +23,7 @@ class FieldsOfForm extends StatelessWidget {
             title: 'Email',
             suffixIcon: Padding(
               padding: EdgeInsets.all(15.h(context)),
-              child: SvgPicture.asset(AppSVG.checkCircleIcon),
+              child: SvgPicture.asset(AppIcons.checkCircleIcon),
             ),
           ),
           const Gap(20),

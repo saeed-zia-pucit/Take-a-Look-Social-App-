@@ -19,7 +19,7 @@ class _EnableLocationPageState extends State<EnableLocationPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SvgPicture.asset(
-                AppSVG.locationIcon,
+                AppIcons.locationIcon,
                 height: 230.h(context),
               ),
               Header(

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:take_a_look/constants/app_images.dart';
-import 'package:take_a_look/constants/app_svg.dart';
+import 'package:take_a_look/constants/app_icons.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/hair_formula/presentation/widgets/hair_view.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/hair_formula/presentation/widgets/selected_colors.dart';
 
@@ -81,7 +81,7 @@ class _HairFormulaState extends State<HairFormula> {
                         fit: BoxFit.cover
                       )
                     ),
-                    child: SvgPicture.asset(AppSVG.playIcon),
+                    child: SvgPicture.asset(AppIcons.playIcon),
                   )
                 ],
               ),

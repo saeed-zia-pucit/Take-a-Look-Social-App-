@@ -29,7 +29,7 @@ class _CongratsPageState extends State<CongratsPage> {
                   children: [
                     const Gap(20),
                     SvgPicture.asset(
-                      AppSVG.congratsIcon,
+                      AppIcons.congratsIcon,
                       height: 165.h(context),
                     ),
                     const Gap(30),

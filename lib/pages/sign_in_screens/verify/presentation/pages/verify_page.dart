@@ -24,7 +24,7 @@ class _VerifyPageState extends State<VerifyPage> {
                 context.statusBarHeightGap,
                 InkWell(
                   onTap: () => context.pop(),
-                  child: SvgPicture.asset(AppSVG.backIcon,),
+                  child: SvgPicture.asset(AppIcons.backIcon,),
                 ),
                 const Header(
                   title: 'Verfiy Email',

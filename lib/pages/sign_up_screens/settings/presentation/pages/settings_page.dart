@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:take_a_look/constants/app_colors.dart';
-import 'package:take_a_look/constants/app_svg.dart';
+import 'package:take_a_look/constants/app_icons.dart';
 import 'package:take_a_look/core/extensions/number_extension.dart';
 import 'package:take_a_look/core/router/router.dart';
 
@@ -71,7 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ],
           ),
-          Center(child: SvgPicture.asset(AppSVG.firstOnboard_2, height: .4.hp(context),))
+          Center(child: SvgPicture.asset(AppIcons.firstOnboard_2, height: .4.hp(context),))
         ],
       ),
     );

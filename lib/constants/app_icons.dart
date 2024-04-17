@@ -1,8 +1,9 @@
 
-class AppSVG {
+class AppIcons {
   static String path = 'assets/svg/';
   static String pathOnBoard = '${path}onboard/';
-  static String pathSocial = '${path}social_icons/';
+  static String pathSocial = '${path}social/';
+  static String pathTabBar = '${path}tab_bar/';
 
   static String firstOnboard_1 = '${pathOnBoard}first_onboard_1.svg';
   static String firstOnboard_2 = '${pathOnBoard}first_onboard_2.svg';
@@ -23,6 +24,12 @@ class AppSVG {
   static String googleIcon = '${pathSocial}google_icon.svg';
   static String appleIcon = '${pathSocial}apple_icon.svg';
 
+  static String tabBar1 = '${pathTabBar}tab_bar_1.png';
+  static String tabBar2 = '${pathTabBar}tab_bar_2.png';
+  static String tabBar3 = '${pathTabBar}tab_bar_3.png';
+  static String tabBar4 = '${pathTabBar}tab_bar_4.png';
+  static String tabBar5 = '${pathTabBar}tab_bar_5.png';
+
   static String backIcon = '${path}back_icon.svg';
   static String checkCircleIcon = '${path}check_circle.svg';
   static String congratsIcon = '${path}congrats_icon.svg';
@@ -34,4 +41,7 @@ class AppSVG {
   static String trashBasketIcon = '${path}trash_basket_icon.svg';
   static String brushIcon = '${path}brush_icon.svg';
   static String playIcon = '${path}play_icon.svg';
+  static String notificationIcon = '${path}notification_icon.svg';
+  static String cameraIcon = '${path}camera_icon.svg';
+  static String commentIcon = '${path}comment_icon.svg';
 }

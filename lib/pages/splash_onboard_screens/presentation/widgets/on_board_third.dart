@@ -26,7 +26,7 @@ class OnBoardThird extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.bottomCenter,
-                child: SvgPicture.asset(AppSVG.thirdOnBoard_1,),
+                child: SvgPicture.asset(AppIcons.thirdOnBoard_1,),
               ),
               Padding(
                 padding: const EdgeInsets.all(20),
@@ -59,7 +59,7 @@ class OnBoardThird extends StatelessWidget {
                           Expanded(
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: SvgPicture.asset(AppSVG.thirdOnBoard_2, height: 35.h(context)),
+                              child: SvgPicture.asset(AppIcons.thirdOnBoard_2, height: 35.h(context)),
                             ),
                           ),
                           Expanded(
@@ -67,14 +67,14 @@ class OnBoardThird extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Image.asset(
                                 height: 50.h(context),
-                                AppSVG.thirdOnBoard_3,
+                                AppIcons.thirdOnBoard_3,
                               ),
                             ),
                           ),
                           Expanded(
                             child: Align(
                               alignment: Alignment.centerRight,
-                              child: SvgPicture.asset(AppSVG.thirdOnBoard_4, height: 38.h(context),),
+                              child: SvgPicture.asset(AppIcons.thirdOnBoard_4, height: 38.h(context),),
                             ),
                           ),
                         ],
@@ -87,7 +87,7 @@ class OnBoardThird extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Image.asset(AppSVG.thirdOnBoard_5),
+          child: Image.asset(AppIcons.thirdOnBoard_5),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),

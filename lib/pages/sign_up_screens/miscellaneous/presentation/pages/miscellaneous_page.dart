@@ -4,7 +4,7 @@ import 'package:take_a_look/pages/sign_up_screens/miscellaneous/presentation/wid
 import 'package:take_a_look/pages/sign_up_screens/miscellaneous/view_model/miscellaneous_view_model.dart';
 
 import '/constants/app_colors.dart';
-import '/constants/app_svg.dart';
+import '/constants/app_icons.dart';
 import '/core/extensions/number_extension.dart';
 import '/core/router/router.dart';
 import '/pages/sign_up_screens/about_term_privacy/presentation/pages/about_term_privacy.dart';
@@ -88,7 +88,7 @@ class _MiscellaneousPageState extends State<MiscellaneousPage> {
                   ),
                 ),
               ),
-              Center(child: SvgPicture.asset(AppSVG.firstOnboard_2, height: .4.hp(context),))
+              Center(child: SvgPicture.asset(AppIcons.firstOnboard_2, height: .4.hp(context),))
             ],
           ),
         ),

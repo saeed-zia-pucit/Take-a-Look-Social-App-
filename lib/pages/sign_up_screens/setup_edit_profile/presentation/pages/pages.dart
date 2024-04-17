@@ -4,7 +4,7 @@ import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
 import '/core/extensions/number_extension.dart';
 import '/core/router/router.dart';
-import '/core/widgets/avatar.dart';
+import '/core/widgets/avatar_with_radius.dart';
 import '/core/widgets/text_field_with_title.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';

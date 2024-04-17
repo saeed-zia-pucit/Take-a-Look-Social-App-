@@ -4,7 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:take_a_look/constants/app_colors.dart';
-import 'package:take_a_look/constants/app_svg.dart';
+import 'package:take_a_look/constants/app_icons.dart';
 
 class ItemOfNotification extends StatelessWidget {
   const ItemOfNotification({super.key});
@@ -33,7 +33,7 @@ class ItemOfNotification extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: SvgPicture.asset(
-                  AppSVG.trashBasketIcon,
+                  AppIcons.trashBasketIcon,
                   colorFilter: ColorFilter.mode(
                     AppColors.whiteColor,
                     BlendMode.srcIn,

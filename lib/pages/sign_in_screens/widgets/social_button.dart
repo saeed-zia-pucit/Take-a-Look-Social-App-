@@ -1,6 +1,6 @@
 
 import '/constants/app_colors.dart';
-import '/constants/app_svg.dart';
+import '/constants/app_icons.dart';
 import '/core/extensions/context_extension.dart';
 import '/core/extensions/number_extension.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,17 +43,17 @@ class SocialButton extends StatelessWidget {
             const Gap(20),
             if (socialButtonType == SocialButtonType.facebook)
             SvgPicture.asset(
-              AppSVG.facebookIcon,
+              AppIcons.facebookIcon,
               height: 23.h(context),
             ),
             if (socialButtonType == SocialButtonType.google)
             SvgPicture.asset(
-              AppSVG.googleIcon,
+              AppIcons.googleIcon,
               height: 23.h(context),
             ),
             if (socialButtonType == SocialButtonType.apple)
             SvgPicture.asset(
-              AppSVG.appleIcon,
+              AppIcons.appleIcon,
               height: 23.h(context),
             ),
             Expanded(

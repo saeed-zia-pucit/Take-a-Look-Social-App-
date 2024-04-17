@@ -20,7 +20,7 @@ class ForgetForm extends StatelessWidget {
             titleColor: AppColors.whiteColor,
             suffixIcon: Padding(
               padding: EdgeInsets.all(15.h(context)),
-              child: SvgPicture.asset(AppSVG.checkCircleIcon),
+              child: SvgPicture.asset(AppIcons.checkCircleIcon),
               // child: Icon(Icons.add)
             ),
           ),

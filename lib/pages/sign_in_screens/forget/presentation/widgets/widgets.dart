@@ -1,5 +1,5 @@
 
-import '/constants/app_svg.dart';
+import '/constants/app_icons.dart';
 import '/core/extensions/number_extension.dart';
 import '/core/router/router.dart';
 import '/core/widgets/text_field_with_title.dart';

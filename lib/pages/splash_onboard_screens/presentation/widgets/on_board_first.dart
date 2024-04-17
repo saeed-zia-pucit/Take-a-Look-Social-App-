@@ -52,13 +52,13 @@ class OnBoardFirst extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: SvgPicture.asset(AppSVG.firstOnboard_1),
+                    child: SvgPicture.asset(AppIcons.firstOnboard_1),
                   ),
                 ],
               ),
             ),
           ),
-          SvgPicture.asset(AppSVG.firstOnboard_2, height: .4.hp(context),),
+          SvgPicture.asset(AppIcons.firstOnboard_2, height: .4.hp(context),),
         ],
       ),
     );

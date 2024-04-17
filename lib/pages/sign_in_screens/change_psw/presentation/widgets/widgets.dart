@@ -7,7 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../constants/app_colors.dart';
-import '../../../../../constants/app_svg.dart';
+import '../../../../../constants/app_icons.dart';
 import '../../../../../core/widgets/text_field_with_title.dart';
 import '../../../widgets/header.dart';
 

@@ -20,7 +20,7 @@ class OnBoardSecond extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          SvgPicture.asset(AppSVG.secondOnboard_1),
+          SvgPicture.asset(AppIcons.secondOnboard_1),
           Column(
             children: [
               Expanded(
@@ -78,22 +78,22 @@ class OnBoardSecond extends StatelessWidget {
                             Expanded(
                               child: Align(
                                 alignment: Alignment.centerRight,
-                                child: SvgPicture.asset(AppSVG.secondOnboard_2),
+                                child: SvgPicture.asset(AppIcons.secondOnboard_2),
                               ),
                             ),
                             Expanded(
                               child: Align(
                                 alignment: Alignment.centerLeft,
-                                child: SvgPicture.asset(AppSVG.secondOnboard_3),
+                                child: SvgPicture.asset(AppIcons.secondOnboard_3),
                               ),
                             ),
                             Expanded(
                               child: Align(
                                 alignment: Alignment.centerRight,
-                                child: SvgPicture.asset(AppSVG.secondOnboard_4),
+                                child: SvgPicture.asset(AppIcons.secondOnboard_4),
                               ),
                             ),
-                            Image.asset(AppSVG.secondOnboard_5),
+                            Image.asset(AppIcons.secondOnboard_5),
                           ],
                         ),
                       ),

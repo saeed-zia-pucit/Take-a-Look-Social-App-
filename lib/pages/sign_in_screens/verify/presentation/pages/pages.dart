@@ -9,6 +9,6 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../constants/app_images.dart';
-import '../../../../../constants/app_svg.dart';
+import '../../../../../constants/app_icons.dart';
 
 part 'verify_page.dart';

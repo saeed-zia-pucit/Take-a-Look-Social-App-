@@ -24,7 +24,7 @@ class _ForgetPageState extends State<ForgetPage> {
                 context.statusBarHeightGap,
                 InkWell(
                   onTap: () => context.pop(),
-                  child: SvgPicture.asset(AppSVG.backIcon,),
+                  child: SvgPicture.asset(AppIcons.backIcon,),
                 ),
                 // const ForgetHeader(),
                 const Header(

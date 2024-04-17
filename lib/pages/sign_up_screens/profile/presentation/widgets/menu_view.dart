@@ -5,7 +5,7 @@ import '/constants/app_images.dart';
 import '/core/extensions/context_extension.dart';
 import '/core/extensions/number_extension.dart';
 import '/core/router/router.dart';
-import '/core/widgets/avatar.dart';
+import '/core/widgets/avatar_with_radius.dart';
 import '/pages/sign_up_screens/profile/presentation/widgets/item_of_profile_menu.dart';
 import '/pages/sign_up_screens/profile/view_model/profile_view_model.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class MenuView extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ProfileAvatar(image: AppImages.avatar, radius: 50),
+                  AvatarWithRadius(image: AppImages.avatar, radius: 50),
                   const Gap(10),
                   Text(
                     'Lavish Productline',
@@ -64,7 +64,7 @@ class MenuView extends StatelessWidget {
                   Column(
                     children: [
                       ItemOfProfileMenu(
-                        onPressed: (){},
+                        onPressed: () => context.push(RouteNames.home),
                         text: 'Home',
                       ),
                       ItemOfProfileMenu(

@@ -31,9 +31,9 @@ class _WishListPageState extends State<WishListPage> {
         child: Column(
           children: [
             FormulaItem(),
-            // FormulaItem(),
-            // FormulaItem(),
-            // FormulaItem(),
+            FormulaItem(),
+            FormulaItem(),
+            FormulaItem(),
           ],
         ),
       ),

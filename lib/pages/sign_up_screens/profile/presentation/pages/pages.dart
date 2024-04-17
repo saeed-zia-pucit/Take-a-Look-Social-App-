@@ -1,9 +1,9 @@
 
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
-import '/constants/app_svg.dart';
+import '/constants/app_icons.dart';
 import '/core/extensions/number_extension.dart';
-import '/core/widgets/avatar.dart';
+import '/core/widgets/avatar_with_radius.dart';
 import '/pages/sign_up_screens/profile/presentation/widgets/item_of_profile_post.dart';
 import '/pages/sign_up_screens/profile/presentation/widgets/menu_view.dart';
 import '/pages/sign_up_screens/profile/view_model/profile_view_model.dart';

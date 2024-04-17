@@ -1,6 +1,6 @@
 
 import '/constants/app_images.dart';
-import '/constants/app_svg.dart';
+import '/constants/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -25,7 +25,7 @@ class ItemOfProfilePost extends StatelessWidget {
       Align(
         alignment: Alignment.topRight,
         child: SvgPicture.asset(
-          AppSVG.squareStackIcon,
+          AppIcons.squareStackIcon,
           fit: BoxFit.scaleDown,
         ),
       ) : const SizedBox.shrink(),

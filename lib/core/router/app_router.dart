@@ -169,5 +169,11 @@ final GoRouter router = GoRouter(
         return FollowFollowingPage(followFollowingPageType: followFollowingPageType);
       },
     ),
+    GoRoute(
+      path: RouteNames.home,
+      builder: (context, state) {
+        return const HomePage();
+      },
+    ),
   ],
 );

@@ -57,7 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ProfileAvatar(image: AppImages.avatar, radius: 30),
+                      AvatarWithRadius(image: AppImages.avatar, radius: 30),
                       Column(
                         children: [
                           Text(
@@ -199,7 +199,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(20),
-                              child: SvgPicture.asset(AppSVG.instaIcon),
+                              child: SvgPicture.asset(AppIcons.instaIcon),
                             ),
                           ),
                           const Gap(10),
@@ -223,7 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(20),
-                              child: SvgPicture.asset(AppSVG.save),
+                              child: SvgPicture.asset(AppIcons.save),
                             ),
                           ),
                           const Gap(10),

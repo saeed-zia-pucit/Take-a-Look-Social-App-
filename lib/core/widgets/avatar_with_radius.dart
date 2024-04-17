@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 
-class ProfileAvatar extends StatelessWidget {
-  const ProfileAvatar({super.key,
+class AvatarWithRadius extends StatelessWidget {
+  const AvatarWithRadius({super.key,
      required this.image,
      required this.radius,
   });

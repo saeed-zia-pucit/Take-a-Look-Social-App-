@@ -45,7 +45,7 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
             children: [
 
               const Gap(30),
-              ProfileAvatar(
+              AvatarWithRadius(
                 radius: 60.h(context),
                 image: AppImages.avatar,
               ),

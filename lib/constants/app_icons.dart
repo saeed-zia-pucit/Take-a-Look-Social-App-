@@ -44,4 +44,5 @@ class AppIcons {
   static String notificationIcon = '${path}notification_icon.svg';
   static String cameraIcon = '${path}camera_icon.svg';
   static String commentIcon = '${path}comment_icon.svg';
+  static String editIcon = '${path}edit_icon.svg';
 }

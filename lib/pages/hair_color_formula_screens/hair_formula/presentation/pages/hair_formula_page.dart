@@ -2,9 +2,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
-import 'package:take_a_look/constants/app_colors.dart';
 import 'package:take_a_look/constants/app_images.dart';
+import 'package:take_a_look/constants/app_svg.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/hair_formula/presentation/widgets/hair_view.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/hair_formula/presentation/widgets/selected_colors.dart';
 
@@ -43,22 +44,31 @@ class _HairFormulaState extends State<HairFormula> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('URL'),
+                  const Gap(20),
                   DottedBorder(
-                    child: Row(
-                      children: [
-                        const Text(
-                          'https//play.google.com/store/apps/details?..'
-                        ),
-                        TextButton(
-                          onPressed: (){},
-                          child: const Text('Copy'),
-                        )
-                      ],
+                    borderType: BorderType.RRect,
+                    radius: const Radius.circular(12),
+                    dashPattern: const [5],
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'https//play.google.com/store/apps/details?..'
+                          ),
+                          TextButton(
+                            onPressed: (){},
+                            child: const Text('Copy'),
+                          )
+                        ],
+                      ),
                     ),
                   ),
 
                   const Gap(30),
                   const Text('Video'),
+                  const Gap(20),
                   Container(
                     height: 200,
                     width: double.infinity,
@@ -71,10 +81,7 @@ class _HairFormulaState extends State<HairFormula> {
                         fit: BoxFit.cover
                       )
                     ),
-                    child: Icon(
-                      Icons.play_circle_fill,
-                      color: AppColors.secondaryColor,
-                    ),
+                    child: SvgPicture.asset(AppSVG.playIcon),
                   )
                 ],
               ),

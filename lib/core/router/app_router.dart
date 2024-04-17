@@ -24,6 +24,7 @@ sealed class RouteNames {
   static const hairFormula = '/hairFormula';
   static const wishList = '/wishList';
   static const followFollowing = '/followFollowing';
+  static const comments = '/comments';
 
 }
 
@@ -173,6 +174,12 @@ final GoRouter router = GoRouter(
       path: RouteNames.home,
       builder: (context, state) {
         return const HomePage();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.comments,
+      builder: (context, state) {
+        return const CommentPage();
       },
     ),
   ],

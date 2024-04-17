@@ -1,6 +1,7 @@
 
 import 'dart:ui';
 
+import 'package:take_a_look/pages/hair_color_formula_screens/comment/presentation/pages/comments_page.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/follow_following/presentation/pages/follow_following_page.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/home/presentation/pages/home.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/wishlist/presentation/pages/wishlist_page.dart';

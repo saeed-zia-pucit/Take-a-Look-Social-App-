@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:take_a_look/constants/app_colors.dart';
 import 'package:take_a_look/constants/app_icons.dart';
+import 'package:take_a_look/core/widgets/slidable_delete_button.dart';
 
 class ItemOfNotification extends StatelessWidget {
   const ItemOfNotification({super.key});
@@ -15,32 +16,11 @@ class ItemOfNotification extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Slidable(
-
-        endActionPane: ActionPane(
+        endActionPane: const ActionPane(
           extentRatio: .1,
-          motion: const ScrollMotion(),
+          motion: ScrollMotion(),
           children: [
-            GestureDetector(
-              onTap: () {
-                Slidable.of(context)!.close();
-              },
-              child: Container(
-                height: 30,
-                width: 30,
-                padding: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: SvgPicture.asset(
-                  AppIcons.trashBasketIcon,
-                  colorFilter: ColorFilter.mode(
-                    AppColors.whiteColor,
-                    BlendMode.srcIn,
-                  ),
-                ),
-              ),
-            ),
+            SlidableDeleteButton(),
           ],
         ),
         child: Column(
@@ -84,7 +64,6 @@ class ItemOfNotification extends StatelessWidget {
                             color: AppColors.greyColor
                           ),
                         ),
-
                       ],
                     ),
                   ),

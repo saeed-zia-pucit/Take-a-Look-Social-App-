@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:take_a_look/constants/app_colors.dart';
 import 'package:take_a_look/constants/app_icons.dart';
 import 'package:take_a_look/constants/app_images.dart';
+import 'package:take_a_look/core/router/router.dart';
 import 'package:take_a_look/core/widgets/avatar_with_size.dart';
 
 class PostLikeComment extends StatelessWidget {
@@ -37,11 +39,11 @@ class PostLikeComment extends StatelessWidget {
               ),
               IconButton(
                 onPressed: (){},
-                icon: Icon(Icons.bookmark_border),
+                icon: const Icon(Icons.bookmark_border),
               )
             ],
           ),
-          Gap(10),
+          const Gap(10),
           Row(
             children: [
               AvatarWithSize(
@@ -51,29 +53,34 @@ class PostLikeComment extends StatelessWidget {
               ),
               const Gap(10),
               Expanded(
-                child: Container(
-                  height: 35,
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      width: 2,
-                      color: AppColors.greyColor.withOpacity(.3),
-                    )
-                  ),
-                  alignment: Alignment.centerRight,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Commnets',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: AppColors.greyColor
+                child: GestureDetector(
+                  onTap: () {
+                    context.push(RouteNames.comments);
+                  },
+                  child: Container(
+                    height: 35,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        width: 2,
+                        color: AppColors.greyColor.withOpacity(.3),
+                      )
+                    ),
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Commnets',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: AppColors.greyColor
+                          ),
                         ),
-                      ),
-                      Icon(Icons.send, size: 18, color: AppColors.greyColor,),
-                    ],
+                        Icon(Icons.send, size: 18, color: AppColors.greyColor,),
+                      ],
+                    ),
                   ),
                 ),
               )

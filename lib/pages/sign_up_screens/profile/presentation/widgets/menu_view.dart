@@ -1,4 +1,6 @@
 
+import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/home_feed.dart';
+
 import '../../../../hair_color_formula_screens/follow_following/presentation/pages/follow_following_like_page.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
@@ -64,7 +66,11 @@ class MenuView extends StatelessWidget {
                   Column(
                     children: [
                       ItemOfProfileMenu(
-                        onPressed: () => context.push(RouteNames.home),
+                        onPressed: () => context.push(
+                          RouteNames.homeFeed,
+                          extra: HomeFeedPageType.feed
+                          // extra: HomeFeedPageType.home
+                        ),
                         text: 'Home',
                       ),
                       ItemOfProfileMenu(

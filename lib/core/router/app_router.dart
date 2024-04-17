@@ -3,7 +3,7 @@ part of 'router.dart';
 
 sealed class RouteNames {
   static const splash = '/';
-  static const home = '/home';
+  static const homeFeed = '/home_feed';
   static const onBoard = '/onBoard';
   static const signIn = '/signIn';
   static const signUp = '/signUp';
@@ -171,9 +171,12 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: RouteNames.home,
+      path: RouteNames.homeFeed,
       builder: (context, state) {
-        return const HomePage();
+        HomeFeedPageType homeFeedPageType = state.extra as HomeFeedPageType;
+        return HomeFeedPage(
+          homeFeedPageType: homeFeedPageType,
+        );
       },
     ),
     GoRoute(

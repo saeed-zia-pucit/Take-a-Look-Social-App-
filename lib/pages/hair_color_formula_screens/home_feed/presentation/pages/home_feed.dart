@@ -1,33 +1,32 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:take_a_look/constants/app_colors.dart';
 import 'package:take_a_look/constants/app_icons.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import 'package:take_a_look/core/extensions/context_extension.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/home/presentation/widgets/add_portfolio.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/home/presentation/widgets/location_view.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/home/presentation/widgets/post_item.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/home/presentation/widgets/tab_bar_view.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import '../widgets/add_portfolio.dart';
+import '../widgets/location_view.dart';
+import '../widgets/post_item.dart';
+import '../widgets/tab_bar_view.dart';
+
+class HomeFeedPage extends StatefulWidget {
+  const HomeFeedPage({super.key, required this.homeFeedPageType});
+
+  final HomeFeedPageType homeFeedPageType;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeFeedPage> createState() => _HomeFeedPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeFeedPageState extends State<HomeFeedPage> {
 
-  // late TabController tabController;
-  //
-  // @override
-  // void initState() {
-  //   tabController = TabController(vsync: this, length: 3);
-  //
-  //   // tabController = TabController(vsync: this, length: 3);
-  //   super.initState();
-  // }
+  late HomeFeedPageType homeFeedPageType;
+
+  @override
+  void initState() {
+    homeFeedPageType = widget.homeFeedPageType;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +37,10 @@ class _HomePageState extends State<HomePage> {
           onPressed: (){},
           icon: const Icon(Icons.sort),
         ),
-        title: const Text(
-          'Discovery feed'
+        title: Text(
+          homeFeedPageType.isHome ?
+          'Discovery feed' :
+          'Feed' ,
         ),
         actions: [
           IconButton(
@@ -58,8 +59,9 @@ class _HomePageState extends State<HomePage> {
           Section(
             child: Column(
               children: [
-                LocationItem(),
-                AddPortfolio(),
+                if (homeFeedPageType.isHome)
+                const LocationItem(),
+                const AddPortfolio(),
               ],
             ),
           ),
@@ -69,16 +71,12 @@ class _HomePageState extends State<HomePage> {
               physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.only(bottom: 50),
               children: [
-                PostItem(),
-                PostItem(),
-                PostItem(),
-                PostItem(),
-                PostItem(),
-                PostItem(),
-                PostItem(),
-                PostItem(),
-                PostItem(),
-                PostItem(),
+                PostItem(homeFeedPageType: homeFeedPageType,),
+                PostItem(homeFeedPageType: homeFeedPageType,),
+                PostItem(homeFeedPageType: homeFeedPageType,),
+                PostItem(homeFeedPageType: homeFeedPageType,),
+                PostItem(homeFeedPageType: homeFeedPageType,),
+                PostItem(homeFeedPageType: homeFeedPageType,),
               ],
             ),
             child: const TabBarMenuView(),
@@ -103,4 +101,14 @@ class Section extends MultiSliver {
       item ?? const SizedBox.shrink(),
     ],
   );
+}
+
+enum HomeFeedPageType {
+  home,
+  feed,
+}
+
+extension HomeFeedPageTypeExtension on HomeFeedPageType {
+  bool get isHome => HomeFeedPageType.home == this;
+  bool get isFeed => HomeFeedPageType.feed == this;
 }

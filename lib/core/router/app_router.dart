@@ -22,6 +22,7 @@ sealed class RouteNames {
   static const notification = '/notification';
   static const hairColor = '/hairColor';
   static const hairFormula = '/hairFormula';
+  static const wishList = '/wishList';
 
 }
 
@@ -152,6 +153,12 @@ final GoRouter router = GoRouter(
         return HairFormula(
           colors: colors,
         );
+      },
+    ),
+    GoRoute(
+      path: RouteNames.wishList,
+      builder: (context, state) {
+        return const WishListPage();
       },
     ),
   ],

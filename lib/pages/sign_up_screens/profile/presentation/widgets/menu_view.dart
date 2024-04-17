@@ -100,7 +100,7 @@ class MenuView extends StatelessWidget {
                         text: 'Notification',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: (){},
+                        onPressed: () => context.push(RouteNames.wishList),
                         text: 'Wishlist',
                       ),
                       ItemOfProfileMenu(

@@ -1,7 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
-
+import '/pages/hair_color_formula_screens/follow_following/presentation/pages/follow_following_page.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
 import '/core/extensions/context_extension.dart';
@@ -84,11 +82,15 @@ class MenuView extends StatelessWidget {
                         text: 'E-learning',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: (){},
+                        onPressed: (){
+                          context.push(RouteNames.followFollowing, extra: FollowFollowingPageType.followers);
+                        },
                         text: 'Followers',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: (){},
+                        onPressed: (){
+                          context.push(RouteNames.followFollowing, extra: FollowFollowingPageType.following);
+                        },
                         text: 'Followings',
                       ),
                       ItemOfProfileMenu(

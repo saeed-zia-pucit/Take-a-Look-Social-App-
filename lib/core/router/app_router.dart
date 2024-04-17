@@ -23,6 +23,7 @@ sealed class RouteNames {
   static const hairColor = '/hairColor';
   static const hairFormula = '/hairFormula';
   static const wishList = '/wishList';
+  static const followFollowing = '/followFollowing';
 
 }
 
@@ -159,6 +160,13 @@ final GoRouter router = GoRouter(
       path: RouteNames.wishList,
       builder: (context, state) {
         return const WishListPage();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.followFollowing,
+      builder: (context, state) {
+        FollowFollowingPageType followFollowingPageType = state.extra as FollowFollowingPageType;
+        return FollowFollowingPage(followFollowingPageType: followFollowingPageType);
       },
     ),
   ],

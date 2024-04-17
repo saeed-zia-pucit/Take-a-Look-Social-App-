@@ -9,8 +9,8 @@ class FormulaItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(20),
-      padding: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         border: Border.all(
@@ -29,8 +29,8 @@ class FormulaItem extends StatelessWidget {
                       height: 95,
                       color: Colors.red,
                     ),
-                    Text('Current Color'),
-                    Text(
+                    const Text('Current Color'),
+                    const Text(
                       'Blonde',
                       style: TextStyle(
                         fontSize: 10
@@ -46,8 +46,8 @@ class FormulaItem extends StatelessWidget {
                       height: 95,
                       color: Colors.blue,
                     ),
-                    Text('Natural Level'),
-                    Text(
+                    const Text('Natural Level'),
+                    const Text(
                       'Lighter Blonde | 08',
                       style: TextStyle(
                         fontSize: 10
@@ -63,8 +63,8 @@ class FormulaItem extends StatelessWidget {
                       height: 95,
                       color: Colors.yellow,
                     ),
-                    Text('Desired Color'),
-                    Text(
+                    const Text('Desired Color'),
+                    const Text(
                       'Ash',
                       style: TextStyle(
                         fontSize: 10

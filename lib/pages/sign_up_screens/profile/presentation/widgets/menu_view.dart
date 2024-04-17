@@ -1,5 +1,5 @@
 
-import '/pages/hair_color_formula_screens/follow_following/presentation/pages/follow_following_page.dart';
+import '../../../../hair_color_formula_screens/follow_following/presentation/pages/follow_following_like_page.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
 import '/core/extensions/context_extension.dart';

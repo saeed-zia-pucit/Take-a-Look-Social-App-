@@ -4,13 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:take_a_look/constants/app_colors.dart';
 import 'package:take_a_look/constants/app_images.dart';
 
-import '../pages/follow_following_page.dart';
-
 class UserItem extends StatelessWidget {
-  const UserItem({super.key, required this.followFollowingPageType});
-
-  final FollowFollowingPageType followFollowingPageType;
-
+  const UserItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +50,7 @@ class UserItem extends StatelessWidget {
               TextButton(
                 onPressed: (){},
                 child: Text(
-                  followFollowingPageType.isFollowers ?
-                  'Unfollow' : 'Follow',
+                  'Unfollow',
                 ),
               ),
             ],

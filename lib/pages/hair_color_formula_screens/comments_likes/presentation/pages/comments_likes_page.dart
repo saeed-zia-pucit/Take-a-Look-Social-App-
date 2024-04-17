@@ -1,26 +1,39 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:take_a_look/constants/app_colors.dart';
 import 'package:take_a_look/constants/app_images.dart';
 import 'package:take_a_look/core/widgets/avatar_with_size.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/comment/presentation/widgets/comment_item.dart';
+import 'package:take_a_look/core/widgets/user_item.dart';
 
-class CommentPage extends StatefulWidget {
-  const CommentPage({super.key});
+import '../widgets/comment_item.dart';
+
+class CommentLikesPage extends StatefulWidget {
+  const CommentLikesPage({super.key, required this.commentLikesPageType});
+
+  final CommentLikesPageType commentLikesPageType;
 
   @override
-  State<CommentPage> createState() => _CommentPageState();
+  State<CommentLikesPage> createState() => _CommentLikesPageState();
 }
 
-class _CommentPageState extends State<CommentPage> {
+class _CommentLikesPageState extends State<CommentLikesPage> {
+
+  late CommentLikesPageType commentLikesPageType;
+
+  @override
+  void initState() {
+    commentLikesPageType = widget.commentLikesPageType;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Comments'
+        title: Text(
+          (commentLikesPageType.isComments) ?
+          'Comments' : 'Likes',
         ),
       ),
 
@@ -44,14 +57,30 @@ class _CommentPageState extends State<CommentPage> {
                     ],
                   ),
                 ),
-                const CommentItem(),
-                const CommentItem(),
-                const CommentItem(),
-                const CommentItem(),
-                const CommentItem(),
-                const CommentItem(),
-                const CommentItem(),
-                const CommentItem(),
+                if (commentLikesPageType.isComments)
+                const Column(
+                  children: [
+                    CommentItem(),
+                    CommentItem(),
+                    CommentItem(),
+                    CommentItem(),
+                    CommentItem(),
+                    CommentItem(),
+                    CommentItem(),
+                    CommentItem(),
+                  ],
+                ),
+                
+                if (commentLikesPageType.isLikes)
+                  const Column(
+                    children: [
+                      UserItem(),
+                      UserItem(),
+                      UserItem(),
+                      UserItem(),
+                      UserItem(),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -86,4 +115,14 @@ class _CommentPageState extends State<CommentPage> {
       ),
     );
   }
+}
+
+enum CommentLikesPageType {
+  comments,
+  likes,
+}
+
+extension CommentLikesPageTypeExtension on CommentLikesPageType {
+  bool get isComments => CommentLikesPageType.comments == this;
+  bool get isLikes => CommentLikesPageType.likes == this;
 }

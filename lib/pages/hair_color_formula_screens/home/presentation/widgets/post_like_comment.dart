@@ -10,6 +10,7 @@ import 'package:take_a_look/constants/app_icons.dart';
 import 'package:take_a_look/constants/app_images.dart';
 import 'package:take_a_look/core/router/router.dart';
 import 'package:take_a_look/core/widgets/avatar_with_size.dart';
+import 'package:take_a_look/pages/hair_color_formula_screens/comments_likes/presentation/pages/comments_likes_page.dart';
 
 class PostLikeComment extends StatelessWidget {
   const PostLikeComment({super.key});
@@ -26,7 +27,11 @@ class PostLikeComment extends StatelessWidget {
               Row(
                 children: [
                   TextButton.icon(
-                    onPressed: (){},
+                    onPressed: () {
+                      context.push(RouteNames.comments,
+                        extra: CommentLikesPageType.likes,
+                      );
+                    },
                     icon: Icon(CupertinoIcons.heart_fill, color: AppColors.primaryColor,),
                     label: Text('255', style: TextStyle(color: AppColors.blackColor),),
                   ),
@@ -55,7 +60,9 @@ class PostLikeComment extends StatelessWidget {
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    context.push(RouteNames.comments);
+                    context.push(RouteNames.comments,
+                      extra: CommentLikesPageType.comments,
+                    );
                   },
                   child: Container(
                     height: 35,

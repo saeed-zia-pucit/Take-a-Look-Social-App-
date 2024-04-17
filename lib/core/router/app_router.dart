@@ -179,7 +179,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.comments,
       builder: (context, state) {
-        return const CommentPage();
+        CommentLikesPageType commentLikesPageType = state.extra as CommentLikesPageType;
+        return CommentLikesPage(
+          commentLikesPageType: commentLikesPageType,
+        );
       },
     ),
   ],

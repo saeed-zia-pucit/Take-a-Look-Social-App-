@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/follow_following/presentation/widgets/user_item.dart';
+
+import '../../../../../core/widgets/user_item.dart';
 
 class FollowFollowingPage extends StatefulWidget {
   const FollowFollowingPage({super.key, required this.followFollowingPageType});
@@ -30,26 +31,18 @@ class _FollowFollowingPageState extends State<FollowFollowingPage> {
           'Followers' : 'Followings',
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text('5022 following'),
             ),
-            UserItem(
-              followFollowingPageType: followFollowingPageType,
-            ),
-            UserItem(
-              followFollowingPageType: followFollowingPageType,
-            ),
-            UserItem(
-              followFollowingPageType: followFollowingPageType,
-            ),
-            UserItem(
-              followFollowingPageType: followFollowingPageType,
-            ),
+            UserItem(),
+            UserItem(),
+            UserItem(),
+            UserItem(),
 
           ],
         ),

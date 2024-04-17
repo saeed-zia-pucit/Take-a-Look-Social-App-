@@ -1,9 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:take_a_look/constants/app_colors.dart';
 import 'package:take_a_look/constants/app_images.dart';

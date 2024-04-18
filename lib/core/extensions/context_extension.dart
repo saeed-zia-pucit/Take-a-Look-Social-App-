@@ -1,6 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
+import 'package:provider/provider.dart';
+
+import '../view_model/global_view_model.dart';
 
 extension ContextExtension on BuildContext {
   double get height => MediaQuery.sizeOf(this).height;
@@ -13,4 +16,5 @@ extension ContextExtension on BuildContext {
   double get bottomHeight => MediaQuery.of(this).padding.bottom;
 
   bool get isKeyboardOpen => MediaQuery.of(this).viewInsets.bottom == 0;
+
 }

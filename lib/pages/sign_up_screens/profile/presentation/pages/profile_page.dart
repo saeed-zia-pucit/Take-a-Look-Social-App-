@@ -29,7 +29,9 @@ class _ProfilePageState extends State<ProfilePage> {
         Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              onPressed: () => read.onTapMenu(true),
+              onPressed: () {
+                context.read<GlobalViewModel>().menuControl(open: true);
+              },
               icon: const Icon(Icons.sort),
             ),
             title: const Text('Profile'),
@@ -257,9 +259,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-        ),
-        if (watch.showMenu)
-        const MenuView(),
+        ).menu(context),
       ],
     );
   }

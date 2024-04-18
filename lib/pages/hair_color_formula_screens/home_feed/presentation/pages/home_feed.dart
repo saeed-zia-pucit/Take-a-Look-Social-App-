@@ -1,8 +1,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:take_a_look/constants/app_icons.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'package:take_a_look/core/extensions/context_extension.dart';
+import 'package:take_a_look/core/extensions/widget_extension.dart';
+import 'package:take_a_look/core/router/router.dart';
+import 'package:take_a_look/core/view_model/global_view_model.dart';
 
 import '../widgets/add_portfolio.dart';
 import '../widgets/location_view.dart';
@@ -34,7 +40,9 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          onPressed: (){},
+          onPressed: (){
+            context.read<GlobalViewModel>().menuControl(open: true);
+          },
           icon: const Icon(Icons.sort),
         ),
         title: Text(
@@ -48,7 +56,9 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
             icon: const Icon(Icons.search),
           ),
           IconButton(
-            onPressed: (){},
+            onPressed: (){
+              context.push(RouteNames.notification);
+            },
             icon: SvgPicture.asset(AppIcons.notificationIcon),
           ),
         ],
@@ -60,7 +70,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
             child: Column(
               children: [
                 if (homeFeedPageType.isHome)
-                const LocationItem(),
+                  const LocationItem(),
                 const AddPortfolio(),
               ],
             ),
@@ -83,7 +93,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
           ),
         ],
       ),
-    );
+    ).menu(context);
   }
 }
 

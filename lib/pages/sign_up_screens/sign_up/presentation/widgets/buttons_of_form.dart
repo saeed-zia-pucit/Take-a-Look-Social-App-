@@ -11,9 +11,9 @@ class ButtonsOfForm extends StatelessWidget {
       child: Column(
         children: [
           ElevatedButton(
-            onPressed: () => context.push(
-              RouteNames.profileSetupEdit,
-              extra: SetupEditProfileType.setup,
+            onPressed: () => context.pushReplacement(
+              RouteNames.homeFeed,
+              extra: HomeFeedPageType.feed,
             ),
             child: const Text('Sign Up'),
           ),

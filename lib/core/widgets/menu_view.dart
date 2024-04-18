@@ -1,7 +1,9 @@
 
+import 'package:take_a_look/core/view_model/global_view_model.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/home_feed.dart';
+import 'package:take_a_look/pages/sign_up_screens/profile/presentation/pages/pages.dart';
 
-import '../../../../hair_color_formula_screens/follow_following/presentation/pages/follow_following_like_page.dart';
+import '../../pages/hair_color_formula_screens/follow_following/presentation/pages/follow_following_like_page.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
 import '/core/extensions/context_extension.dart';
@@ -31,7 +33,9 @@ class MenuView extends StatelessWidget {
           Align(
             alignment: Alignment.topRight,
             child: IconButton(
-              onPressed: () => read.onTapMenu(false),
+              onPressed: () {
+                context.read<GlobalViewModel>().menuControl(open: false);
+              },
               icon: Icon(Icons.close, color: AppColors.whiteColor,),
             ),
           ),
@@ -66,53 +70,78 @@ class MenuView extends StatelessWidget {
                   Column(
                     children: [
                       ItemOfProfileMenu(
-                        onPressed: () => context.push(
-                          RouteNames.homeFeed,
-                          extra: HomeFeedPageType.feed
-                          // extra: HomeFeedPageType.home
-                        ),
+                        onPressed: () {
+                          context.read<GlobalViewModel>().menuControl(open: false);
+                          context.pushReplacement(
+                            RouteNames.homeFeed,
+                            extra: HomeFeedPageType.home,
+                          );
+                        },
                         text: 'Home',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: (){},
+                        onPressed: (){
+                          context.read<GlobalViewModel>().menuControl(open: false);
+                          context.push(
+                            RouteNames.profile,
+                            extra: ProfilePageType.mine,
+                          );
+                        },
                         text: 'Profile',
                       ),
                       ItemOfProfileMenu(
                         onPressed: () {
+                          context.read<GlobalViewModel>().menuControl(open: false);
                           context.push(RouteNames.hairColor);
                         },
                         text: 'Take a Hair Formula',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: (){},
+                        onPressed: (){
+                          context.read<GlobalViewModel>().menuControl(open: false);
+                        },
                         text: 'E-learning',
                       ),
                       ItemOfProfileMenu(
                         onPressed: (){
+                          context.read<GlobalViewModel>().menuControl(open: false);
                           context.push(RouteNames.followFollowing, extra: FollowFollowingPageType.followers);
                         },
                         text: 'Followers',
                       ),
                       ItemOfProfileMenu(
                         onPressed: (){
+                          context.read<GlobalViewModel>().menuControl(open: false);
                           context.push(RouteNames.followFollowing, extra: FollowFollowingPageType.following);
                         },
                         text: 'Followings',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: () => context.push(RouteNames.note),
+                        onPressed: () {
+                          context.read<GlobalViewModel>().menuControl(open: false);
+                          context.push(RouteNames.note);
+                        },
                         text: 'Note',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: () => context.push(RouteNames.notification),
+                        onPressed: () {
+                          context.read<GlobalViewModel>().menuControl(open: false);
+                          context.push(RouteNames.notification);
+                        },
                         text: 'Notification',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: () => context.push(RouteNames.wishList),
+                        onPressed: () {
+                          context.read<GlobalViewModel>().menuControl(open: false);
+                          context.push(RouteNames.wishList);
+                        },
                         text: 'Wishlist',
                       ),
                       ItemOfProfileMenu(
-                        onPressed: () => context.push(RouteNames.miscellaneous),
+                        onPressed: () {
+                          context.read<GlobalViewModel>().menuControl(open: false);
+                          context.push(RouteNames.miscellaneous);
+                        },
                         text: 'Miscellaneous ',
                       ),
                     ],

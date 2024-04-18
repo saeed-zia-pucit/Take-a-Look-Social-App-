@@ -7,6 +7,7 @@ import 'package:take_a_look/pages/sign_up_screens/note/view_model/note_view_mode
 
 import 'core/router/router.dart';
 import 'core/theme/theme.dart';
+import 'core/view_model/global_view_model.dart';
 import 'pages/sign_in_screens/verify/view_model/verify_view_model.dart';
 import 'pages/sign_up_screens/profile/view_model/profile_view_model.dart';
 
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => AppThemeViewModel(),
+          create: (context) => GlobalViewModel(),
         ),
         ChangeNotifierProvider(
           create: (context) => VerifyViewModel(),
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => HairColorViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AppThemeViewModel(),
         ),
       ],
       builder: (context, _) {

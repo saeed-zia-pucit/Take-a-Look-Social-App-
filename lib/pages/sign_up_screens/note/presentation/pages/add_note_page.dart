@@ -1,6 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:take_a_look/constants/app_colors.dart';
+part of 'pages.dart';
 
 class AddNotePage extends StatefulWidget {
   const AddNotePage({super.key});

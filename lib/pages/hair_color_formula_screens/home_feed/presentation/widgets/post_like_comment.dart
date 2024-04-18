@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -29,17 +30,25 @@ class PostLikeComment extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  TextButton.icon(
-                    onPressed: () {
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(CupertinoIcons.heart_fill, color: AppColors.primaryColor,),
+                    // label: Text('255', style: TextStyle(color: AppColors.blackColor),),
+                  ),
+                  InkWell(
+                    onTap: (){
                       context.push(RouteNames.comments,
                         extra: CommentLikesPageType.likes,
                       );
                     },
-                    icon: Icon(CupertinoIcons.heart_fill, color: AppColors.primaryColor,),
-                    label: Text('255', style: TextStyle(color: AppColors.blackColor),),
+                    child: Text('255', style: TextStyle(color: AppColors.blackColor),),
                   ),
                   TextButton.icon(
-                    onPressed: (){},
+                    onPressed: (){
+                      context.push(RouteNames.comments,
+                        extra: CommentLikesPageType.comments,
+                      );
+                    },
                     icon: SvgPicture.asset(AppIcons.commentIcon),
                     label: Text('44', style: TextStyle(color: AppColors.blackColor),),
                   ),
@@ -51,7 +60,7 @@ class PostLikeComment extends StatelessWidget {
               )
             ],
           ),
-          if (homeFeedPageType.isHome)
+          if (homeFeedPageType.isFeed)
           Row(
             children: [
               AvatarWithSize(
@@ -82,7 +91,7 @@ class PostLikeComment extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Commnets',
+                          'Comments',
                           style: TextStyle(
                             fontSize: 10,
                             color: AppColors.greyColor

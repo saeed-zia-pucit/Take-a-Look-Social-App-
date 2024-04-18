@@ -11,10 +11,12 @@ class ButtonsOfForm extends StatelessWidget {
       child: Column(
         children: [
           ElevatedButton(
-            onPressed: () => context.pushReplacement(
-              RouteNames.homeFeed,
-              extra: HomeFeedPageType.feed,
-            ),
+            onPressed: () {
+              context.pushReplacement(
+                RouteNames.profileSetupEdit,
+                extra: SetupEditProfileType.setup
+              );
+            },
             child: const Text('Sign Up'),
           ),
           const Gap(30),

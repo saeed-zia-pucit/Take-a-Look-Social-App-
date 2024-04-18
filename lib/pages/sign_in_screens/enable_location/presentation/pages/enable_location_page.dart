@@ -29,8 +29,12 @@ class _EnableLocationPageState extends State<EnableLocationPage> {
                 content1Color: AppColors.blackColor,
               ),
               ElevatedButton(
-                onPressed: (){
-                  Permission.location.request();
+                onPressed: () async{
+                  await Permission.location.request();
+                  context.pushReplacement(
+                    RouteNames.homeFeed,
+                    extra: HomeFeedPageType.feed
+                  );
                 },
                 child: const Text('Enable'),
               ),

@@ -130,8 +130,9 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
                 onPressed: () =>
                 (profileType.isSetup) ?
                 context.pushReplacement(
-                  RouteNames.profile,
-                  extra: ProfilePageType.mine,
+                  RouteNames.homeFeed,
+                  extra: HomeFeedPageType.feed
+                  // extra: ProfilePageType.mine,
                 ) :
                 context.pop(),
                 child: const Text('Submit'),

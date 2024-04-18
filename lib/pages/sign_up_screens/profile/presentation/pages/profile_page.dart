@@ -22,18 +22,18 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<ProfileViewModel>();
-    final watch = context.watch<ProfileViewModel>();
     return Stack(
       children: [
         Scaffold(
           appBar: AppBar(
-            leading: IconButton(
+            leading:
+            (profilePageType.isMine) ?
+            IconButton(
               onPressed: () {
                 context.read<GlobalViewModel>().menuControl(open: true);
               },
               icon: const Icon(Icons.sort),
-            ),
+            ) : null,
             title: const Text('Profile'),
             actions: [
               TextButton(

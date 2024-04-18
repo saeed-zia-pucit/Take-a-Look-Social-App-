@@ -11,7 +11,6 @@ import '/core/extensions/number_extension.dart';
 import '/core/router/router.dart';
 import '/core/widgets/avatar_with_radius.dart';
 import '/pages/sign_up_screens/profile/presentation/widgets/item_of_profile_menu.dart';
-import '/pages/sign_up_screens/profile/view_model/profile_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -23,7 +22,6 @@ class MenuView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<ProfileViewModel>();
     return Scaffold(
       backgroundColor: AppColors.blackColor.withOpacity(.9),
       body: Column(
@@ -72,7 +70,7 @@ class MenuView extends StatelessWidget {
                       ItemOfProfileMenu(
                         onPressed: () {
                           context.read<GlobalViewModel>().menuControl(open: false);
-                          context.pushReplacement(
+                          context.push(
                             RouteNames.homeFeed,
                             extra: HomeFeedPageType.home,
                           );
@@ -82,7 +80,7 @@ class MenuView extends StatelessWidget {
                       ItemOfProfileMenu(
                         onPressed: (){
                           context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(
+                          context.go(
                             RouteNames.profile,
                             extra: ProfilePageType.mine,
                           );

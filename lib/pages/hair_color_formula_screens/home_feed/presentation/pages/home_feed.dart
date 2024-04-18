@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:take_a_look/constants/app_icons.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import 'package:take_a_look/core/extensions/context_extension.dart';
 import 'package:take_a_look/core/extensions/widget_extension.dart';
 import 'package:take_a_look/core/router/router.dart';
 import 'package:take_a_look/core/view_model/global_view_model.dart';
@@ -39,14 +38,16 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        leading: IconButton(
+        leading:
+        (homeFeedPageType.isFeed)?
+        IconButton(
           onPressed: (){
             context.read<GlobalViewModel>().menuControl(open: true);
           },
           icon: const Icon(Icons.sort),
-        ),
+        ) : null,
         title: Text(
-          homeFeedPageType.isHome ?
+          homeFeedPageType.isFeed ?
           'Discovery feed' :
           'Feed' ,
         ),
@@ -69,7 +70,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
           Section(
             child: Column(
               children: [
-                if (homeFeedPageType.isHome)
+                if (homeFeedPageType.isFeed)
                   const LocationItem(),
                 const AddPortfolio(),
               ],
@@ -114,11 +115,11 @@ class Section extends MultiSliver {
 }
 
 enum HomeFeedPageType {
-  home,
   feed,
+  home,
 }
 
 extension HomeFeedPageTypeExtension on HomeFeedPageType {
-  bool get isHome => HomeFeedPageType.home == this;
   bool get isFeed => HomeFeedPageType.feed == this;
+  bool get isHome => HomeFeedPageType.home == this;
 }

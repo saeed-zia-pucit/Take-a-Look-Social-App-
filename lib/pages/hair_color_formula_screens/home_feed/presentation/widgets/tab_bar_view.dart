@@ -1,8 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:take_a_look/constants/app_icons.dart';
-
-import '../../../../../constants/app_colors.dart';
+part of 'widgets.dart';
 
 class TabBarMenuView extends StatelessWidget {
   const TabBarMenuView({super.key});

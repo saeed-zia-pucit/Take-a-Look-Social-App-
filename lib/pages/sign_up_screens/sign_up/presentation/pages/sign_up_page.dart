@@ -14,7 +14,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: Stack(
         children: [
-          PageBackground(image: AppImages.signUpBackground),
+          PageBackgroundImage(image: AppImages.signUpBackground),
           const SingleChildScrollView(
             padding: EdgeInsets.symmetric(vertical: 30),
             child: Column(

@@ -1,7 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:take_a_look/constants/app_images.dart';
-import 'package:take_a_look/core/extensions/context_extension.dart';
+part of 'widgets.dart';
 
 class PostContent extends StatelessWidget {
   const PostContent({super.key});

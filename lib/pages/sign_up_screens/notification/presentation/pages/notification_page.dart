@@ -1,6 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:take_a_look/pages/sign_up_screens/notification/presentation/widgets/item_of_notification.dart';
+part of 'pages.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});

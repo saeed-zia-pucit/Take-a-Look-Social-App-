@@ -14,7 +14,7 @@ class _CongratsPageState extends State<CongratsPage> {
     return Scaffold(
       body: Stack(
         children: [
-          PageBackground(image: AppImages.congratsBackground),
+          PageBackgroundImage(image: AppImages.congratsBackground),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Center(

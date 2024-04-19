@@ -1,6 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:take_a_look/constants/app_colors.dart';
+part of 'widgets.dart';
 
 class LocationItem extends StatelessWidget {
   const LocationItem({super.key});

@@ -1,9 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:take_a_look/constants/app_colors.dart';
-import 'package:take_a_look/constants/app_images.dart';
-import 'package:take_a_look/core/extensions/context_extension.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/hair_formula/presentation/widgets/hair_items.dart';
+part of 'widgets.dart';
 
 class HairView extends StatelessWidget {
   const HairView({super.key});
@@ -13,8 +9,8 @@ class HairView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(20),
+        const Padding(
+          padding: EdgeInsets.all(20),
           child: Text(
             'Guide to blonde hair colors Notes',
           ),
@@ -42,7 +38,7 @@ class HairView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Additional Notes',
               ),
               Text(

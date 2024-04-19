@@ -1,6 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/presentation/widgets/get_formula_item.dart';
+part of 'widgets.dart';
 
 class GetFormula extends StatelessWidget {
   const GetFormula({super.key, required this.colors});

@@ -15,7 +15,7 @@ class _ForgetPageState extends State<ForgetPage> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          PageBackground(image: AppImages.forgetBackground),
+          PageBackgroundImage(image: AppImages.forgetBackground),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(

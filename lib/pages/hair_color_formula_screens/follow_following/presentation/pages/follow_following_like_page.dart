@@ -1,7 +1,5 @@
 
-import 'package:flutter/material.dart';
-
-import '../../../../../core/widgets/user_item.dart';
+part of 'pages.dart';
 
 class FollowFollowingPage extends StatefulWidget {
   const FollowFollowingPage({super.key, required this.followFollowingPageType});

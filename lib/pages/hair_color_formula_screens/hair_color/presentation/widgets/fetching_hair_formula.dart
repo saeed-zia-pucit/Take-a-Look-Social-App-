@@ -1,11 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
-import 'package:take_a_look/constants/app_icons.dart';
-
-import '../../view_model/hair_color_view_model.dart';
+part of 'widgets.dart';
 
 class FetchingHairFormula extends StatefulWidget {
   const FetchingHairFormula({super.key});

@@ -173,7 +173,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.homeFeed,
       builder: (context, state) {
-        HomeFeedPageType homeFeedPageType = state.extra as HomeFeedPageType;
+        var homeFeedPageType = state.extra as HomeFeedPageType;
         return HomeFeedPage(
           homeFeedPageType: homeFeedPageType,
         );

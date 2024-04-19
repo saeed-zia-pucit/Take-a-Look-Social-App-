@@ -22,7 +22,7 @@ class _SignInPageState extends State<SignInPage> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          PageBackground(image: AppImages.signInBackground),
+          PageBackgroundImage(image: AppImages.signInBackground),
           const Stack(
             children: [
               Column(

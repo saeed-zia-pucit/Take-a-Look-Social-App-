@@ -1,16 +1,16 @@
 
 import 'package:take_a_look/core/view_model/global_view_model.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/home_feed.dart';
 import 'package:take_a_look/pages/sign_up_screens/profile/presentation/pages/pages.dart';
 
-import '../../pages/hair_color_formula_screens/follow_following/presentation/pages/follow_following_like_page.dart';
+import '../../pages/hair_color_formula_screens/follow_following/presentation/pages/pages.dart';
+import '../../pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
+import '../../pages/sign_up_screens/profile/presentation/widgets/widgets.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
 import '/core/extensions/context_extension.dart';
 import '/core/extensions/number_extension.dart';
 import '/core/router/router.dart';
 import '/core/widgets/avatar_with_radius.dart';
-import '/pages/sign_up_screens/profile/presentation/widgets/item_of_profile_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';

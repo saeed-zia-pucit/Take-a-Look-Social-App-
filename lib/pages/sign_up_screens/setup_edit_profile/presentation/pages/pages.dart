@@ -1,6 +1,5 @@
 
-import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/home_feed.dart';
-
+import '../../../../hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
 import '/core/extensions/number_extension.dart';

@@ -1,11 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:take_a_look/core/extensions/context_extension.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/presentation/widgets/fetching_hair_formula.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/presentation/widgets/get_formula.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/presentation/widgets/show_color.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/view_model/hair_color_view_model.dart';
+part of 'pages.dart';
 
 class HairColorPage extends StatefulWidget {
   const HairColorPage({super.key});

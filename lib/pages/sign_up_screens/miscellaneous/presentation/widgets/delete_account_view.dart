@@ -1,13 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
-import 'package:take_a_look/constants/app_colors.dart';
-import 'package:take_a_look/constants/app_icons.dart';
-import 'package:take_a_look/core/extensions/number_extension.dart';
-import 'package:take_a_look/pages/sign_in_screens/widgets/header.dart';
-import 'package:take_a_look/pages/sign_up_screens/miscellaneous/view_model/miscellaneous_view_model.dart';
+part of 'widgets.dart';
 
 class DeleteAccountView extends StatelessWidget {
   const DeleteAccountView({super.key});

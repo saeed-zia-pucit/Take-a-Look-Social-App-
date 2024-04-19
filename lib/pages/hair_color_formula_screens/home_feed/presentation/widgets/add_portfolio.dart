@@ -1,10 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:take_a_look/constants/app_colors.dart';
-import 'package:take_a_look/constants/app_images.dart';
-import 'package:take_a_look/constants/app_icons.dart';
+part of 'widgets.dart';
 
 class AddPortfolio extends StatelessWidget {
   const AddPortfolio({super.key});

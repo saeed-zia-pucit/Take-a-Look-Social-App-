@@ -1,6 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/wishlist/presentation/widgets/formula_item.dart';
+part of 'pages.dart';
 
 class WishListPage extends StatefulWidget {
   const WishListPage({super.key});

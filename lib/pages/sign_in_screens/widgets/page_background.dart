@@ -2,8 +2,8 @@
 import '/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
-class PageBackground extends StatelessWidget {
-  const PageBackground({super.key, required this.image});
+class PageBackgroundImage extends StatelessWidget {
+  const PageBackgroundImage({super.key, required this.image});
 
   final String image;
 

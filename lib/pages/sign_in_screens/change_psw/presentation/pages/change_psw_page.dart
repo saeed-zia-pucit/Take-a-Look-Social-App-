@@ -15,7 +15,7 @@ class _ChangePswPageState extends State<ChangePswPage> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          PageBackground(image: AppImages.changePswBackground),
+          PageBackgroundImage(image: AppImages.changePswBackground),
           const ChangePswForm(),
         ],
       ),

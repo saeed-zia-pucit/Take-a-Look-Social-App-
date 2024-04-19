@@ -1,16 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:take_a_look/constants/app_colors.dart';
-import 'package:take_a_look/constants/app_icons.dart';
-import 'package:take_a_look/constants/app_images.dart';
-import 'package:take_a_look/core/extensions/context_extension.dart';
-
-import '../../../../../core/router/router.dart';
-import '../../../../sign_up_screens/profile/presentation/pages/pages.dart';
-import '../pages/home_feed.dart';
+part of 'widgets.dart';
 
 class PostAuthor extends StatelessWidget {
   const PostAuthor({super.key, required this.homeFeedPageType});

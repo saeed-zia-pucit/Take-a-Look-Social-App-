@@ -1,6 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
-import 'package:take_a_look/constants/app_images.dart';
+part of 'widgets.dart';
 
 class HairItem extends StatelessWidget {
   const HairItem({super.key});

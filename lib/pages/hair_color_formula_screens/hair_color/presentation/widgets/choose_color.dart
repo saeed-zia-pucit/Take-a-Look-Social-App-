@@ -1,12 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:take_a_look/constants/app_colors.dart';
-import 'package:take_a_look/core/extensions/number_extension.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/presentation/widgets/color_item.dart';
-
-import '../../view_model/hair_color_view_model.dart';
+part of 'widgets.dart';
 
 class ChooseColor extends StatelessWidget {
   const ChooseColor({super.key,
@@ -17,12 +10,9 @@ class ChooseColor extends StatelessWidget {
 
   final String title;
   final List<Color> colors;
-  // final int index;
 
   @override
   Widget build(BuildContext context) {
-    final watch = context.watch<HairColorViewModel>();
-
     return Container(
       height: 180.h(context),
       margin: const EdgeInsets.all(20),

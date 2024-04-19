@@ -1,18 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
-import 'package:take_a_look/constants/app_colors.dart';
-import 'package:take_a_look/constants/app_icons.dart';
-import 'package:take_a_look/constants/app_images.dart';
-import 'package:take_a_look/core/router/router.dart';
-import 'package:take_a_look/core/widgets/avatar_with_size.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/comments_likes/presentation/pages/comments_likes_page.dart';
-
-import '../pages/home_feed.dart';
+part of 'widgets.dart';
 
 class PostLikeComment extends StatelessWidget {
   const PostLikeComment({super.key, required this.homeFeedPageType});

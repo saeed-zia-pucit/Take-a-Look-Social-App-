@@ -1,11 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/widgets/post_author.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/widgets/post_content.dart';
-import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/widgets/post_like_comment.dart';
-
-import '../pages/home_feed.dart';
+part of 'widgets.dart';
 
 class PostItem extends StatelessWidget {
   const PostItem({super.key, required this.homeFeedPageType});

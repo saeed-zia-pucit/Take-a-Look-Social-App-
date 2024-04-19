@@ -1,5 +1,5 @@
 
-import 'package:flutter/material.dart';
+part of 'pages.dart';
 
 class AboutTermPrivacy extends StatefulWidget {
   const AboutTermPrivacy({super.key, required this.aboutTermPrivacyType});

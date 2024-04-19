@@ -15,7 +15,7 @@ class _VerifyPageState extends State<VerifyPage> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          PageBackground(image: AppImages.verifyBackground),
+          PageBackgroundImage(image: AppImages.verifyBackground),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Column(

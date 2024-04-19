@@ -1,5 +1,5 @@
 
-import 'package:flutter/material.dart';
+part of 'widgets.dart';
 
 class SelectedColors extends StatelessWidget {
   const SelectedColors({super.key, required this.colors});

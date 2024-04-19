@@ -1,5 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
+part of 'widgets.dart';
 
 class GetFormulaItem extends StatelessWidget {
   const GetFormulaItem({super.key, required this.color, required this.text1, required this.text2});

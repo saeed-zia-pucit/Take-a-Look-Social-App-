@@ -1,8 +1,5 @@
 
-import '/constants/app_images.dart';
-import '/constants/app_icons.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+part of 'widgets.dart';
 
 class ItemOfProfilePost extends StatelessWidget {
   const ItemOfProfilePost({super.key, this.haveIcon = false});

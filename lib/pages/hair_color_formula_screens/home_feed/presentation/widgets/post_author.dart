@@ -99,7 +99,7 @@ class PostAuthor extends StatelessWidget {
                           onPressed: (){},
                           icon: SvgPicture.asset(AppIcons.trashBasketIcon),
                           label: Text(
-                            'Save',
+                            'Delete',
                             style: TextStyle(
                               color: AppColors.blackColor,
                             ),

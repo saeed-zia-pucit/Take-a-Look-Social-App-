@@ -137,6 +137,7 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
                 context.pop(),
                 child: const Text('Submit'),
               ),
+              const Gap(50),
             ],
           ),
         ),

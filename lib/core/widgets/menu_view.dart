@@ -80,7 +80,7 @@ class MenuView extends StatelessWidget {
                       ItemOfProfileMenu(
                         onPressed: (){
                           context.read<GlobalViewModel>().menuControl(open: false);
-                          context.go(
+                          context.push(
                             RouteNames.profile,
                             extra: ProfilePageType.mine,
                           );

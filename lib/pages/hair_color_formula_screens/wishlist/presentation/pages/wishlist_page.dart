@@ -14,7 +14,9 @@ class _WishListPageState extends State<WishListPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: (){},
+          onPressed: (){
+            context.read<GlobalViewModel>().menuControl(open: true);
+          },
           icon: const Icon(Icons.sort),
         ),
         title: const Text('Wishlist'),
@@ -26,7 +28,7 @@ class _WishListPageState extends State<WishListPage> {
         ],
       ),
 
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             FormulaItem(),
@@ -36,6 +38,6 @@ class _WishListPageState extends State<WishListPage> {
           ],
         ),
       ),
-    );
+    ).menu(context);
   }
 }

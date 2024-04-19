@@ -49,7 +49,7 @@ class UserItem extends StatelessWidget {
               ),
               TextButton(
                 onPressed: (){},
-                child: Text(
+                child: const Text(
                   'Unfollow',
                 ),
               ),

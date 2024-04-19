@@ -1,9 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:gap/gap.dart';
-import 'package:provider/provider.dart';
-
-import '../view_model/global_view_model.dart';
 
 extension ContextExtension on BuildContext {
   double get height => MediaQuery.sizeOf(this).height;

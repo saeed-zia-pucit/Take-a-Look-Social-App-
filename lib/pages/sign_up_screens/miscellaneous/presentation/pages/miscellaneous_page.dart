@@ -17,7 +17,7 @@ class _MiscellaneousPageState extends State<MiscellaneousPage> {
       children: [
         Scaffold(
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               'Miscellaneous'
             ),
           ),

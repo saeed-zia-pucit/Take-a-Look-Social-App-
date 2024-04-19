@@ -3,7 +3,6 @@ import '/constants/app_colors.dart';
 import '/constants/app_icons.dart';
 import '/core/extensions/context_extension.dart';
 import '/core/extensions/number_extension.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';

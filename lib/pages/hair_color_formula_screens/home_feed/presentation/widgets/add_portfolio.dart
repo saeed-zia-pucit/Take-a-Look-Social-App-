@@ -24,7 +24,7 @@ class AddPortfolio extends StatelessWidget {
                   ),
                 ),
               ),
-              Gap(10),
+              const Gap(10),
               Text(
                 'Add Portfolio...',
                 style: TextStyle(

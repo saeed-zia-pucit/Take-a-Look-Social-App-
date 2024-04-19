@@ -31,10 +31,12 @@ class _EnableLocationPageState extends State<EnableLocationPage> {
               ElevatedButton(
                 onPressed: () async{
                   await Permission.location.request();
-                  context.pushReplacement(
-                    RouteNames.homeFeed,
-                    extra: HomeFeedPageType.feed
-                  );
+                  if (context.mounted) {
+                    context.pushReplacement(
+                      RouteNames.homeFeed,
+                      extra: HomeFeedPageType.feed,
+                    );
+                  }
                 },
                 child: const Text('Enable'),
               ),

@@ -17,7 +17,11 @@ class MiscellaneousViewModel extends ChangeNotifier {
 
   void logOut(BuildContext context) async {
 
-    bool? isYes = await confirmDialog(context);
+    bool? isYes = await confirmDialog(
+      context,
+      title: 'Log out',
+      content: 'Do you want to log out?',
+    );
     if (isYes == null) return;
 
     GoogleSignIn googleSignIn = GoogleSignIn();
@@ -25,7 +29,7 @@ class MiscellaneousViewModel extends ChangeNotifier {
     await FacebookAuth.instance.logOut();
     await FirebaseAuth.instance.signOut();
     if (FirebaseAuth.instance.currentUser == null) {
-      context.go(RouteNames.signIn);
+      if (context.mounted) context.go(RouteNames.signIn);
     }
   }
 

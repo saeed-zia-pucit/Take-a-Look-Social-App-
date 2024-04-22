@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
         return Consumer<AppThemeViewModel>(
           builder: (context, viewModel, _) {
             return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
               routerConfig: router,
               title: 'Flutter Demo',
               themeMode: viewModel.themeMode,

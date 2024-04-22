@@ -1,26 +1,56 @@
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Future<bool?> confirmDialog(BuildContext context) async {
+Future<bool?> confirmDialog(BuildContext context,  {
+  required String title, required String content,
+  String yes = 'Yes',
+  String no = 'No',
+  Color? yesColor = Colors.red,
+  Color? noColor = Colors.green,
+}) async {
   return await showDialog(
     context: context,
     builder: (context) {
       return AlertDialog.adaptive(
-        title: const Text('Log out'),
-        content: const Text('Do you want to log out?'),
+        title: Text(title),
+        content: Text(content),
         actions: [
-          TextButton(
+
+          /// yes
+          if (Platform.isIOS)
+          CupertinoDialogAction(
             onPressed: (){
               Navigator.pop(context, true);
             },
-            child: const Text('Yes'),
+            textStyle: TextStyle(color: yesColor),
+            child: Text(yes),
+          ) else TextButton(
+            onPressed: (){
+              Navigator.pop(context, true);
+            },
+            child: Text(yes, style: TextStyle(color: yesColor),),
           ),
-          TextButton(
+
+
+
+          /// no
+          if (Platform.isIOS)
+          CupertinoDialogAction(
             onPressed: (){
               Navigator.pop(context, null);
             },
-            child: const Text('No'),
+            textStyle: TextStyle(color: noColor),
+            child: Text(no),
+          ) else TextButton(
+            onPressed: (){
+              Navigator.pop(context, null);
+            },
+            child: Text(no, style: TextStyle(color: noColor),),
           ),
+
         ],
       );
     },

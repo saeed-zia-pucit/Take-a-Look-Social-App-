@@ -119,7 +119,7 @@ extension SocialButtonExtension on BuildContext {
       (Platform.isIOS) ?
       SocialAuthButton(
     onPressed: () async {
-      // var user = await getIt.get<SocialAuth>().signInWithApple();
+      var user = await getIt.get<SocialAuth>().signInWithApple();
       // print(user?.email);
       // if (user == null) return;
       if (context.mounted) {

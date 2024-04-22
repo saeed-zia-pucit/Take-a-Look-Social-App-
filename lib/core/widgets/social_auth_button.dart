@@ -1,4 +1,12 @@
 
+import 'dart:io';
+
+import 'package:go_router/go_router.dart';
+import 'package:take_a_look/core/data/repo/social_auth.dart';
+import 'package:take_a_look/core/router/router.dart';
+import 'package:take_a_look/di_service.dart';
+import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
+
 import '/constants/app_colors.dart';
 import '/constants/app_icons.dart';
 import '/core/extensions/context_extension.dart';
@@ -7,8 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
-class SocialButton extends StatelessWidget {
-  const SocialButton({super.key,
+class SocialAuthButton extends StatelessWidget {
+  const SocialAuthButton({super.key,
     required this.onPressed,
     required this.socialButtonType,
     required this.text,
@@ -75,21 +83,56 @@ class SocialButton extends StatelessWidget {
 }
 
 extension SocialButtonExtension on BuildContext {
-  Widget get facebookButton => SocialButton(
-    onPressed: (){},
+  Widget facebookButton(BuildContext context) => SocialAuthButton(
+    onPressed: () async {
+      var user = await getIt.get<SocialAuth>().signInWithFacebook();
+      print(user?.displayName);
+      if (user == null) return;
+      if (context.mounted) {
+        context.go(
+          RouteNames.homeFeed,
+          extra: HomeFeedPageType.feed,
+        );
+      }
+    },
     socialButtonType: SocialButtonType.facebook,
     text: 'Continue with Facebook',
   );
-  Widget get googleButton => SocialButton(
-    onPressed: (){},
+
+  Widget googleButton(BuildContext context) => SocialAuthButton(
+    onPressed: () async {
+      var user = await getIt.get<SocialAuth>().signInWithGoogle();
+      print(user?.displayName);
+      if (user == null) return;
+      if (context.mounted) {
+        context.go(
+          RouteNames.homeFeed,
+          extra: HomeFeedPageType.feed,
+        );
+      }
+    },
     socialButtonType: SocialButtonType.google,
     text: 'Continue with Google',
   );
-  Widget get appleButton => SocialButton(
-    onPressed: (){},
+
+  Widget appleButton(BuildContext context) =>
+      (Platform.isIOS) ?
+      SocialAuthButton(
+    onPressed: () async {
+      // var user = await getIt.get<SocialAuth>().signInWithApple();
+      // print(user?.email);
+      // if (user == null) return;
+      if (context.mounted) {
+        context.go(
+          RouteNames.homeFeed,
+          extra: HomeFeedPageType.feed,
+        );
+      }
+    },
     socialButtonType: SocialButtonType.apple,
     text: 'Continue with Apple',
-  );
+  ) :
+      const SizedBox.shrink();
 }
 
 enum SocialButtonType {

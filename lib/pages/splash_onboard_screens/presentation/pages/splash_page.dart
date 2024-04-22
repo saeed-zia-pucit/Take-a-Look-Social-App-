@@ -13,7 +13,18 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-    Future.delayed(const Duration(seconds: 1), () => context.pushReplacement(RouteNames.onBoard),);
+    Future.delayed(const Duration(seconds: 1), () async {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        context.pushReplacement(RouteNames.onBoard);
+      } else {
+        context.pushReplacement(
+          RouteNames.homeFeed,
+          extra: HomeFeedPageType.feed
+        );
+      }
+    }
+    );
     super.initState();
   }
 

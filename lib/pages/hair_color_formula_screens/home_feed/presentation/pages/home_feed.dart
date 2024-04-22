@@ -16,6 +16,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
 
   @override
   void initState() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     homeFeedPageType = widget.homeFeedPageType;
     super.initState();
   }

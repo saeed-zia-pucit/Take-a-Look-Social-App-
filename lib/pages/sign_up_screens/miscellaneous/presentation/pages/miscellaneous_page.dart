@@ -65,7 +65,9 @@ class _MiscellaneousPageState extends State<MiscellaneousPage> {
                           color: AppColors.greyColor,
                         ),
                         ItemOfProfileMenu(
-                          onPressed: (){},
+                          onPressed: (){
+                            read.logOut(context);
+                          },
                           text: 'Logout',
                           color: AppColors.greyColor,
                         ),

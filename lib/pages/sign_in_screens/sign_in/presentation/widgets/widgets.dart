@@ -1,7 +1,7 @@
 
 import '/core/extensions/number_extension.dart';
 import '/core/router/router.dart';
-import '/pages/sign_in_screens/widgets/social_button.dart';
+import '../../../../../core/widgets/social_auth_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';

@@ -129,7 +129,7 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
               ElevatedButton(
                 onPressed: () =>
                 (profileType.isSetup) ?
-                context.pushReplacement(
+                context.go(
                   RouteNames.homeFeed,
                   extra: HomeFeedPageType.feed
                   // extra: ProfilePageType.mine,

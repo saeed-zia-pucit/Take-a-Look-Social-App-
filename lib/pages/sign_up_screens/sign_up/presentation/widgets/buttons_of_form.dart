@@ -12,7 +12,7 @@ class ButtonsOfForm extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              context.pushReplacement(
+              context.push(
                 RouteNames.profileSetupEdit,
                 extra: SetupEditProfileType.setup
               );
@@ -29,9 +29,9 @@ class ButtonsOfForm extends StatelessWidget {
             ),
           ),
           const Gap(30),
-          context.facebookButton,
-          context.googleButton,
-          context.appleButton,
+          context.facebookButton(context),
+          context.googleButton(context),
+          context.appleButton(context),
         ],
       ),
     );

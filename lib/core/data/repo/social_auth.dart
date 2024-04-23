@@ -1,6 +1,5 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -9,7 +8,7 @@ abstract class SocialAuth {
   Future<User?> signInWithFacebook();
   Future<User?> signInWithApple();
   Future<bool?> deleteAccount();
-  Future<bool?> logOut(BuildContext context);
+  Future<bool?> logOut();
 }
 
 class SocialAuthImpl extends SocialAuth {
@@ -60,7 +59,7 @@ class SocialAuthImpl extends SocialAuth {
   }
 
   @override
-  Future<bool?> logOut(BuildContext context) async {
+  Future<bool?> logOut() async {
     try {
       /// Google
       GoogleSignIn googleSignIn = GoogleSignIn();
@@ -87,21 +86,23 @@ class SocialAuthImpl extends SocialAuth {
   Future<bool?> deleteAccount() async {
     try {
       FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-      final providerData = firebaseAuth.currentUser?.providerData.first;
-
-      if (AppleAuthProvider().providerId == providerData!.providerId) {
-        /// Apple
-        await firebaseAuth.currentUser!.reauthenticateWithProvider(AppleAuthProvider());
-      } else if (GoogleAuthProvider().providerId == providerData.providerId) {
-        /// Google
-        await firebaseAuth.currentUser!.reauthenticateWithProvider(GoogleAuthProvider());
-      } else if (FacebookAuthProvider().providerId == providerData.providerId) {
-        /// Facebook
-        await firebaseAuth.currentUser!.reauthenticateWithProvider(FacebookAuthProvider());
-      }
+      // final providerData = firebaseAuth.currentUser?.providerData.first;
+      //
+      // if (AppleAuthProvider().providerId == providerData!.providerId) {
+      //   /// Apple
+      //   await firebaseAuth.currentUser!.reauthenticateWithProvider(AppleAuthProvider());
+      // } else if (GoogleAuthProvider().providerId == providerData.providerId) {
+      //   /// Google
+      //   await firebaseAuth.currentUser!.reauthenticateWithProvider(GoogleAuthProvider());
+      // } else if (FacebookAuthProvider().providerId == providerData.providerId) {
+      //   /// Facebook
+      //   await firebaseAuth.currentUser!.reauthenticateWithProvider(FacebookAuthProvider());
+      // }
       await firebaseAuth.currentUser?.delete();
+      await logOut();
       return true;
     } catch (e) {
+      print(e.toString());
       return null;
     }
   }

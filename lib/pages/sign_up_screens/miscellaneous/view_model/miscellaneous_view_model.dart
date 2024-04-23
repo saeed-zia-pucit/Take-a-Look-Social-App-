@@ -22,7 +22,7 @@ class MiscellaneousViewModel extends ChangeNotifier {
       content: 'Do you want to log out?',
     );
     if (isYes == null) return;
-    bool? isDelete = await getIt.get<SocialAuth>().logOut(context);
+    bool? isDelete = await getIt.get<SocialAuth>().logOut();
 
     if (isDelete == null) return;
     if (context.mounted) context.go(RouteNames.signIn);

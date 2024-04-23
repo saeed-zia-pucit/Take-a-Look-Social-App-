@@ -1,6 +1,8 @@
 
 import 'dart:io';
 
+import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:take_a_look/core/data/repo/social_auth.dart';
 import 'package:take_a_look/core/router/router.dart';
@@ -12,8 +14,6 @@ import '/constants/app_icons.dart';
 import '/core/extensions/context_extension.dart';
 import '/core/extensions/number_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
 
 class SocialAuthButton extends StatelessWidget {
   const SocialAuthButton({super.key,
@@ -86,7 +86,6 @@ extension SocialButtonExtension on BuildContext {
   Widget facebookButton(BuildContext context) => SocialAuthButton(
     onPressed: () async {
       var user = await getIt.get<SocialAuth>().signInWithFacebook();
-      print(user?.displayName);
       if (user == null) return;
       if (context.mounted) {
         context.go(
@@ -102,7 +101,6 @@ extension SocialButtonExtension on BuildContext {
   Widget googleButton(BuildContext context) => SocialAuthButton(
     onPressed: () async {
       var user = await getIt.get<SocialAuth>().signInWithGoogle();
-      print(user?.displayName);
       if (user == null) return;
       if (context.mounted) {
         context.go(
@@ -120,8 +118,7 @@ extension SocialButtonExtension on BuildContext {
       SocialAuthButton(
     onPressed: () async {
       var user = await getIt.get<SocialAuth>().signInWithApple();
-      // print(user?.email);
-      // if (user == null) return;
+      if (user == null) return;
       if (context.mounted) {
         context.go(
           RouteNames.homeFeed,

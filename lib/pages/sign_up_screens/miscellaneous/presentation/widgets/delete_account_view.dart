@@ -30,7 +30,9 @@ class DeleteAccountView extends StatelessWidget {
                   child: SizedBox(
                     height: 60.h(context),
                     child: ElevatedButton(
-                      onPressed: () => read.onTapDeleteAccount(false),
+                      onPressed: () {
+                        read.deleteAccount(context);
+                      },
                       child: const Text(
                         'Delete',
                         style: TextStyle(

@@ -23,9 +23,25 @@ class _SignInPageState extends State<SignInPage> {
       body: Stack(
         children: [
           PageBackgroundImage(image: AppImages.signInBackground),
-          const Stack(
+          Stack(
             children: [
-              Column(
+              Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                    colors: [
+                      Colors.black,
+                      Colors.transparent,
+                      Colors.transparent,
+                      Colors.transparent,
+                      Colors.transparent,
+                      Colors.transparent,
+                    ]
+                  ),
+                ),
+              ),
+              const Column(
                 children: [
                   Header(
                     title: 'Sign In',

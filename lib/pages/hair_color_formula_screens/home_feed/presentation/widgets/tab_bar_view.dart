@@ -20,45 +20,93 @@ class TabBarMenuView extends StatelessWidget {
             fontSize: 12,
             color: AppColors.greyColor,
           ),
+          // tabs: [
+          //   Tab(
+          //     icon: Column(
+          //       children: [
+          //         Image.asset(
+          //           AppIcons.tabBar1,
+          //           height: 40,
+          //         ),
+          //       ],
+          //     ),
+          //     text: 'All',
+          //   ),
+          //   Tab(
+          //     icon: Image.asset(
+          //       AppIcons.tabBar2,
+          //       height: 40,
+          //     ),
+          //     text: 'Curly',
+          //   ),
+          //   Tab(
+          //     icon: Image.asset(
+          //       AppIcons.tabBar3,
+          //       height: 40,
+          //     ),
+          //     text: 'Highlight',
+          //   ),
+          //   Tab(
+          //     icon: Image.asset(
+          //       AppIcons.tabBar4,
+          //       height: 40,
+          //     ),
+          //     text: 'Blonde',
+          //   ),
+          //   Tab(
+          //     icon: Image.asset(
+          //       AppIcons.tabBar5,
+          //       height: 40,
+          //     ),
+          //     text: 'Burnett ',
+          //   ),
+          // ],
           tabs: [
+            // Tab(
+            //   icon: Column(
+            //     children: [
+            //       Image.asset(
+            //         AppIcons.tabBar1,
+            //         height: 40,
+            //       ),
+            //     ],
+            //   ),
+            //   text: 'Brunette',
+            // ),
             Tab(
-              icon: Column(
-                children: [
-                  Image.asset(
-                    AppIcons.tabBar1,
-                    height: 40,
-                  ),
-                ],
+              icon: Image.asset(
+                AppIcons.tabBar1,
+                height: 40,
               ),
-              text: 'All',
+              text: 'Brunette ',
             ),
             Tab(
               icon: Image.asset(
                 AppIcons.tabBar2,
                 height: 40,
               ),
-              text: 'Curly',
+              text: 'Blonde',
             ),
             Tab(
               icon: Image.asset(
                 AppIcons.tabBar3,
                 height: 40,
               ),
-              text: 'Highlight',
+              text: 'Red',
             ),
             Tab(
               icon: Image.asset(
                 AppIcons.tabBar4,
                 height: 40,
               ),
-              text: 'Blonde',
+              text: 'Grey',
             ),
             Tab(
               icon: Image.asset(
                 AppIcons.tabBar5,
                 height: 40,
               ),
-              text: 'Burnett ',
+              text: 'Black',
             ),
           ],
         ),

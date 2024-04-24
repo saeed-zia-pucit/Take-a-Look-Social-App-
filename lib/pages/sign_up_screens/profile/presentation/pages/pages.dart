@@ -1,6 +1,8 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:take_a_look/core/extensions/widget_extension.dart';
 import 'package:take_a_look/core/view_model/global_view_model.dart';
+import 'package:take_a_look/pages/sign_up_screens/setup_edit_profile/view_model/setup_edit_profile_view_model.dart';
 
 import '../widgets/widgets.dart';
 import '/constants/app_colors.dart';

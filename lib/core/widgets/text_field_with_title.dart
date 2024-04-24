@@ -17,6 +17,7 @@ class TextFieldWithTitle extends StatefulWidget {
     this.hintText,
     this.hintStyle,
     this.maxLines = 1,
+    this.enable = true,
   });
 
   final String title;
@@ -27,6 +28,7 @@ class TextFieldWithTitle extends StatefulWidget {
   final String? hintText;
   final TextStyle? hintStyle;
   final int? maxLines;
+  final bool enable;
 
   @override
   State<TextFieldWithTitle> createState() => _TextFieldWithTitleState();
@@ -55,6 +57,7 @@ class _TextFieldWithTitleState extends State<TextFieldWithTitle> {
           height: widget.maxLines == null ? 50.h(context) : null,
           child: Center(
             child: TextField(
+              enabled: widget.enable,
               style: widget.textStyle ?? GoogleFonts.nunito(fontSize: 12.h(context),),
               obscureText: (widget.obscureText) ? hidePassword : false,
               maxLines: widget.maxLines,
@@ -87,6 +90,13 @@ class _TextFieldWithTitleState extends State<TextFieldWithTitle> {
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  borderSide: BorderSide(
+                    width: .5,
+                    color: AppColors.borderColor,
+                  ),
+                ),
+                disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide(
                     width: .5,

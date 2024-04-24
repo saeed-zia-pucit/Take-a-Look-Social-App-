@@ -22,6 +22,10 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final read = context.read<SetupEditProfileViewModel>();
+    final watch = context.watch<SetupEditProfileViewModel>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -39,6 +43,7 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
         ),
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(vertical: 30),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -84,19 +89,31 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
                 hintText: 'Add Bio',
                 maxLines: 5,
               ),
-              const Gap(30),
-              const TextFieldWithTitle(
-                title: 'Cosmetology License Number',
-                titleColor: Colors.black,
+
+
+              if (!watch.isStudent)
+              Column(
+                children: [
+                  const Gap(30),
+                  TextFieldWithTitle(
+                    title: 'Cosmetology License Number',
+                    titleColor: Colors.black,
+                    enable: !watch.isStudent,
+                  ),
+                ],
               ),
-              const Gap(30),
+
+              if (!watch.isStudent)
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const Gap(30),
                   const Text('Upload License'),
                   const Gap(5),
                   InkWell(
-                    onTap: (){},
+                    onTap: (){
+                      context.read<SetupEditProfileViewModel>().uploadLicense();
+                    },
                     child: DottedBorder(
                       borderType: BorderType.RRect,
                       radius: const Radius.circular(12),
@@ -125,6 +142,24 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
                   ),
                 ],
               ),
+
+              const Gap(30),
+              GestureDetector(
+                onTap: () {
+                  read.onTapStudent();
+                },
+                child: Row(
+                  children: [
+                    Checkbox(
+                      onChanged: (_) => read.onTapStudent(),
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      value: watch.isStudent,
+                    ),
+                    const Text('Cosmetology Student'),
+                  ],
+                ),
+              ),
+
               const Gap(60),
               ElevatedButton(
                 onPressed: () =>

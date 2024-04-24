@@ -143,17 +143,22 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                             ],
                           ),
-                          Container(
+                          (context.watch<SetupEditProfileViewModel>().image != null) ?
+                          SizedBox(
                             height: 50.h(context),
                             width: 50.h(context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: AssetImage(AppImages.cosmetologyLicense),
-                                fit: BoxFit.cover,
-                              )
+                            child: const Icon(
+                              CupertinoIcons.checkmark_seal_fill,
+                              color: Colors.blue,
                             ),
-                          )
+                            // decoration: BoxDecoration(
+                            //   borderRadius: BorderRadius.circular(10),
+                            //   image: DecorationImage(
+                            //     image: AssetImage(AppImages.cosmetologyLicense),
+                            //     fit: BoxFit.cover,
+                            //   )
+                            // ),
+                          ) : const SizedBox.shrink(),
                         ],
                       ),
                       const Gap(10),

@@ -6,6 +6,7 @@ import 'package:take_a_look/di_service.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/view_model/hair_color_view_model.dart';
 import 'package:take_a_look/pages/sign_up_screens/miscellaneous/view_model/miscellaneous_view_model.dart';
 import 'package:take_a_look/pages/sign_up_screens/note/view_model/note_view_model.dart';
+import 'package:take_a_look/pages/sign_up_screens/setup_edit_profile/view_model/setup_edit_profile_view_model.dart';
 
 import 'core/router/router.dart';
 import 'core/theme/theme.dart';
@@ -54,6 +55,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => SignUpViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SetupEditProfileViewModel(),
         ),
       ],
       builder: (context, _) {

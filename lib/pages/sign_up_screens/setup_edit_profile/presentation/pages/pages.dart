@@ -1,5 +1,9 @@
 
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+
 import '../../../../hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
+import '../../view_model/setup_edit_profile_view_model.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
 import '/core/extensions/number_extension.dart';

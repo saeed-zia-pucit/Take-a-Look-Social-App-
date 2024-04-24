@@ -7,12 +7,14 @@ class ColorItem extends StatelessWidget {
     required this.index,
     this.label,
     required this.color,
+    this.image,
   });
 
   // final int pageIndex;
   final int index;
   final Color color;
   final String? label;
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,10 @@ class ColorItem extends StatelessWidget {
             width: 40,
             child: DecoratedBox(
               decoration: BoxDecoration(
+                image: (image == null) ? null :
+                DecorationImage(
+                  image: AssetImage(image ?? ''),
+                ),
                 color: color,
                 borderRadius: BorderRadius.circular(5),
               ),

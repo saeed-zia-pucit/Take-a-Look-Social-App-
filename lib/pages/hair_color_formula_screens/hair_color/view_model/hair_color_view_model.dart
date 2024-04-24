@@ -12,12 +12,17 @@ class HairColorViewModel extends ChangeNotifier {
   bool isLoadingFormula = false;
 
   List<Color> primaryColors = [
-    const Color.fromRGBO(33, 33, 33, 1),
+    Colors.black,
     const Color.fromRGBO(144, 84, 47, 1),
     const Color.fromRGBO(255, 0, 0, 1),
     const Color.fromRGBO(251, 231, 161, 1),
   ];
   List<Color> naturalLevelColors = [
+    const Color.fromRGBO(250, 240, 190, 1),
+    const Color.fromRGBO(250, 240, 190, 1),
+    const Color.fromRGBO(250, 240, 190, 1),
+    const Color.fromRGBO(250, 240, 190, 1),
+    const Color.fromRGBO(250, 240, 190, 1),
     const Color.fromRGBO(250, 240, 190, 1),
     const Color.fromRGBO(250, 240, 190, 1),
     const Color.fromRGBO(240, 226, 182, 1),
@@ -43,54 +48,44 @@ class HairColorViewModel extends ChangeNotifier {
 
 
   void initPage() {
-    pageTitle = 'Primary color';
+    pageTitle = 'Natural Level';
     currentPageIndex = 0;
     allColors = [
-      primaryColors,
       naturalLevelColors,
+      primaryColors,
       desiredColors,
     ];
     colorItemsSelect = [
-      List.generate(primaryColors.length, (index) => false),
       List.generate(naturalLevelColors.length, (index) => false),
+      List.generate(primaryColors.length, (index) => false),
       List.generate(desiredColors.length, (index) => false),
     ];
-
-    print(colorItemsSelect);
 
     colorItemSelect = colorItemsSelect.first;
     notifyListeners();
   }
 
   void onNextStep(int index) {
+    if (index == -1) return;
     if (index == 4) return;
 
     currentPageIndex = index;
 
     switch (currentPageIndex) {
       case 0: {
-        pageTitle = 'Primary color';
-
-        // if (colorItemsSelect[0].isEmpty) {
-        //   colorItemsSelect[0] = List.generate(primaryColors.length, (index) => false);
-          colorItemSelect = colorItemsSelect[0];
-        // }
-      } break;
-      case 1: {
         pageTitle = 'Natural Level';
 
-        // if (colorItemsSelect[1].isEmpty) {
-        //   colorItemsSelect[1] = List.generate(naturalLevelColors.length, (index) => false);
+          colorItemSelect = colorItemsSelect[0];
+      } break;
+      case 1: {
+        pageTitle = 'Primary color';
+
           colorItemSelect = colorItemsSelect[1];
-        // }
       } break;
       case 2: {
-        pageTitle = 'Desired Color';
+        pageTitle = 'Desired Tones';
 
-        // if (colorItemsSelect[2].isEmpty) {
-        //   colorItemsSelect[2] = List.generate(desiredColors.length, (index) => false);
           colorItemSelect = colorItemsSelect[2];
-        // }
       } break;
       case 3: {
         pageTitle = 'Get Formula';

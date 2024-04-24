@@ -30,6 +30,19 @@ class _HairColorPageState extends State<HairColorPage> {
             title: Text(
               read.pageTitle
             ),
+            leading: (watch.currentPageIndex == 0) ?
+            IconButton(
+              onPressed: (){
+                context.read<GlobalViewModel>().menuControl(open: true);
+              },
+              icon: const Icon(Icons.sort),
+            ) :
+            IconButton(
+              onPressed: (){
+                read.onNextStep(read.currentPageIndex-1);
+              },
+              icon: const Icon(Icons.chevron_left),
+            ),
             actions: [
               if (read.currentPageIndex != 3)
               TextButton(
@@ -53,19 +66,19 @@ class _HairColorPageState extends State<HairColorPage> {
                   controller: read.pageController,
                   children: [
                     ShowColor(
-                      title: 'Select client current color',
-                      chooseColorTitle: 'Blonde',
-                      selectedColor: watch.selectedColors[0],
-                      hairColorPageType: HairColorPageType.primaryColor,
-                    ),
-                    ShowColor(
                       title: 'Choose client natural level',
                       chooseColorTitle: 'Lighter Blonde',
                       selectedColor: watch.selectedColors[1],
                       hairColorPageType: HairColorPageType.naturalLevel,
                     ),
                     ShowColor(
-                      title: 'Choose client desired color',
+                      title: 'Select client current color',
+                      chooseColorTitle: 'Blonde',
+                      selectedColor: watch.selectedColors[0],
+                      hairColorPageType: HairColorPageType.primaryColor,
+                    ),
+                    ShowColor(
+                      title: 'Choose client desired Tones',
                       chooseColorTitle: 'Ashes',
                       selectedColor: watch.selectedColors[2],
                       hairColorPageType: HairColorPageType.desiredColor,
@@ -97,7 +110,7 @@ class _HairColorPageState extends State<HairColorPage> {
             ],
           ),
 
-        ),
+        ).menu(context),
         if (watch.isLoadingFormula)
         const FetchingHairFormula()
       ],

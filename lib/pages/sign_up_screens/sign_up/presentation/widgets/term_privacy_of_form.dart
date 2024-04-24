@@ -6,12 +6,16 @@ class TermPrivacyOfForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final read = context.read<SignUpViewModel>();
+    final watch = context.watch<SignUpViewModel>();
     return Row(
       children: [
         const Gap(10),
         Checkbox(
-          onChanged: (_) {},
-          value: false,
+          onChanged: (_) {
+            read.onTapPrivacyPolicyBox();
+          },
+          value: watch.isAgree,
           side: BorderSide(
             width: 2,
             color: AppColors.whiteColor,
@@ -34,7 +38,11 @@ class TermPrivacyOfForm extends StatelessWidget {
             Row(
               children: [
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    context.push(RouteNames.aboutTermPrivacy,
+                      extra: AboutTermPrivacyType.term,
+                    );
+                  },
                   child: Text(
                     'Terms & Conditions',
                     style: TextStyle(fontSize: 12, color: AppColors.primaryColor),
@@ -48,7 +56,11 @@ class TermPrivacyOfForm extends StatelessWidget {
                 ),
                 const Gap(5),
                 InkWell(
-                  onTap: (){},
+                  onTap: (){
+                    context.push(RouteNames.aboutTermPrivacy,
+                      extra: AboutTermPrivacyType.privacy,
+                    );
+                  },
                   child: Text(
                     'Privacy Policy',
                     style: TextStyle(fontSize: 12, color: AppColors.primaryColor),

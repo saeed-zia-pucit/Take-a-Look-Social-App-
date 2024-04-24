@@ -50,6 +50,7 @@ class ShowColor extends StatelessWidget {
             ),
           ],
         ),
+        if (watch.currentPageIndex < 3)
         Align(
           alignment: Alignment.bottomCenter,
           child: ChooseColor(

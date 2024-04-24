@@ -9,10 +9,19 @@ class HairColorPage extends StatefulWidget {
 }
 
 class _HairColorPageState extends State<HairColorPage> {
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HairColorViewModel>().initPage();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-  final read = context.read<HairColorViewModel>();
-  final watch = context.watch<HairColorViewModel>();
+    final read = context.read<HairColorViewModel>();
+    final watch = context.watch<HairColorViewModel>();
 
     return Stack(
       children: [

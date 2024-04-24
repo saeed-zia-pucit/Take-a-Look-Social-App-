@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 extension ContextExtension on BuildContext {
@@ -13,5 +14,11 @@ extension ContextExtension on BuildContext {
   double get bottomHeight => MediaQuery.of(this).padding.bottom;
 
   bool get isKeyboardOpen => MediaQuery.of(this).viewInsets.bottom == 0;
+
+  void showSnackBar(String msg) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(content: Text(msg))
+    );
+  }
 
 }

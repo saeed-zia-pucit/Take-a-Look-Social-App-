@@ -1,6 +1,4 @@
 
-import 'dart:io';
-
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -114,7 +112,7 @@ extension SocialButtonExtension on BuildContext {
   );
 
   Widget appleButton(BuildContext context) =>
-      (Platform.isIOS) ?
+      // (Platform.isIOS) ?
       SocialAuthButton(
     onPressed: () async {
       var user = await getIt.get<SocialAuth>().signInWithApple();
@@ -128,8 +126,8 @@ extension SocialButtonExtension on BuildContext {
     },
     socialButtonType: SocialButtonType.apple,
     text: 'Continue with Apple',
-  ) :
-      const SizedBox.shrink();
+  ) ;
+      // const SizedBox.shrink();
 }
 
 enum SocialButtonType {

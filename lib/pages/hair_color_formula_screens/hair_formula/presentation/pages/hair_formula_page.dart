@@ -16,6 +16,15 @@ class _HairFormulaState extends State<HairFormula> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Hair Formula'),
+        leading: IconButton(
+          onPressed: (){
+            context.pushReplacement(
+              RouteNames.homeFeed,
+              extra: HomeFeedPageType.feed,
+            );
+          },
+          icon: const Icon(Icons.chevron_left),
+        ),
         actions: [
           IconButton(
             onPressed: (){},

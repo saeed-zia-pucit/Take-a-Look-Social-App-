@@ -13,6 +13,7 @@ import 'core/view_model/global_view_model.dart';
 import 'firebase_options.dart';
 import 'pages/sign_in_screens/verify/view_model/verify_view_model.dart';
 import 'pages/sign_up_screens/profile/view_model/profile_view_model.dart';
+import 'pages/sign_up_screens/sign_up/view_model/signup_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,6 +51,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => AppThemeViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SignUpViewModel(),
         ),
       ],
       builder: (context, _) {

@@ -12,10 +12,16 @@ class ButtonsOfForm extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              context.push(
+              if (context.read<SignUpViewModel>().isAgree) {
+                context.push(
                 RouteNames.profileSetupEdit,
                 extra: SetupEditProfileType.setup
               );
+              } else {
+                context.showSnackBar(
+                  'You must agree to Terms & Conditions and Privacy Policy in order to sign up'
+                );
+              }
             },
             child: const Text('Sign Up'),
           ),

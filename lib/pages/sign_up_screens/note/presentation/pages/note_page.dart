@@ -16,12 +16,6 @@ class _NotePageState extends State<NotePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: (){
-            context.read<GlobalViewModel>().menuControl(open: true);
-          },
-          icon: const Icon(Icons.sort),
-        ),
         title: const Text('Notes'),
         actions: [
           if (watch.isSelected)
@@ -60,6 +54,6 @@ class _NotePageState extends State<NotePage> {
         SvgPicture.asset(AppIcons.trashBasketIcon) :
         const Icon(CupertinoIcons.add),
       ),
-    ).menu(context);
+    );
   }
 }

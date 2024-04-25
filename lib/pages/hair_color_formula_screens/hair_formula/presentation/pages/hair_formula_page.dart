@@ -4,7 +4,7 @@ part of 'pages.dart';
 class HairFormula extends StatefulWidget {
   const HairFormula({super.key, required this.colors});
 
-  final List<Color> colors;
+  final List<ColorModel> colors;
 
   @override
   State<HairFormula> createState() => _HairFormulaState();

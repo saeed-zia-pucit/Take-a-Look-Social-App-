@@ -10,6 +10,7 @@ import 'package:take_a_look/constants/app_icons.dart';
 import 'package:take_a_look/core/router/router.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
 
+import '../../../hair_color/data/models/color_model.dart';
 import '../widgets/widgets.dart';
 
 part 'hair_formula_page.dart';

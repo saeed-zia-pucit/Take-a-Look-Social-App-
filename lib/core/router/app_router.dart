@@ -151,7 +151,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.hairFormula,
       builder: (context, state) {
-        List<Color> colors = state.extra as List<Color>;
+        List<ColorModel> colors = state.extra as List<ColorModel>;
         return HairFormula(
           colors: colors,
         );

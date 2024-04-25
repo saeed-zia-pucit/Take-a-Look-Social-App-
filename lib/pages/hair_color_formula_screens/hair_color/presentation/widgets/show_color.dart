@@ -54,7 +54,6 @@ class ShowColor extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: ChooseColor(
-            // title: chooseColorTitle,
             colors: (hairColorPageType.isPrimaryColor) ?
             watch.primaryColors :
             (hairColorPageType.isNaturalLevel) ?

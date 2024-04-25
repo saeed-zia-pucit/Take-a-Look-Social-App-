@@ -65,46 +65,45 @@ class HairColorViewModel extends ChangeNotifier {
 
   List<ColorModel> primaryColors = [
     ColorModel(
-      name: "",
+      name: "1",
       color: Colors.black,
     ),
     ColorModel(
-      name: "",
+      name: "2",
       color: Colors.black.withOpacity(.9),
     ),
     ColorModel(
-      name: "",
+      name: "3",
       color: Colors.black.withOpacity(.8),
     ),
     ColorModel(
-      name: "",
+      name: "4",
       color: Colors.black.withOpacity(.7),
     ),
     ColorModel(
-      name: "",
+      name: "5",
       color: Colors.black.withOpacity(.6),
     ),
     ColorModel(
-      name: "",
+      name: "6",
       color: Colors.black.withOpacity(.5),
     ),
     ColorModel(
-      name: "",
+      name: "7",
       color: Colors.black.withOpacity(.4),
     ),
     ColorModel(
-      name: "",
+      name: "8",
       color: Colors.black.withOpacity(.3),
     ),
     ColorModel(
-      name: "",
+      name: "9",
       color: Colors.black.withOpacity(.2),
     ),
     ColorModel(
-      name: "",
+      name: "10",
       color: Colors.black.withOpacity(.1),
     ),
-
   ];
 
   List<ColorModel> desiredTones = [

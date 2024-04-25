@@ -3,9 +3,7 @@ part of 'widgets.dart';
 
 class ChooseColor extends StatelessWidget {
   const ChooseColor({super.key,
-    // required this.title,
     required this.colors,
-    // required this.index
   });
 
   // final String title;
@@ -15,7 +13,6 @@ class ChooseColor extends StatelessWidget {
   Widget build(BuildContext context) {
     final read = context.read<HairColorViewModel>();
     return Container(
-      // height: 280.h(context),
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -34,9 +31,7 @@ class ChooseColor extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(read.selectedColorName),
-
           Wrap(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: read.allColors[read.currentPageIndex].asMap().entries.map((e) {
               return ColorItem(
                 index:e.key,
@@ -44,7 +39,6 @@ class ChooseColor extends StatelessWidget {
               );
             }).toList(),
           ),
-
         ],
       ),
     );

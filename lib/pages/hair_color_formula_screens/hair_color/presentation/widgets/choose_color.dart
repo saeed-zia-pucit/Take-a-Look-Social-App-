@@ -15,7 +15,7 @@ class ChooseColor extends StatelessWidget {
   Widget build(BuildContext context) {
     final read = context.read<HairColorViewModel>();
     return Container(
-      height: 180.h(context),
+      // height: 280.h(context),
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -30,49 +30,21 @@ class ChooseColor extends StatelessWidget {
           )
         ],
       ),
-      child: Stack(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Text(title),
-          ),
-          // Center(
-          //   child: ListView.builder(
-          //     scrollDirection: Axis.horizontal,
-          //     physics: const NeverScrollableScrollPhysics(),
-          //     itemCount: colors.length,
-          //     itemBuilder: (context, index) {
-          //       return ColorItem(
-          //         index: index,
-          //         color: colors[index],
-          //       );
-          //     },
-          //   ),
-          // ),
+          Text(title),
 
-          Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: read.allColors[read.currentPageIndex].asMap().entries.map((e) {
-                return ColorItem(
-                  index:e.key,
-                  color: e.value,
-                );
-              }).toList(),
-            ),
+          Wrap(
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: read.allColors[read.currentPageIndex].asMap().entries.map((e) {
+              return ColorItem(
+                index:e.key,
+                color: e.value,
+              );
+            }).toList(),
           ),
 
-          // Center(
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //     children: colors.map((color) {
-          //       return ColorItem(
-          //         index: colors.indexOf(color),
-          //         color: color,
-          //       );
-          //     }).toList(),
-          //   ),
-          // ),
         ],
       ),
     );

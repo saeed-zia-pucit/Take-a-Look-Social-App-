@@ -14,7 +14,7 @@ class ItemOfProfilePost extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: Colors.blue,
         image: DecorationImage(
-          image: AssetImage(AppImages.hair1),
+          image: AssetImage(AppImages.hair01),
           fit: BoxFit.cover
         )
       ),

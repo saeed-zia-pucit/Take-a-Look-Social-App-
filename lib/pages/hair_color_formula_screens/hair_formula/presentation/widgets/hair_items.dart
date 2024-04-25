@@ -15,7 +15,7 @@ class HairItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Image(
-        image: AssetImage(AppImages.hair1),
+        image: AssetImage(AppImages.hair01),
       ),
     );
   }

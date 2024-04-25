@@ -3,17 +3,13 @@ part of 'widgets.dart';
 
 class ColorItem extends StatelessWidget {
   const ColorItem({super.key,
-    // required this.pageIndex,
     required this.index,
-    this.label,
     required this.color,
     this.image,
   });
 
-  // final int pageIndex;
   final int index;
   final Color color;
-  final String? label;
   final String? image;
 
   @override
@@ -22,27 +18,30 @@ class ColorItem extends StatelessWidget {
     bool selected = read.colorItemsSelect[read.currentPageIndex][index];
     return GestureDetector(
       onTap: () {
-        // print(index);
         read.onTapColorItem(index, read.currentPageIndex, color);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: 40,
-            width: 40,
+          Container(
+            height: 80.h(context),
+            width: 50.h(context),
+            margin: const EdgeInsets.only(bottom: 5, left: 10, right: 10, top: 10),
             child: DecoratedBox(
               decoration: BoxDecoration(
-                image: (image == null) ? null :
+                image: (read.currentPageIndex == 0) ?
                 DecorationImage(
-                  image: AssetImage(image ?? ''),
-                ),
+                  image: AssetImage(AppImages.hairs[index]),
+                  fit: BoxFit.cover,
+                ) : null,
                 color: color,
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
           ),
+
+          Text('${index + 1}'),
 
           const Gap(5),
           (selected) ?
@@ -67,6 +66,8 @@ class ColorItem extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
+          
+
         ],
       ),
     );

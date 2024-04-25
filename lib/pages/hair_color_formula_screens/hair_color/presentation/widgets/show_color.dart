@@ -60,7 +60,7 @@ class ShowColor extends StatelessWidget {
             watch.primaryColors :
             (hairColorPageType.isNaturalLevel) ?
             watch.naturalLevelColors :
-            watch.desiredColors,
+            watch.desiredTones,
           ),
         ),
       ],

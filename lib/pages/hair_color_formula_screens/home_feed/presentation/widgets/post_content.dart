@@ -15,7 +15,7 @@ class PostContent extends StatelessWidget {
         Image.asset(
           height: context.width - 100,
           width: double.infinity,
-          AppImages.hair1,
+          AppImages.hair01,
           fit: BoxFit.cover,
         )
       ],

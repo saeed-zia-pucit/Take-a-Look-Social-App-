@@ -96,6 +96,7 @@ flutter:
     - assets/svg/social/
     - assets/svg/tab_bar/
     - assets/images/
+    - assets/images/hair/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

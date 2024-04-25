@@ -19,7 +19,7 @@ class HairView extends StatelessWidget {
           height: context.width - 50,
           width: double.infinity,
           child: Image.asset(
-            AppImages.hair1,
+            AppImages.hair01,
             fit: BoxFit.cover,
           ),
         ),

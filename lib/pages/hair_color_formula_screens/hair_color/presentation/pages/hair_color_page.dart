@@ -50,7 +50,9 @@ class _HairColorPageState extends State<HairColorPage> {
                 child: Text('Steps ${read.currentPageIndex+1}/4'),
               ) else
               TextButton(
-                onPressed: (){},
+                onPressed: (){
+                  read.initPage();
+                },
                 child: const Text('Reset'),
               )
             ],
@@ -68,13 +70,13 @@ class _HairColorPageState extends State<HairColorPage> {
                     ShowColor(
                       title: 'Choose client natural level',
                       chooseColorTitle: 'Lighter Blonde',
-                      selectedColor: watch.selectedColors[1],
+                      selectedColor: watch.selectedColors[0],
                       hairColorPageType: HairColorPageType.naturalLevel,
                     ),
                     ShowColor(
                       title: 'Select client current color',
                       chooseColorTitle: 'Blonde',
-                      selectedColor: watch.selectedColors[0],
+                      selectedColor: watch.selectedColors[1],
                       hairColorPageType: HairColorPageType.primaryColor,
                     ),
                     ShowColor(
@@ -91,6 +93,7 @@ class _HairColorPageState extends State<HairColorPage> {
               ),
               Container(
                 color: Colors.transparent,
+                margin: const EdgeInsets.only(bottom: 30),
                 padding: EdgeInsets.symmetric(
                   vertical: context.bottomHeight,
                   horizontal: 20,

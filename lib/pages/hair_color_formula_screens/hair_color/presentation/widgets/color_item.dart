@@ -4,12 +4,12 @@ part of 'widgets.dart';
 class ColorItem extends StatelessWidget {
   const ColorItem({super.key,
     required this.index,
-    required this.color,
+    required this.colorModel,
     this.image,
   });
 
   final int index;
-  final Color color;
+  final ColorModel colorModel;
   final String? image;
 
   @override
@@ -18,7 +18,7 @@ class ColorItem extends StatelessWidget {
     bool selected = read.colorItemsSelect[read.currentPageIndex][index];
     return GestureDetector(
       onTap: () {
-        read.onTapColorItem(index, read.currentPageIndex, color);
+        read.onTapColorItem(index, read.currentPageIndex, colorModel);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +35,7 @@ class ColorItem extends StatelessWidget {
                   image: AssetImage(AppImages.hairs[index]),
                   fit: BoxFit.cover,
                 ) : null,
-                color: color,
+                color: colorModel.color,
                 borderRadius: BorderRadius.circular(5),
               ),
             ),

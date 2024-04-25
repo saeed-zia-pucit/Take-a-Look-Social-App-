@@ -12,7 +12,7 @@ class ShowColor extends StatelessWidget {
   final String title;
   final String chooseColorTitle;
   final HairColorPageType hairColorPageType;
-  final Color selectedColor;
+  final ColorModel selectedColor;
 
 
   @override
@@ -45,7 +45,7 @@ class ShowColor extends StatelessWidget {
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(bottom: 110.h(context)),
-                color: selectedColor,
+                color: selectedColor.color,
               ),
             ),
           ],
@@ -54,9 +54,8 @@ class ShowColor extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: ChooseColor(
-            title: chooseColorTitle,
-            colors:
-            (hairColorPageType.isPrimaryColor) ?
+            // title: chooseColorTitle,
+            colors: (hairColorPageType.isPrimaryColor) ?
             watch.primaryColors :
             (hairColorPageType.isNaturalLevel) ?
             watch.naturalLevelColors :

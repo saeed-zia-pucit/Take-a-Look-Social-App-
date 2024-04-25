@@ -5,5 +5,5 @@ class ColorModel {
   String name = '';
   Color color = Colors.transparent;
 
-  ColorModel({required this.name, required this.color})
+  ColorModel({required this.name, required this.color});
 }

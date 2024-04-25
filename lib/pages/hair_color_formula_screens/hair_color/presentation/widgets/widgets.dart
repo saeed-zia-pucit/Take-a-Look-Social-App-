@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:take_a_look/constants/app_images.dart';
 import 'package:take_a_look/core/extensions/number_extension.dart';
+import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/data/models/color_model.dart';
 
 import '../../../../../constants/app_colors.dart';
 import '../../../../../constants/app_icons.dart';

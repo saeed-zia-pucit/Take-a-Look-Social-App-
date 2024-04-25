@@ -6,6 +6,7 @@ import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/data/mod
 
 class HairColorViewModel extends ChangeNotifier {
   String pageTitle = '';
+  String selectedColorName = '';
   int currentPageIndex = 0;
   List<bool> colorItemSelect = [];
   List<List<bool>> colorItemsSelect = [];
@@ -24,44 +25,127 @@ class HairColorViewModel extends ChangeNotifier {
       name: "Darkest black",
       color: const Color(0xff000000),
     ),
-    const Color(0xff302E2E),
-    const Color(0xff4F4C4C),
-    const Color(0xff65615D),
-    const Color(0xff7F7C75),
-    const Color(0xffA09E97),
-    const Color(0xffC7C4B4),
-    const Color(0xffD7D2C8),
-    const Color(0xffEBE8E3),
-    const Color(0xffF7F5F0),
+    ColorModel(
+      name: "Black",
+      color: const Color(0xff302E2E),
+    ),
+    ColorModel(
+      name: "Darkest Brown",
+      color: const Color(0xff4F4C4C),
+    ),
+    ColorModel(
+      name: "Dark Brown",
+      color: const Color(0xff65615D),
+    ),
+    ColorModel(
+      name: "Medium Brown",
+      color: const Color(0xff7F7C75),
+    ),
+    ColorModel(
+      name: "Medium Light Brown",
+      color: const Color(0xffA09E97),
+    ),
+    ColorModel(
+      name: "Lightest Brown",
+      color: const Color(0xffC7C4B4),
+    ),
+    ColorModel(
+      name: "Dark Blonde",
+      color: const Color(0xffD7D2C8),
+    ),
+    ColorModel(
+      name: "Medium Blonde",
+      color: const Color(0xffEBE8E3),
+    ),
+    ColorModel(
+      name: "Lightest Blonde",
+      color: const Color(0xffF7F5F0),
+    ),
   ];
 
-  List<Color> primaryColors = [
-    Colors.black,
-    Colors.black.withOpacity(.9),
-    Colors.black.withOpacity(.8),
-    Colors.black.withOpacity(.7),
-    Colors.black.withOpacity(.6),
-    Colors.black.withOpacity(.5),
-    Colors.black.withOpacity(.4),
-    Colors.black.withOpacity(.3),
-    Colors.black.withOpacity(.2),
-    Colors.black.withOpacity(.1),
+  List<ColorModel> primaryColors = [
+    ColorModel(
+      name: "",
+      color: Colors.black,
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.9),
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.8),
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.7),
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.6),
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.5),
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.4),
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.3),
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.2),
+    ),
+    ColorModel(
+      name: "",
+      color: Colors.black.withOpacity(.1),
+    ),
+
   ];
 
-  List<Color> desiredTones = [
-    const Color(0xffCBC3E3),
-    const Color(0xff964B00),
-    const Color(0xff5C4033),
-    const Color(0xffA0DDAD),
-    const Color(0xffFFDF00),
+  List<ColorModel> desiredTones = [
+    ColorModel(
+      name: "Cool (light purple)",
+      color: const Color(0xffCBC3E3),
+    ),
+    ColorModel(
+      name: "Warm (brown)",
+      color: const Color(0xff964B00),
+    ),
+    ColorModel(
+      name: "Neutral (dark brown)",
+      color: const Color(0xff5C4033),
+    ),
+    ColorModel(
+      name: "Ash (green)",
+      color: const Color(0xffA0DDAD),
+    ),
+    ColorModel(
+      name: "Golden (yellow)",
+      color: const Color(0xffFFDF00),
+    ),
+
   ];
 
-  List<List<Color>> allColors = [];
+  List<List<ColorModel>> allColors = [];
 
-  List<Color> selectedColors = [
-    Colors.white,
-    Colors.white,
-    Colors.white,
+  List<ColorModel> selectedColors = [
+    ColorModel(
+      name: '',
+      color: Colors.white,
+    ),
+    ColorModel(
+      name: '',
+      color: Colors.white,
+    ),
+    ColorModel(
+      name: '',
+      color: Colors.white,
+    ),
   ];
 
 
@@ -92,18 +176,18 @@ class HairColorViewModel extends ChangeNotifier {
     switch (currentPageIndex) {
       case 0: {
         pageTitle = 'Natural Level';
-
-          colorItemSelect = colorItemsSelect[0];
+        selectedColorName = selectedColors[0].name;
+        colorItemSelect = colorItemsSelect[0];
       } break;
       case 1: {
         pageTitle = 'Primary color';
-
-          colorItemSelect = colorItemsSelect[1];
+        selectedColorName = selectedColors[1].name;
+        colorItemSelect = colorItemsSelect[1];
       } break;
       case 2: {
         pageTitle = 'Desired Tones';
-
-          colorItemSelect = colorItemsSelect[2];
+        selectedColorName = selectedColors[2].name;
+        colorItemSelect = colorItemsSelect[2];
       } break;
       case 3: {
         pageTitle = 'Get Formula';
@@ -118,11 +202,12 @@ class HairColorViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void onTapColorItem(int index, int pageIndex, Color color) {
+  void onTapColorItem(int index, int pageIndex, ColorModel colorModel) {
     colorItemsSelect[pageIndex] = List.generate(colorItemsSelect[pageIndex].length, (index) => false);
     colorItemsSelect[pageIndex][index] = true;
     colorItemSelect = colorItemsSelect[pageIndex];
-    selectedColors[pageIndex] = color;
+    selectedColors[pageIndex] = colorModel;
+    selectedColorName = allColors[pageIndex][index].name;
     notifyListeners();
   }
 

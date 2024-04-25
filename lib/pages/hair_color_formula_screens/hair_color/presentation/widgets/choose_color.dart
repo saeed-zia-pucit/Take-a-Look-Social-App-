@@ -3,13 +3,13 @@ part of 'widgets.dart';
 
 class ChooseColor extends StatelessWidget {
   const ChooseColor({super.key,
-    required this.title,
+    // required this.title,
     required this.colors,
     // required this.index
   });
 
-  final String title;
-  final List<Color> colors;
+  // final String title;
+  final List<ColorModel> colors;
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +33,14 @@ class ChooseColor extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(title),
+          Text(read.selectedColorName),
 
           Wrap(
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: read.allColors[read.currentPageIndex].asMap().entries.map((e) {
               return ColorItem(
                 index:e.key,
-                color: e.value,
+                colorModel: e.value,
               );
             }).toList(),
           ),

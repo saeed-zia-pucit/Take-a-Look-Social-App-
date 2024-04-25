@@ -86,7 +86,7 @@ class _HairColorPageState extends State<HairColorPage> {
                       hairColorPageType: HairColorPageType.desiredColor,
                     ),
                     GetFormula(
-                      colors: watch.selectedColors,
+                      colors: read.selectedColors.map((e) => e.color).toList(),
                     )
                   ],
                 ),

@@ -157,6 +157,11 @@ class HairColorViewModel extends ChangeNotifier {
       primaryColors,
       desiredTones,
     ];
+    selectedColors = [
+      ColorModel(name: '', color: Colors.white),
+      ColorModel(name: '', color: Colors.white),
+      ColorModel(name: '', color: Colors.white),
+    ];
     colorItemsSelect = [
       List.generate(naturalLevelColors.length, (index) => false),
       List.generate(primaryColors.length, (index) => false),

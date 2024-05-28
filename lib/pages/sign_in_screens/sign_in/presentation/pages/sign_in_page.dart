@@ -12,6 +12,7 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   void initState() {
+    context.read<SignInViewModel>().init();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     super.initState();
   }
@@ -62,6 +63,6 @@ class _SignInPageState extends State<SignInPage> {
           ),
         ],
       ),
-    );
+    ).loadingView(context.watch<SignInViewModel>().isLoading);
   }
 }

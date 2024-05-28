@@ -67,11 +67,11 @@ class _CommentLikesPageState extends State<CommentLikesPage> {
                 if (commentLikesPageType.isLikes)
                   const Column(
                     children: [
-                      UserItem(),
-                      UserItem(),
-                      UserItem(),
-                      UserItem(),
-                      UserItem(),
+                      // UserItem(),
+                      // UserItem(),
+                      // UserItem(),
+                      // UserItem(),
+                      // UserItem(),
                     ],
                   ),
               ],

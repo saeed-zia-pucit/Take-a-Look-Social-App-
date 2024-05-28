@@ -1,5 +1,6 @@
 
 import 'package:provider/provider.dart';
+import 'package:take_a_look/core/extensions/widget_extension.dart';
 import 'package:take_a_look/pages/sign_up_screens/miscellaneous/view_model/miscellaneous_view_model.dart';
 
 import '../../../about_term_privacy/presentation/pages/pages.dart';

@@ -1,6 +1,6 @@
 
 import '../../pages/hair_color_formula_screens/comments_likes/presentation/pages/pages.dart';
-import '../../pages/hair_color_formula_screens/follow_following/presentation/pages/pages.dart';
+import '../../pages/hair_color_formula_screens/follow/presentation/pages/pages.dart';
 import '../../pages/hair_color_formula_screens/hair_color/data/models/color_model.dart';
 import '../../pages/hair_color_formula_screens/hair_color/presentation/pages/pages.dart';
 import '../../pages/hair_color_formula_screens/hair_formula/presentation/pages/pages.dart';

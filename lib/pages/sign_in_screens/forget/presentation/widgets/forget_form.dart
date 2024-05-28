@@ -6,6 +6,9 @@ class ForgetForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final read = context.read<ForgetViewModel>();
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -16,6 +19,7 @@ class ForgetForm extends StatelessWidget {
         children: [
           const Gap(10),
           TextFieldWithTitle(
+            controller: read.emailEditingController,
             title: 'Email',
             titleColor: AppColors.whiteColor,
             suffixIcon: Padding(
@@ -26,7 +30,9 @@ class ForgetForm extends StatelessWidget {
           ),
           Gap(100.h(context)),
           ElevatedButton(
-            onPressed: () => context.push(RouteNames.verify),
+            onPressed: () {
+              read.sendToEmail(context);
+            },
             child: const Text('Verify'),
           ),
           const Gap(10),

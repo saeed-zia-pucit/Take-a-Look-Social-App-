@@ -16,7 +16,7 @@ ThemeData lightTheme(BuildContext context) {
         fontWeight: FontWeight.w500,
       ),
       iconTheme: IconThemeData(
-        size: 24,
+        size: 28,
         color: AppColors.greyColor,
       ),
       surfaceTintColor: AppColors.whiteColor,

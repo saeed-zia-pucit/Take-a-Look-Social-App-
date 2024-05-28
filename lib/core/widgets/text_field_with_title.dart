@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TextFieldWithTitle extends StatefulWidget {
   const TextFieldWithTitle({super.key,
+    this.controller,
     required this.title,
     this.titleColor,
     this.obscureText = false,
@@ -20,6 +21,7 @@ class TextFieldWithTitle extends StatefulWidget {
     this.enable = true,
   });
 
+  final TextEditingController? controller;
   final String title;
   final Color? titleColor;
   final bool obscureText;
@@ -57,8 +59,9 @@ class _TextFieldWithTitleState extends State<TextFieldWithTitle> {
           height: widget.maxLines == null ? 50.h(context) : null,
           child: Center(
             child: TextField(
+              controller: widget.controller,
               enabled: widget.enable,
-              style: widget.textStyle ?? GoogleFonts.nunito(fontSize: 12.h(context),),
+              style: widget.textStyle ?? GoogleFonts.nunito(fontSize: 14.h(context),),
               obscureText: (widget.obscureText) ? hidePassword : false,
               maxLines: widget.maxLines,
               decoration: InputDecoration(

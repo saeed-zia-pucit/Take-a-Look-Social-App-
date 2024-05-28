@@ -15,10 +15,10 @@ extension ContextExtension on BuildContext {
 
   bool get isKeyboardOpen => MediaQuery.of(this).viewInsets.bottom == 0;
 
-  void showSnackBar(String msg) {
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(content: Text(msg))
-    );
-  }
+  // void showSnackBar(String msg) {
+  //   ScaffoldMessenger.of(this).showSnackBar(
+  //     SnackBar(content: Text(msg))
+  //   );
+  // }
 
 }

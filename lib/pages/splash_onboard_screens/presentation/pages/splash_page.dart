@@ -14,8 +14,10 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     Future.delayed(const Duration(seconds: 1), () async {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user == null) {
+      // User? user = FirebaseAuth.instance.currentUser;
+      await context.read<ProfileViewModel>().getUser();
+      String? token = await AppLocalData.getUserToken;
+      if (token == null) {
         context.pushReplacement(RouteNames.onBoard);
       } else {
         context.pushReplacement(

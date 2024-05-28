@@ -15,9 +15,10 @@ class _WishListPageState extends State<WishListPage> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: (){
-            context.read<GlobalViewModel>().menuControl(open: true);
+            // context.read<GlobalViewModel>().menuControl(open: true);
+            Navigator.pop(context);
           },
-          icon: const Icon(Icons.sort),
+          icon: const Icon(Icons.chevron_left),
         ),
         title: const Text('Wishlist'),
         actions: [

@@ -82,8 +82,7 @@ class _MiscellaneousPageState extends State<MiscellaneousPage> {
           ),
         ),
         if (watch.showDeleteDialog)
-          const DeleteAccountView(),
-
+          const DeleteAccountView().loadingView(watch.isLoading),
       ],
     );
   }

@@ -127,13 +127,15 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.note,
       builder: (context, state) {
+
         return const NotePage();
       },
     ),
     GoRoute(
       path: RouteNames.addNote,
       builder: (context, state) {
-        return const AddNotePage();
+        AddNotePageType addNotePageType = state.extra as AddNotePageType;
+        return AddNotePage(addNotePageType: addNotePageType,);
       },
     ),
     GoRoute(
@@ -166,8 +168,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.followFollowing,
       builder: (context, state) {
-        FollowFollowingPageType followFollowingPageType = state.extra as FollowFollowingPageType;
-        return FollowFollowingPage(followFollowingPageType: followFollowingPageType);
+        FollowPageType followPageType = state.extra as FollowPageType;
+        return FollowPage(followPageType: followPageType);
       },
     ),
     GoRoute(

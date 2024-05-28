@@ -6,20 +6,26 @@ class FieldsOfForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final read = context.read<SignUpViewModel>();
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
           const Gap(20),
-          const TextFieldWithTitle(
+          TextFieldWithTitle(
+            controller: read.firstNameController,
             title: 'First Name',
           ),
           const Gap(20),
-          const TextFieldWithTitle(
+          TextFieldWithTitle(
+            controller: read.lastNameController,
             title: 'Last Name',
           ),
           const Gap(20),
           TextFieldWithTitle(
+            controller: read.emailController,
             title: 'Email',
             suffixIcon: Padding(
               padding: EdgeInsets.all(15.h(context)),
@@ -28,6 +34,7 @@ class FieldsOfForm extends StatelessWidget {
           ),
           const Gap(20),
           TextFieldWithTitle(
+            controller: read.passwordController,
             title: 'Password',
             obscureText: true,
             suffixIcon: IconButton(
@@ -37,6 +44,7 @@ class FieldsOfForm extends StatelessWidget {
           ),
           const Gap(20),
           TextFieldWithTitle(
+            controller: read.confirmPasswordController,
             title: 'Confirm Password',
             obscureText: true,
             suffixIcon: IconButton(

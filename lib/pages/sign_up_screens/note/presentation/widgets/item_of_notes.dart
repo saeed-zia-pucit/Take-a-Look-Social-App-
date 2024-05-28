@@ -2,9 +2,10 @@
 part of 'widgets.dart';
 
 class ItemOfNotes extends StatelessWidget {
-  const ItemOfNotes({super.key, required this.index});
+  const ItemOfNotes({super.key, required this.index, required this.noteModel});
 
   final int index;
+  final NoteModel noteModel;
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +13,18 @@ class ItemOfNotes extends StatelessWidget {
     final watch = context.watch<NoteViewModel>();
     return GestureDetector(
       onTap: () {
-        read.onTapPressNoteItem(index);
+        read.isSelected ?
+        read.onTapDuringSelectNoteItem(index) :
+        read.onTapNoteItem(context, noteModel);
       },
       onLongPress: () {
         read.onLongPressNoteItem(index);
       },
       child: Stack(
         children: [
-          Container(
-            padding: const EdgeInsets.all(20),
+          DecoratedBox(
             decoration: BoxDecoration(
-              color: (watch.noteChecks[index]) ?
+              color: (read.noteChecks[index]) ?
               AppColors.primaryColor.withOpacity(.2):
               AppColors.whiteColor,
               borderRadius: BorderRadius.circular(5),
@@ -33,30 +35,37 @@ class ItemOfNotes extends StatelessWidget {
                 width: .2
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Current Color ',
-                ),
-                Expanded(
-                  child: Text(
-                    'Dark blonde is the combination of yellow and black, while light brown is the combination',
-                    style: GoogleFonts.nunito(
-                      fontSize: 12,
-                      color: AppColors.greyColor,
+            child: SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      noteModel.title ?? '',
                     ),
-                  ),
+                    Expanded(
+                      child: Text(
+                        noteModel.content ?? '',
+                        style: GoogleFonts.nunito(
+                          fontSize: 12,
+                          color: AppColors.greyColor,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      // '4 April | 12:00 PM',
+                      noteModel.updateAt.toString().getDateTimeFormatted,
+                      style: GoogleFonts.nunito(
+                        fontSize: 10,
+                        color: AppColors.greyColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  '4 April | 12:00 PM',
-                  style: GoogleFonts.nunito(
-                    fontSize: 10,
-                    color: AppColors.greyColor,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
           if (watch.noteChecks[index])

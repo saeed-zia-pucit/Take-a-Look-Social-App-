@@ -6,6 +6,9 @@ class SignInForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final read = context.read<SignInViewModel>();
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(20),
@@ -17,11 +20,13 @@ class SignInForm extends StatelessWidget {
         children: [
           const Gap(10),
           TextFieldWithTitle(
+            controller: read.emailController,
             title: 'Email',
             titleColor: AppColors.whiteColor,
           ),
           const Gap(20),
           TextFieldWithTitle(
+            controller: read.passwordController,
             title: 'Password',
             titleColor: AppColors.whiteColor,
             obscureText: true,
@@ -39,7 +44,11 @@ class SignInForm extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () => context.pushReplacement(RouteNames.location),
+            onPressed: () async {
+              await read.signIn(context);
+              context.read<ProfileViewModel>().getUser();
+              // context.pushReplacement(RouteNames.location);
+            },
             child: Text(
               'Sign In',
               style: GoogleFonts.nunito(

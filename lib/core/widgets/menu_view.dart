@@ -1,8 +1,9 @@
 
 import 'package:take_a_look/core/view_model/global_view_model.dart';
 import 'package:take_a_look/pages/sign_up_screens/profile/presentation/pages/pages.dart';
+import 'package:take_a_look/pages/sign_up_screens/profile/view_model/profile_view_model.dart';
 
-import '../../pages/hair_color_formula_screens/follow_following/presentation/pages/pages.dart';
+import '../../pages/hair_color_formula_screens/follow/presentation/pages/pages.dart';
 import '../../pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
 import '../../pages/sign_up_screens/profile/presentation/widgets/widgets.dart';
 import '/constants/app_colors.dart';
@@ -22,142 +23,146 @@ class MenuView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.blackColor.withOpacity(.9),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          context.statusBarHeightGap,
-          Align(
-            alignment: Alignment.topRight,
-            child: IconButton(
-              onPressed: () {
-                context.read<GlobalViewModel>().menuControl(open: false);
-              },
-              icon: Icon(Icons.close, color: AppColors.whiteColor,),
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  AvatarWithRadius(image: AppImages.avatar, radius: 50),
-                  const Gap(10),
-                  Text(
-                    'Lavish Productline',
-                    style: GoogleFonts.nunito(
-                      fontSize: 16,
-                      color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Text(
-                    'lavishproductline@gmail.com | TL0548569 ',
-                    style: GoogleFonts.nunito(
-                      fontSize: 12,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-
-                  Divider(
-                    height: 50,
-                    indent: .15.wp(context),
-                    endIndent: .15.wp(context),
-                  ),
-
-                  Column(
+    return Consumer<ProfileViewModel>(
+      builder: (context, viewModel, _) {
+        return Scaffold(
+          backgroundColor: AppColors.blackColor.withOpacity(.9),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              context.statusBarHeightGap,
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  onPressed: () {
+                    context.read<GlobalViewModel>().menuControl(open: false);
+                  },
+                  icon: Icon(Icons.close, color: AppColors.whiteColor,),
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      ItemOfProfileMenu(
-                        onPressed: () {
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(
-                            RouteNames.homeFeed,
-                            extra: HomeFeedPageType.home,
-                          );
-                        },
-                        text: 'Home',
+                      AvatarWithRadius(image: AppImages.avatar, radius: 50),
+                      const Gap(10),
+                      Text(
+                        '${viewModel.firstName} ${viewModel.lastName}',
+                        style: GoogleFonts.nunito(
+                          fontSize: 16,
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      ItemOfProfileMenu(
-                        onPressed: (){
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(
-                            RouteNames.profile,
-                            extra: ProfilePageType.mine,
-                          );
-                        },
-                        text: 'Profile',
+                      Text(
+                        '${viewModel.emailName} | ${viewModel.license}',
+                        style: GoogleFonts.nunito(
+                          fontSize: 12,
+                          color: AppColors.whiteColor,
+                        ),
                       ),
-                      ItemOfProfileMenu(
-                        onPressed: () {
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(RouteNames.hairColor);
-                        },
-                        text: 'Take a Hair Formula',
+
+                      Divider(
+                        height: 50,
+                        indent: .15.wp(context),
+                        endIndent: .15.wp(context),
                       ),
-                      ItemOfProfileMenu(
-                        onPressed: (){
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                        },
-                        text: 'E-learning',
+
+                      Column(
+                        children: [
+                          ItemOfProfileMenu(
+                            onPressed: () {
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(
+                                RouteNames.homeFeed,
+                                extra: HomeFeedPageType.home,
+                              );
+                            },
+                            text: 'Home',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: (){
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(
+                                RouteNames.profile,
+                                extra: ProfilePageType.mine,
+                              );
+                            },
+                            text: 'Profile',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: () {
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(RouteNames.hairColor);
+                            },
+                            text: 'Take a Hair Formula',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: (){
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                            },
+                            text: 'E-learning',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: (){
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(RouteNames.followFollowing, extra: FollowPageType.followers);
+                            },
+                            text: 'Followers',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: (){
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(RouteNames.followFollowing, extra: FollowPageType.following);
+                            },
+                            text: 'Followings',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: () {
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(RouteNames.note);
+                            },
+                            text: 'Note',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: () {
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(RouteNames.notification);
+                            },
+                            text: 'Notification',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: () {
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(RouteNames.wishList);
+                            },
+                            text: 'Wishlist',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: () {
+                              context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(RouteNames.miscellaneous);
+                            },
+                            text: 'Miscellaneous ',
+                          ),
+                        ],
                       ),
-                      ItemOfProfileMenu(
-                        onPressed: (){
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(RouteNames.followFollowing, extra: FollowFollowingPageType.followers);
-                        },
-                        text: 'Followers',
-                      ),
-                      ItemOfProfileMenu(
-                        onPressed: (){
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(RouteNames.followFollowing, extra: FollowFollowingPageType.following);
-                        },
-                        text: 'Followings',
-                      ),
-                      ItemOfProfileMenu(
-                        onPressed: () {
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(RouteNames.note);
-                        },
-                        text: 'Note',
-                      ),
-                      ItemOfProfileMenu(
-                        onPressed: () {
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(RouteNames.notification);
-                        },
-                        text: 'Notification',
-                      ),
-                      ItemOfProfileMenu(
-                        onPressed: () {
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(RouteNames.wishList);
-                        },
-                        text: 'Wishlist',
-                      ),
-                      ItemOfProfileMenu(
-                        onPressed: () {
-                          context.read<GlobalViewModel>().menuControl(open: false);
-                          context.push(RouteNames.miscellaneous);
-                        },
-                        text: 'Miscellaneous ',
-                      ),
+
                     ],
                   ),
-
-                ],
+                ),
               ),
-            ),
+              Text(
+                'App Version v0.1\n\n',
+                style: GoogleFonts.nunito(
+                  fontSize: 12,
+                  color: AppColors.whiteColor
+                ),
+              ),
+            ],
           ),
-          Text(
-            'App Version v0.1\n\n',
-            style: GoogleFonts.nunito(
-              fontSize: 12,
-              color: AppColors.whiteColor
-            ),
-          ),
-        ],
-      ),
+        );
+      }
     );
   }
 }

@@ -9,6 +9,13 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  @override
+  void initState() {
+    context.read<SignUpViewModel>().init();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +40,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ],
       ),
-    );
+    ).loadingView(context.watch<SignUpViewModel>().isLoading);
   }
 }

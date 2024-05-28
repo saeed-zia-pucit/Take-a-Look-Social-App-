@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:take_a_look/di_service.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/hair_color/view_model/hair_color_view_model.dart';
+import 'package:take_a_look/pages/sign_in_screens/forget/view_model/forget_view_model.dart';
+import 'package:take_a_look/pages/sign_in_screens/sign_in/view_model/sign_in_view_model.dart';
 import 'package:take_a_look/pages/sign_up_screens/miscellaneous/view_model/miscellaneous_view_model.dart';
 import 'package:take_a_look/pages/sign_up_screens/note/view_model/note_view_model.dart';
 import 'package:take_a_look/pages/sign_up_screens/setup_edit_profile/view_model/setup_edit_profile_view_model.dart';
@@ -12,6 +14,7 @@ import 'core/router/router.dart';
 import 'core/theme/theme.dart';
 import 'core/view_model/global_view_model.dart';
 import 'firebase_options.dart';
+import 'pages/hair_color_formula_screens/follow/view_model/follow_view_model.dart';
 import 'pages/sign_in_screens/verify/view_model/verify_view_model.dart';
 import 'pages/sign_up_screens/profile/view_model/profile_view_model.dart';
 import 'pages/sign_up_screens/sign_up/view_model/signup_view_model.dart';
@@ -21,7 +24,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  init();
+  await init();
   runApp(const MyApp());
 }
 
@@ -39,13 +42,13 @@ class MyApp extends StatelessWidget {
           create: (context) => VerifyViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (context) => ProfileViewModel(),
+          create: (context) => ProfileViewModel(getIt()),
         ),
         ChangeNotifierProvider(
-          create: (context) => MiscellaneousViewModel(),
+          create: (context) => MiscellaneousViewModel(getIt()),
         ),
         ChangeNotifierProvider(
-          create: (context) => NoteViewModel(),
+          create: (context) => NoteViewModel(getIt()),
         ),
         ChangeNotifierProvider(
           create: (context) => HairColorViewModel(),
@@ -54,11 +57,21 @@ class MyApp extends StatelessWidget {
           create: (context) => AppThemeViewModel(),
         ),
         ChangeNotifierProvider(
-          create: (context) => SignUpViewModel(),
+          create: (context) => SignUpViewModel(getIt()),
         ),
         ChangeNotifierProvider(
-          create: (context) => SetupEditProfileViewModel(),
+          create: (context) => SetupEditProfileViewModel(getIt()),
         ),
+        ChangeNotifierProvider(
+          create: (context) => SignInViewModel(getIt()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ForgetViewModel(getIt()),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FollowViewModel(getIt()),
+        ),
+
       ],
       builder: (context, _) {
         return Consumer<AppThemeViewModel>(

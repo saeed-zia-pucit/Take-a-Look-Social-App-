@@ -2,7 +2,9 @@
 part of 'pages.dart';
 
 class SetupEditProfilePage extends StatefulWidget {
-  const SetupEditProfilePage({super.key, required this.profileType});
+  const SetupEditProfilePage({super.key,
+    required this.profileType,
+  });
 
   final SetupEditProfileType profileType;
 
@@ -17,6 +19,7 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
   @override
   void initState() {
     profileType = widget.profileType;
+    context.read<SetupEditProfileViewModel>().getProfile();
     super.initState();
   }
 
@@ -61,21 +64,24 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
               const Gap(30),
 
               if (profileType.isEdit)
-              const Column(
+              Column(
                 children: [
                   TextFieldWithTitle(
+                    controller: read.firstNameController,
                     title: 'First Name',
                     titleColor: Colors.black,
                   ),
                   Gap(30),
 
                   TextFieldWithTitle(
+                    controller: read.lastNameController,
                     title: 'Last Name',
                     titleColor: Colors.black,
                   ),
                   Gap(30),
 
                   TextFieldWithTitle(
+                    controller: read.emailController,
                     title: 'Email',
                     titleColor: Colors.black,
                   ),
@@ -83,7 +89,8 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
                 ],
               ),
 
-              const TextFieldWithTitle(
+              TextFieldWithTitle(
+                controller: read.bioController,
                 title: 'Tell as about yourself',
                 titleColor: Colors.black,
                 hintText: 'Add Bio',
@@ -96,6 +103,7 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
                 children: [
                   const Gap(30),
                   TextFieldWithTitle(
+                    controller:  read.licenseController,
                     title: 'Cosmetology License Number',
                     titleColor: Colors.black,
                     enable: !watch.isStudent,
@@ -162,14 +170,10 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
 
               const Gap(60),
               ElevatedButton(
-                onPressed: () =>
-                (profileType.isSetup) ?
-                context.go(
-                  RouteNames.homeFeed,
-                  extra: HomeFeedPageType.feed
-                  // extra: ProfilePageType.mine,
-                ) :
-                context.pop(),
+                onPressed: () async {
+                  await read.updateProfile(context, profileType);
+                  context.read<ProfileViewModel>().getUser();
+                },
                 child: const Text('Submit'),
               ),
               const Gap(50),
@@ -177,8 +181,7 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
           ),
         ),
       ),
-
-    );
+    ).loadingView(read.isLoading && read.emailController.text.isEmpty);
   }
 }
 

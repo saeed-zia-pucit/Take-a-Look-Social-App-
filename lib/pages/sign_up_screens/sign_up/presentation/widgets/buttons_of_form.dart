@@ -6,6 +6,9 @@ class ButtonsOfForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final read = context.read<SignUpViewModel>();
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -13,14 +16,9 @@ class ButtonsOfForm extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               if (context.read<SignUpViewModel>().isAgree) {
-                context.push(
-                RouteNames.profileSetupEdit,
-                extra: SetupEditProfileType.setup
-              );
+                read.signUp(context);
               } else {
-                context.showSnackBar(
-                  'You must agree to Terms & Conditions and Privacy Policy in order to sign up'
-                );
+                Utils.showToast('You must agree to Terms & Conditions and Privacy Policy in order to sign up');
               }
             },
             child: const Text('Sign Up'),

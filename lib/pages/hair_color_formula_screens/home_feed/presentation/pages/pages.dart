@@ -9,6 +9,8 @@ import 'package:sliver_tools/sliver_tools.dart';
 import 'package:take_a_look/core/extensions/widget_extension.dart';
 import 'package:take_a_look/core/router/router.dart';
 import 'package:take_a_look/core/view_model/global_view_model.dart';
+import 'package:take_a_look/pages/hair_color_formula_screens/follow/presentation/pages/search_users.dart';
+import 'package:take_a_look/pages/hair_color_formula_screens/follow/view_model/follow_view_model.dart';
 
 import '../widgets/widgets.dart';
 

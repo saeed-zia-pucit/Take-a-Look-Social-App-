@@ -23,66 +23,74 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leading:
-        (homeFeedPageType.isFeed)?
-        IconButton(
-          onPressed: (){
-            context.read<GlobalViewModel>().menuControl(open: true);
-          },
-          icon: const Icon(Icons.sort),
-        ) : null,
-        title: Text(
-          homeFeedPageType.isFeed ?
-          'Discovery feed' :
-          'Feed' ,
-        ),
-        actions: [
-          IconButton(
-            onPressed: (){},
-            icon: const Icon(Icons.search),
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            leading:
+            (homeFeedPageType.isFeed)?
+            IconButton(
+              onPressed: (){
+                context.read<GlobalViewModel>().menuControl(open: true);
+              },
+              icon: const Icon(Icons.sort),
+            ) : null,
+            title: Text(
+              homeFeedPageType.isFeed ?
+              'Discovery feed' :
+              'Feed' ,
+            ),
+            actions: [
+              IconButton(
+                onPressed: (){
+                  context.read<FollowViewModel>().onTapSearch();
+                },
+                icon: const Icon(Icons.search),
+              ),
+              IconButton(
+                onPressed: (){
+                  context.push(RouteNames.notification);
+                },
+                icon: SvgPicture.asset(AppIcons.notificationIcon),
+              ),
+            ],
           ),
-          IconButton(
-            onPressed: (){
-              context.push(RouteNames.notification);
-            },
-            icon: SvgPicture.asset(AppIcons.notificationIcon),
-          ),
-        ],
-      ),
 
-      body: CustomScrollView(
-        slivers: [
-          Section(
-            child: Column(
-              children: [
-                if (homeFeedPageType.isFeed)
-                  const LocationItem(),
-                const AddPortfolio(),
-              ],
-            ),
+          body: CustomScrollView(
+            slivers: [
+              Section(
+                child: Column(
+                  children: [
+                    if (homeFeedPageType.isFeed)
+                      const LocationItem(),
+                    const AddPortfolio(),
+                  ],
+                ),
+              ),
+              Section(
+                item: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.only(bottom: 50),
+                  children: [
+                    PostItem(homeFeedPageType: homeFeedPageType,),
+                    PostItem(homeFeedPageType: homeFeedPageType,),
+                    PostItem(homeFeedPageType: homeFeedPageType,),
+                    PostItem(homeFeedPageType: homeFeedPageType,),
+                    PostItem(homeFeedPageType: homeFeedPageType,),
+                    PostItem(homeFeedPageType: homeFeedPageType,),
+                  ],
+                ),
+                child: const TabBarMenuView(),
+              ),
+            ],
           ),
-          Section(
-            item: ListView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(bottom: 50),
-              children: [
-                PostItem(homeFeedPageType: homeFeedPageType,),
-                PostItem(homeFeedPageType: homeFeedPageType,),
-                PostItem(homeFeedPageType: homeFeedPageType,),
-                PostItem(homeFeedPageType: homeFeedPageType,),
-                PostItem(homeFeedPageType: homeFeedPageType,),
-                PostItem(homeFeedPageType: homeFeedPageType,),
-              ],
-            ),
-            child: const TabBarMenuView(),
-          ),
-        ],
-      ),
-    ).menu(context);
+        ).menu(context),
+        if (context.watch<FollowViewModel>().showSearch)
+        const SearchUsers(),
+      ],
+    );
   }
 }
 

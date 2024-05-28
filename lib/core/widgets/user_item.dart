@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:take_a_look/constants/app_colors.dart';
 import 'package:take_a_look/constants/app_images.dart';
+import 'package:take_a_look/core/data/models/user_model.dart';
 
 class UserItem extends StatelessWidget {
-  const UserItem({super.key});
+  const UserItem({super.key, required this.userModel});
+
+  final UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +36,14 @@ class UserItem extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Joanna Evans',
-                      ),
                       Text(
-                        'Cosmetologist ',
+                        '${userModel.firstname} ${userModel.lastname}',
+                      ),
+                      if (userModel.bio != null)
+                      Text(
+                        (userModel.bio!.isEmpty) ?
+                        'Student' :
+                        'Cosmetologist',
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.greyColor,

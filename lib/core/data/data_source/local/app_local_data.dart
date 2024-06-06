@@ -54,7 +54,7 @@ class AppLocalData {
     if (refreshToken == null) return;
     Dio dio = Dio();
     Response response = await dio.post(
-      'http://18.218.231.128:8445/api/auth/refresh',
+      'http://3.142.45.117:8445/api/auth/refresh',
       data: {
         'token' : refreshToken,
       },

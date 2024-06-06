@@ -74,16 +74,28 @@ class TabBarMenuView extends StatelessWidget {
             //   text: 'Brunette',
             // ),
             Tab(
-              icon: Image.asset(
-                AppIcons.tabBar1,
-                height: 40,
+              icon: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: const Color.fromRGBO(251, 231, 227, 1),
+                ),
+                child: Image.asset(
+                  AppIcons.tabBar1,
+                  height: 40,
+                ),
               ),
               text: 'Brunette ',
             ),
             Tab(
-              icon: Image.asset(
-                AppIcons.tabBar2,
-                height: 40,
+              icon: DecoratedBox(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: const Color.fromRGBO(251, 231, 227, 1),
+                ),
+                child: Image.asset(
+                  AppIcons.tabBar2,
+                  height: 40,
+                ),
               ),
               text: 'Blonde',
             ),

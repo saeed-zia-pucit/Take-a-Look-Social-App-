@@ -18,8 +18,6 @@ class FollowViewModel extends ChangeNotifier {
   TextEditingController searchEditingController = TextEditingController();
   static const int _pageSize = 20;
   PagingController<int, UserModel> pagingController = PagingController(firstPageKey: 0);
-  // PagingController<int, UserModel> pagingSearchController = PagingController(firstPageKey: 0);
-
 
   void init(FollowPageType followPageType) {
     pagingController.dispose();

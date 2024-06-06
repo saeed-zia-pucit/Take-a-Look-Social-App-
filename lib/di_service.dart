@@ -52,7 +52,9 @@ void getItInit() async {
           () => Dio()
         ..options = BaseOptions(
           // baseUrl: 'http://18.118.147.200:8445/api/',
-          baseUrl: 'http://18.218.231.128:8445/api/',
+          // baseUrl: 'http://18.218.231.128:8445/api/',
+          // baseUrl: 'http://18.222.240.84:8445/api/',
+          baseUrl: 'http://3.142.45.117:8445/api/',
           headers: header,
           sendTimeout: const Duration(seconds: 30),
           connectTimeout: const Duration(seconds: 30),

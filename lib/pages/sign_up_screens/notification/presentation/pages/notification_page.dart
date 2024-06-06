@@ -9,26 +9,35 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
+
+  @override
+  void initState() {
+    context.read<NotificationViewModel>().init();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Notification'),
-        actions: [
-          TextButton(
-            onPressed: (){},
-            child: const Text('Delete all'),
-          )
-        ],
-      ),
-      body: const Column(
-        children: [
-          ItemOfNotification(),
-          ItemOfNotification(),
-          ItemOfNotification(),
-          ItemOfNotification(),
-        ],
-      ),
+    return Consumer<NotificationViewModel>(
+      builder: (context, viewModel, _) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Notification'),
+            actions: [
+              TextButton(
+                onPressed: (){},
+                child: const Text('Delete all'),
+              ),
+            ],
+          ),
+          body: PagedListView<int, NotificationModel>(
+            pagingController: viewModel.pagingController,
+            builderDelegate: PagedChildBuilderDelegate<NotificationModel>(
+              itemBuilder: (context, item, index) => const ItemOfNotification(),
+            ),
+          ),
+        );
+      }
     );
   }
 }

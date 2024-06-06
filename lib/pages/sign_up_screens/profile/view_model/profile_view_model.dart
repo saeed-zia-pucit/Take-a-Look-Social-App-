@@ -32,6 +32,7 @@ class ProfileViewModel extends ChangeNotifier {
       currentUser = await profileRepo.getUser();
       followersCount = await profileRepo.getFollowersCount() ?? 0;
       followingsCount = await profileRepo.getFollowingsCount() ?? 0;
+      print(firstName);
       firstName = currentUser!.firstname ?? '';
       lastName = currentUser!.lastname ?? '';
       emailName = currentUser!.email ?? '';

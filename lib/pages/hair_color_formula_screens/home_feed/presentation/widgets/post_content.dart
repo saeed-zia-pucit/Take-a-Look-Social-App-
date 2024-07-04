@@ -2,20 +2,25 @@
 part of 'widgets.dart';
 
 class PostContent extends StatelessWidget {
-  const PostContent({super.key});
-
+  const PostContent({super.key,required this.post});
+  final PostModel post;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Text('Dark blonde hair color often has highlights and low lights to give it depth and shimmer. You need to protect and enhance the color distinction every time you wash. Try the Blondie Gloss Shampoo.'),
-        ),
-        Image.asset(
+         Container(
+           alignment: Alignment.centerLeft,
+           child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Text(post.content, style: TextStyle(color: AppColors.blackColor)
+              ,textAlign: TextAlign.start,
+            ),
+                   ),
+         ),
+        Image.network(
           height: context.width - 100,
           width: double.infinity,
-          AppImages.hair01,
+          post.imageUrl,
           fit: BoxFit.cover,
         )
       ],

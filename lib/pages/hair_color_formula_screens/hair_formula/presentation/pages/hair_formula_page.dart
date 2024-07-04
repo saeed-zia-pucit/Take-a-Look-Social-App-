@@ -11,8 +11,10 @@ class HairFormula extends StatefulWidget {
 }
 
 class _HairFormulaState extends State<HairFormula> {
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Hair Formula'),
@@ -38,12 +40,13 @@ class _HairFormulaState extends State<HairFormula> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SelectedColors(colors: widget.colors),
-            const HairView(),
+            HairView( hairColor: widget.colors),
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   const Text('URL'),
                   const Gap(20),
                   DottedBorder(
@@ -66,7 +69,6 @@ class _HairFormulaState extends State<HairFormula> {
                       ),
                     ),
                   ),
-
                   const Gap(30),
                   const Text('Video'),
                   const Gap(20),
@@ -83,7 +85,8 @@ class _HairFormulaState extends State<HairFormula> {
                       )
                     ),
                     child: SvgPicture.asset(AppIcons.playIcon),
-                  )
+                  ),
+                  const Gap(10),
                 ],
               ),
             )

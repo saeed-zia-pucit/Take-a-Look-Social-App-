@@ -2,7 +2,7 @@
 part of 'widgets.dart';
 
 class ShowColor extends StatelessWidget {
-  const ShowColor({super.key,
+  ShowColor({super.key,
     required this.title,
     required this.chooseColorTitle,
     required this.hairColorPageType,
@@ -13,7 +13,6 @@ class ShowColor extends StatelessWidget {
   final String chooseColorTitle;
   final HairColorPageType hairColorPageType;
   final ColorModel selectedColor;
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +49,16 @@ class ShowColor extends StatelessWidget {
             ),
           ],
         ),
+
         if (watch.currentPageIndex < 3)
         Align(
           alignment: Alignment.bottomCenter,
           child: ChooseColor(
-            colors: (hairColorPageType.isPrimaryColor) ?
-            watch.primaryColors :
-            (hairColorPageType.isNaturalLevel) ?
-            watch.naturalLevelColors :
-            watch.desiredTones,
+            colors: (hairColorPageType.isPrimaryColor)
+                ? watch.primaryColors
+                : (hairColorPageType.isNaturalLevel)
+                ? watch.naturalLevelColors
+                : watch.desiredTones,
           ),
         ),
       ],

@@ -147,9 +147,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                   Text(
                                     // 'lavishproductline@gmail.com | TL0548569 ',
-                                    (viewModel.license.isEmpty) ?
-                                    '${viewModel.emailName} | Student' :
-                                    '${viewModel.emailName} | ${viewModel.license}',
+                                    // (viewModel.license.isEmpty) ?
+                                    // '${viewModel.emailName} | Student' :
+                                    '${viewModel.emailName}',
+                                    // '${viewModel.emailName} | ${viewModel.license}',
                                     style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,

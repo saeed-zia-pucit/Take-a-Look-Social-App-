@@ -17,7 +17,7 @@ class SignUpRepoImpl extends SignUpRepo {
   Future<UserModel?> signUp(UserModel userModel) async {
     try {
       final Response response = await dio.post(
-        '/auth/signup',
+        '/auth/signup?provider=TAKELOOK',
         data: userModel.toSignUpJson,
       );
 

@@ -1,4 +1,3 @@
-
 part of 'widgets.dart';
 
 class ItemOfNotification extends StatelessWidget {
@@ -10,11 +9,16 @@ class ItemOfNotification extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Slidable(
-        endActionPane: const ActionPane(
+        endActionPane: ActionPane(
           extentRatio: .1,
           motion: ScrollMotion(),
           children: [
-            SlidableDeleteButton(),
+            SlidableDeleteButton(
+              id: "",
+              onDeleteSuccess: () {
+                //remove the specific record from the list
+              },
+            ),
           ],
         ),
         child: Column(
@@ -27,14 +31,11 @@ class ItemOfNotification extends StatelessWidget {
                   width: 50,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: AppColors.primaryColor.withOpacity(.2),
-                    shape: BoxShape.circle
-                  ),
+                      color: AppColors.primaryColor.withOpacity(.2),
+                      shape: BoxShape.circle),
                   child: Text(
                     'TL',
-                    style: TextStyle(
-                      color: AppColors.primaryColor
-                    ),
+                    style: TextStyle(color: AppColors.primaryColor),
                   ),
                 ),
                 const Gap(10),
@@ -46,17 +47,13 @@ class ItemOfNotification extends StatelessWidget {
                       children: [
                         const Text(
                           'Ticket ID KD 89780 was successfully submitted. The admin team will begin resolving it.',
-                          style: TextStyle(
-                            fontSize: 12
-                          ),
+                          style: TextStyle(fontSize: 12),
                         ),
                         const Gap(10),
                         Text(
                           '1 day ago',
                           style: TextStyle(
-                            fontSize: 12,
-                            color: AppColors.greyColor
-                          ),
+                              fontSize: 12, color: AppColors.greyColor),
                         ),
                       ],
                     ),

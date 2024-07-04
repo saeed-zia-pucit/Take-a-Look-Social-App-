@@ -27,12 +27,12 @@ class OnBoardFirst extends StatelessWidget {
                             Text('Take A Look', style: GoogleFonts.dancingScript(fontSize: 36.h(context), color: AppColors.primaryColor, fontWeight: FontWeight.w700),),
                             InkWell(
                               onTap: () => context.pushReplacement(RouteNames.signIn),
-                              child: Text('Skip', style: GoogleFonts.nunito(fontSize: 14.h(context), color: AppColors.secondaryColor, fontWeight: FontWeight.w600),),
+                              child: Text('Skip', style: GoogleFonts.nunito(fontSize: 14.h(context), color: AppColors.primaryColor, fontWeight: FontWeight.w600),),
                             )
                           ],
                         ),
                         const Gap(20),
-                        Text('Nurish your inner skils in cosmetology',
+                        Text('Nourish Your Inner Skills in Cosmetology',
                           style: GoogleFonts.nunito(
                             fontSize: 24.h(context),
                             color: AppColors.blackColor,
@@ -40,7 +40,7 @@ class OnBoardFirst extends StatelessWidget {
                           ),
                         ),
                         const Gap(10),
-                        Text('Subscribe premium content to access e-leaning content\nand start learning',
+                        Text('Subscribe to our premium content for exclusive access \nto e-learning materials and start your journey today!',
                           style: GoogleFonts.nunito(
                             fontSize: 12.h(context),
                             color: AppColors.greyColor,

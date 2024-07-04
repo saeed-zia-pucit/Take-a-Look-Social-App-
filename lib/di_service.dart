@@ -28,10 +28,25 @@ final header = {
   'accept' : 'application/json',
   'Content-Type' : 'application/json',
 };
+final  normalHeader = {
+  'accept' : '*/*',
+  'Content-Type' : 'application/json',
+};
 
 Map<String, dynamic> headerWithAuth(String? token) => {
   'accept' : 'application/json',
   'Content-Type' : 'application/json',
+  "Authorization": "Bearer $token",
+};
+Map<String, dynamic> headerAuth(String? token) => {
+  'accept' : '*/*',
+  'Content-Type' : 'application/json',
+  "Authorization": "Bearer $token",
+};
+
+Map<String, dynamic> headerWithAuthMultiPart(String? token) => {
+  'accept' : '*/*',
+  'Content-Type' : 'multipart/form-data',
   "Authorization": "Bearer $token",
 };
 
@@ -54,7 +69,8 @@ void getItInit() async {
           // baseUrl: 'http://18.118.147.200:8445/api/',
           // baseUrl: 'http://18.218.231.128:8445/api/',
           // baseUrl: 'http://18.222.240.84:8445/api/',
-          baseUrl: 'http://3.142.45.117:8445/api/',
+          baseUrl: '${AppLocalData.BaseURL}',
+          // baseUrl: 'http://3.142.45.117:8445/api/',
           headers: header,
           sendTimeout: const Duration(seconds: 30),
           connectTimeout: const Duration(seconds: 30),

@@ -61,7 +61,7 @@ class _TextFieldWithTitleState extends State<TextFieldWithTitle> {
             child: TextField(
               controller: widget.controller,
               enabled: widget.enable,
-              style: widget.textStyle ?? GoogleFonts.nunito(fontSize: 14.h(context),),
+              style: widget.textStyle ?? GoogleFonts.nunito(fontSize: 16.h(context),),
               obscureText: (widget.obscureText) ? hidePassword : false,
               maxLines: widget.maxLines,
               decoration: InputDecoration(

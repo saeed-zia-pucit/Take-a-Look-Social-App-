@@ -14,16 +14,30 @@ class AvatarWithSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    if(image.contains("www")) {
+      return Container(
       height: height,
       width: width,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(
-          image: AssetImage(image),
+          image:NetworkImage(image),
           fit: BoxFit.cover,
         ),
       ),
     );
+    }else{
+      return Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          image: DecorationImage(
+            image:AssetImage(image),
+            fit: BoxFit.cover,
+          ),
+        ),
+      );
+    }
   }
 }

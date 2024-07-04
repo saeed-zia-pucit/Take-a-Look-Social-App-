@@ -1,8 +1,9 @@
-
 part of 'pages.dart';
 
 class ChangePswPage extends StatefulWidget {
-  const ChangePswPage({super.key});
+  ChangePswPage({super.key, required this.token_email});
+
+  var token_email;
 
   @override
   State<ChangePswPage> createState() => _ChangePswPageState();
@@ -15,8 +16,10 @@ class _ChangePswPageState extends State<ChangePswPage> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          PageBackgroundImage(image: AppImages.changePswBackground),
-          const ChangePswForm(),
+          PageBackgroundImage(
+            image: AppImages.changePswBackground,
+          ),
+          ChangePswForm(token_email: widget.token_email),
         ],
       ),
     );

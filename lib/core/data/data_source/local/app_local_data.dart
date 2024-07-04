@@ -8,6 +8,7 @@ import 'package:take_a_look/core/data/models/user_model.dart';
 
 class AppLocalData {
   static Box<dynamic> box = Hive.box('appBox');
+  static String BaseURL = "http://3.142.45.117:8445/api";
 
   static Future<void> saveUserToken(String? token) async {
     await box.put('token', token);
@@ -54,7 +55,7 @@ class AppLocalData {
     if (refreshToken == null) return;
     Dio dio = Dio();
     Response response = await dio.post(
-      'http://3.142.45.117:8445/api/auth/refresh',
+      '$BaseURL/auth/refresh',
       data: {
         'token' : refreshToken,
       },

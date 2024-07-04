@@ -1,4 +1,3 @@
-
 part of 'router.dart';
 
 sealed class RouteNames {
@@ -25,7 +24,6 @@ sealed class RouteNames {
   static const wishList = '/wishList';
   static const followFollowing = '/followFollowing';
   static const comments = '/comments';
-
 }
 
 final GoRouter router = GoRouter(
@@ -56,15 +54,17 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: RouteNames.verify,
+      path:  RouteNames.verify,
       builder: (context, state) {
-        return const VerifyPage();
+        final email = state.extra;
+        return VerifyPage(email: email);
       },
     ),
     GoRoute(
       path: RouteNames.changePsw,
       builder: (context, state) {
-        return const ChangePswPage();
+        final token_email = state.extra;
+        return  ChangePswPage(token_email: token_email);
       },
     ),
     GoRoute(
@@ -112,7 +112,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.aboutTermPrivacy,
       builder: (context, state) {
-        AboutTermPrivacyType aboutTermPrivacyType = state.extra as AboutTermPrivacyType;
+        AboutTermPrivacyType aboutTermPrivacyType =
+            state.extra as AboutTermPrivacyType;
         return AboutTermPrivacy(
           aboutTermPrivacyType: aboutTermPrivacyType,
         );
@@ -127,7 +128,6 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.note,
       builder: (context, state) {
-
         return const NotePage();
       },
     ),
@@ -135,7 +135,9 @@ final GoRouter router = GoRouter(
       path: RouteNames.addNote,
       builder: (context, state) {
         AddNotePageType addNotePageType = state.extra as AddNotePageType;
-        return AddNotePage(addNotePageType: addNotePageType,);
+        return AddNotePage(
+          addNotePageType: addNotePageType,
+        );
       },
     ),
     GoRoute(
@@ -181,7 +183,7 @@ final GoRouter router = GoRouter(
         );
       },
     ),
-    GoRoute(
+    /* GoRoute(
       path: RouteNames.comments,
       builder: (context, state) {
         CommentLikesPageType commentLikesPageType = state.extra as CommentLikesPageType;
@@ -189,6 +191,6 @@ final GoRouter router = GoRouter(
           commentLikesPageType: commentLikesPageType,
         );
       },
-    ),
+    ),*/
   ],
 );

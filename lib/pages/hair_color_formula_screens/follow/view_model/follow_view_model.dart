@@ -24,11 +24,11 @@ class FollowViewModel extends ChangeNotifier {
     pagingController = PagingController(firstPageKey: 0);
     if (followPageType.isFollowers) {
       pagingController.addPageRequestListener((pageKey) {
-        getFollowers(0, 5);
+        getFollowers(0, 100);
       });
     } else {
       pagingController.addPageRequestListener((pageKey) {
-        getFollowings(0, 5);
+        getFollowings(0, 100);
       });
     }
   }

@@ -19,7 +19,7 @@ class SignInRepoImpl extends SignInRepo {
   Future<UserModel?> signIn(BuildContext context, UserModel userModel) async {
     try {
       final Response response = await dio.post(
-        '/auth/login',
+        '${AppLocalData.BaseURL}/auth/login',
         data: userModel.toSignInJson,
       );
 

@@ -1,8 +1,8 @@
-
 part of 'widgets.dart';
 
 class ChooseColor extends StatelessWidget {
-  const ChooseColor({super.key,
+  const ChooseColor({
+    super.key,
     required this.colors,
   });
 
@@ -20,25 +20,37 @@ class ChooseColor extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: const [
           BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.05),
-            offset: Offset(0, 5),
-            blurRadius: 50,
-            spreadRadius: 5
-          )
+              color: Color.fromRGBO(0, 0, 0, 0.05),
+              offset: Offset(0, 5),
+              blurRadius: 50,
+              spreadRadius: 5)
         ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(read.selectedColorName),
-          Wrap(
-            children: read.allColors[read.currentPageIndex].asMap().entries.map((e) {
-              return ColorItem(
-                index:e.key,
-                colorModel: e.value,
-              );
-            }).toList(),
-          ),
+          if (read.currentPageIndex == 2)
+           WheelPicker(
+               color: HSVColor.fromColor(read.selectedColors[2].color),
+               onChanged: (HSVColor color) {
+                 context
+                     .read<HairColorViewModel>()
+                     .updateSelectedColor(2, color.toColor(), read.selectedColors);
+               },
+            )
+          else
+            Wrap(
+              children: read.allColors[read.currentPageIndex]
+                  .asMap()
+                  .entries
+                  .map((e) {
+                return ColorItem(
+                  index: e.key,
+                  colorModel: e.value,
+                );
+              }).toList(),
+            ),
         ],
       ),
     );

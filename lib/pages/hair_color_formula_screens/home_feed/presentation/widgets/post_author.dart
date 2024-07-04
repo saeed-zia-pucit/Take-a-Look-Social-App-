@@ -2,12 +2,15 @@
 part of 'widgets.dart';
 
 class PostAuthor extends StatelessWidget {
-  const PostAuthor({super.key, required this.homeFeedPageType});
+  const PostAuthor({super.key,
+    required this.homeFeedPageType,
+    required this.post});
 
   final HomeFeedPageType homeFeedPageType;
-
+  final PostModel post;
   @override
   Widget build(BuildContext context) {
+    PostModel posts=post;
     return GestureDetector(
       onTap: (){
         context.push(RouteNames.profile,
@@ -32,7 +35,7 @@ class PostAuthor extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage(AppImages.avatar),
+                      image: NetworkImage(posts.imageUrl),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -41,14 +44,15 @@ class PostAuthor extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Lavish Productline',
+                     Text(
+                       posts.authorFirstname + ' ' + posts.authorLastname
+                     ,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Text(
-                      'Curly | 1hr',
+                      'Curly | ${timeDifference(posts.createdAt)}',
                       style: TextStyle(
                         fontSize: 10,
                         color: AppColors.greyColor,
@@ -63,7 +67,7 @@ class PostAuthor extends StatelessWidget {
             (homeFeedPageType.isFeed) ?
             TextButton(
               onPressed: (){},
-              child: const Text('+ Unfollow'),
+              child: const SizedBox.shrink()/*Text('+ Unfollow')*/,
             ) :
             IconButton(
               onPressed: (){
@@ -120,5 +124,21 @@ class PostAuthor extends StatelessWidget {
         ),
       ),
     );
+  }
+  String timeDifference(String createdAt) {
+    DateTime now = DateTime.now();
+    DateTime createdTime = DateTime.parse(createdAt);
+
+    Duration difference = now.difference(createdTime);
+
+    if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} minutes ago';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} hours ago';
+    } else if (difference.inDays < 7) {
+      return '${difference.inDays} days ago';
+    } else {
+      return '${(difference.inDays / 7).floor()} weeks ago';
+    }
   }
 }

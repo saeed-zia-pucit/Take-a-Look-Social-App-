@@ -54,7 +54,7 @@ class OnBoardSecond extends StatelessWidget {
                             ],
                           ),
                           const Gap(20),
-                          Text('Move beyond the limtations of\nhair color formulas',
+                          Text('Move beyond the limitations of\nhair color formulas',
                             style: GoogleFonts.nunito(
                               fontSize: 24.h(context),
                               color: AppColors.whiteColor,

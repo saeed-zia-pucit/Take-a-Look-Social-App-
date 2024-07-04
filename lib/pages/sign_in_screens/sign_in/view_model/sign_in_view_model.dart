@@ -30,8 +30,8 @@ class SignInViewModel extends ChangeNotifier {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
-    email = 'shahobtursunov22@gmail.com';
-    password = 'Qwerty123!';
+    // email = 'shahobtursunov22@gmail.com';
+    // password = 'Qwerty123!';
 
     if (!email.contains('@')) {
       Utils.showToast('Wrong email format');

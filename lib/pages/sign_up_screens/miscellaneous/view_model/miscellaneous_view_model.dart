@@ -32,7 +32,7 @@ class MiscellaneousViewModel extends ChangeNotifier {
     bool? isDelete = await getIt.get<SocialAuth>().logOut();
     await AppLocalData.removeAll();
     if (isDelete == null) return;
-    if (context.mounted) context.go(RouteNames.signUp);
+    if (context.mounted) context.go(RouteNames.signIn);
 
   }
 

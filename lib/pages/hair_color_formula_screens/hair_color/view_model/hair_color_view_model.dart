@@ -111,7 +111,7 @@ class HairColorViewModel extends ChangeNotifier {
       name: "Cool (light purple)",
       color: const Color(0xffCBC3E3),
     ),
-    ColorModel(
+    /*ColorModel(
       name: "Warm (brown)",
       color: const Color(0xff964B00),
     ),
@@ -126,7 +126,7 @@ class HairColorViewModel extends ChangeNotifier {
     ColorModel(
       name: "Golden (yellow)",
       color: const Color(0xffFFDF00),
-    ),
+    ),*/
 
   ];
 
@@ -224,6 +224,11 @@ class HairColorViewModel extends ChangeNotifier {
         extra: selectedColors
       );
     });
+    notifyListeners();
+  }
+
+  void updateSelectedColor(int index, Color color, List<ColorModel> selectedColors) {
+    selectedColors[index].color = color;
     notifyListeners();
   }
 }

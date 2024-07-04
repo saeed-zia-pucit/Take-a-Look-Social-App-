@@ -44,7 +44,7 @@ class FollowRepoImpl extends FollowRepo {
       await AppLocalData.updateToken();
       final token = await AppLocalData.getUserToken;
       Response response = await dio.get(
-        '/social/followings?page=$page&size=$size',
+        '/social/following?page=$page&size=$size',
         options: Options(
           headers: headerWithAuth(token),
         ),

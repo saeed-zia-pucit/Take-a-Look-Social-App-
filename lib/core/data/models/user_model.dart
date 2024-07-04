@@ -10,7 +10,6 @@ class UserModel {
   String? refreshToken;
   String? bio;
   String? license;
-
   bool isFollowing = false;
 
   UserModel({

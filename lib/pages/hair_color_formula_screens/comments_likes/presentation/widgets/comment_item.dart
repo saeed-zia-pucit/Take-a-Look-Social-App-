@@ -1,17 +1,60 @@
-
 part of 'widgets.dart';
 
-class CommentItem extends StatelessWidget {
-  const CommentItem({super.key});
+class CommentItem extends StatefulWidget {
+  final CommentResponse comment;
+
+  final VoidCallback onDeleteSuccess;
+
+  CommentItem({Key? key, required this.comment, required this.onDeleteSuccess})
+      : super(key: key);
 
   @override
+  _CommentItemState createState() => _CommentItemState();
+}
+
+class _CommentItemState extends State<CommentItem> {
+
+  final feedRepo = getIt<FeedRepoImpl>();
+
+  void checkIfUserLikedPost() async {
+    List<LikeInfo> likedPosts =
+    await feedRepo.getFeedLikeComments(0, 100, widget.comment.id);
+    UserModel? userModel = await getIt<ProfileRepo>().getUser();
+    for (LikeInfo liked_post in likedPosts) {
+      for (LikedBy likeBy in liked_post.likedBy) {
+        var currentUserID = userModel!.id;
+        if (likeBy.userId == currentUserID) {
+          setState(() {
+            _isCommentLiked = true;
+          });
+          break;
+        }
+      }
+    }
+  }
+  bool _isCommentLiked = false; // Add this line
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    checkIfUserLikedPost();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+    CommentResponse comment = widget.comment;
     return Slidable(
-      endActionPane: const ActionPane(
+      endActionPane: ActionPane(
         extentRatio: .1,
         motion: ScrollMotion(),
         children: [
-          SlidableDeleteButton(),
+          SlidableDeleteButton(
+            id: comment.id,
+            onDeleteSuccess: () {
+              //remove the specific record from the list
+              widget.onDeleteSuccess();
+            },
+          ),
         ],
       ),
       child: Padding(
@@ -31,7 +74,13 @@ class CommentItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Lavish Productline'),
+                      Text(
+                        '${comment.firstname} ${comment.lastname}',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       Row(
                         children: [
                           Icon(
@@ -41,7 +90,7 @@ class CommentItem extends StatelessWidget {
                           ),
                           const Gap(5),
                           Text(
-                            '3hrs ago',
+                            '${timeDifference(comment.createdAt)}',
                             style: TextStyle(
                               fontSize: 11,
                               color: AppColors.greyColor,
@@ -49,17 +98,16 @@ class CommentItem extends StatelessWidget {
                           ),
                         ],
                       ),
-
                       const Gap(5),
-                      const Text(
-                        'Just wanted you to know that we had a wonderful tripin Incredible India',
-                        style: TextStyle(
+                      Text(
+                        comment.content,
+                        style: const TextStyle(
                           fontSize: 12,
                         ),
                       ),
                       const Gap(20),
                       Text(
-                        '230 Likes',
+                        '${comment.likesCount.toString()} Likes',
                         style: TextStyle(
                           fontSize: 12,
                           color: AppColors.greyColor,
@@ -68,21 +116,70 @@ class CommentItem extends StatelessWidget {
                     ],
                   ),
                 ),
-
                 const Gap(10),
                 IconButton(
-                  onPressed: (){},
+                  onPressed: () async {
+                    // Call postCommentLike when IconButton is pressed
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Please wait!'),
+                      ),
+                    );
+                    if (!_isCommentLiked) {
+                      bool success = await FeedRepoImpl(Dio())
+                          .postCommentLike(comment.id, comment.content);
+                      if (success) {
+                        // If the comment was successfully liked/unliked, toggle _isCommentLiked
+                        setState(() {
+                          comment.likesCount = comment.likesCount + 1;
+                          _isCommentLiked = !_isCommentLiked;
+                        });
+                      }
+                    } else {
+                      bool success = await FeedRepoImpl(Dio())
+                          .deleteCommentLike(comment.id, comment.content);
+                      if (success) {
+                        // If the comment was successfully liked/unliked, toggle _isCommentLiked
+                        setState(() {
+                          comment.likesCount = comment.likesCount - 1;
+                          _isCommentLiked = !_isCommentLiked;
+                        });
+                      }
+                    }
+                  },
                   icon: Icon(
                     CupertinoIcons.heart_fill,
-                    color: AppColors.primaryColor,
+                    color: _isCommentLiked
+                        ? AppColors.primaryColor
+                        : Colors
+                            .grey, // Use _isCommentLiked to decide the color
                   ),
-                )
+                ),
               ],
             ),
-            Divider(color: AppColors.greyColor.withOpacity(.2),),
+            Divider(
+              color: AppColors.greyColor.withOpacity(.2),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  String timeDifference(String createdAt) {
+    DateTime now = DateTime.now();
+    DateTime createdTime = DateTime.parse(createdAt);
+
+    Duration difference = now.difference(createdTime);
+
+    if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} minutes ago';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} hours ago';
+    } else if (difference.inDays < 7) {
+      return '${difference.inDays} days ago';
+    } else {
+      return '${(difference.inDays / 7).floor()} weeks ago';
+    }
   }
 }

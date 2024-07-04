@@ -1,16 +1,20 @@
-
 part of 'pages.dart';
 
 class VerifyPage extends StatefulWidget {
-  const VerifyPage({super.key});
+  VerifyPage({super.key, required this.email});
+
+  var email;
 
   @override
   State<VerifyPage> createState() => _VerifyPageState();
 }
 
 class _VerifyPageState extends State<VerifyPage> {
+  String email = "";
+
   @override
   Widget build(BuildContext context) {
+    if (widget.email.length > 0) email = widget.email['email'];
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -24,15 +28,17 @@ class _VerifyPageState extends State<VerifyPage> {
                 context.statusBarHeightGap,
                 InkWell(
                   onTap: () => context.pop(),
-                  child: SvgPicture.asset(AppIcons.backIcon,),
+                  child: SvgPicture.asset(
+                    AppIcons.backIcon,
+                  ),
                 ),
-                const Header(
-                  title: 'Verfiy Email',
+                Header(
+                  title: 'Verify Email',
                   content1: 'We sent a verification code to ',
-                  content2: 'lavishproductline@gmail.com',
+                  content2: '$email',
                 ),
                 const Gap(50),
-                const VerifyCodeForm()
+                VerifyCodeForm(email: email),
               ],
             ),
           )

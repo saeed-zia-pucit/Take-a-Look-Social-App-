@@ -36,7 +36,7 @@ class OnBoardThird extends StatelessWidget {
                   children: [
                     Gap(MediaQuery.of(context).padding.top,),
                     const Gap(20),
-                    Text('Everyday bussiness makeup by\ndiscovering feeds',
+                    Text('Everyday business makeup by\ndiscovering feeds',
                       style: GoogleFonts.nunito(
                         fontSize: 24.h(context),
                         color: AppColors.whiteColor,
@@ -44,7 +44,7 @@ class OnBoardThird extends StatelessWidget {
                       ),
                     ),
                     const Gap(10),
-                    Text('Post your porfolio and get business impression with the help\nof your followers and followings ',
+                    Text('Post your portfolio and get business impression with the help\nof your followers and followings ',
                       style: GoogleFonts.nunito(
                         fontSize: 12.h(context),
                         color: AppColors.whiteColor,

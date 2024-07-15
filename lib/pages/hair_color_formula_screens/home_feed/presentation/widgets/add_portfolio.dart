@@ -1,24 +1,29 @@
 part of 'widgets.dart';
 
 class AddPortfolio extends StatefulWidget {
-  const AddPortfolio({super.key, required this.onSuccess});
+  const AddPortfolio(
+      {super.key, required this.onSuccess, required this.userModel});
 
-final Function onSuccess;
+  final Function onSuccess;
+  final UserModel userModel;
 
-@override
+  @override
   _AddPortfolioState createState() => _AddPortfolioState();
 }
 
 class _AddPortfolioState extends State<AddPortfolio> {
   bool _isVisible = false;
-
   bool _isImageAttached = false;
+  String _selectedCategory = 'Other';
+
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<AddPortfolioViewModel>(context, listen: false);
 
-    bool _isTextFieldVisible = false; // Set this to false when you want to hide the TextField
-
+    model.selectedCategory=_selectedCategory;
+    UserModel userModel = widget.userModel;
+    bool _isTextFieldVisible =
+        false; // Set this to false when you want to hide the Text
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
@@ -35,10 +40,14 @@ class _AddPortfolioState extends State<AddPortfolio> {
                     child: Container(
                       height: 30,
                       width: 30,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: AssetImage('assets/images/avatar.png'),
+                          image: userModel.avatarUrl == null ||
+                                  userModel.avatarUrl == ''
+                              ? const AssetImage('assets/images/avatar.png')
+                              : NetworkImage(userModel.avatarUrl ?? '')
+                                  as ImageProvider,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -101,18 +110,56 @@ class _AddPortfolioState extends State<AddPortfolio> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  _isTextFieldVisible ? TextField(
-                    controller: model.additionalUrlController,
-                    decoration: const InputDecoration(labelText: 'Additional URL'),
-                  ) : Container(),
+                  _isTextFieldVisible
+                      ? TextField(
+                          controller: model.additionalUrlController,
+                          decoration: const InputDecoration(
+                              labelText: 'Additional URL'),
+                        )
+                      : Container(),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Post Category:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        value: _selectedCategory,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedCategory = newValue!;
+                            model.selectedCategory=_selectedCategory;
+                          });
+                        },
+                        items: <String>[
+                          "Other",
+                          "Brunette",
+                          "Blonde",
+                          "Red",
+                          "Black"
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 10),
                   Column(
                     children: [
-                      _isTextFieldVisible ?   TextField(
-                        controller: model.additionalNoteController,
-                        decoration:
-                            const InputDecoration(labelText: 'Additional Note'),
-                      ): Container(),
+                      _isTextFieldVisible
+                          ? TextField(
+                              controller: model.additionalNoteController,
+                              decoration: const InputDecoration(
+                                  labelText: 'Additional Note'),
+                            )
+                          : Container(),
                       IconButton(
                         icon: Icon(
                           Icons.camera_alt,
@@ -143,13 +190,17 @@ class _AddPortfolioState extends State<AddPortfolio> {
                           );
                           if (option != null) {
                             setState(() {
-                              _isImageAttached = true; // Set this to true when an image is selected
+                              _isImageAttached =
+                                  true; // Set this to true when an image is selected
                             });
                             await model.pickImage(option);
                           }
                         },
                       ),
-                       Text(
+
+                      //add dropdown for post category and add two categoreis other and me for test and also tive tiitle at left start and dropdown at riight end
+
+                      Text(
                         _isImageAttached ? 'Image Attached' : 'Attach Image',
                         style: const TextStyle(
                           color: Colors.grey,
@@ -176,7 +227,7 @@ class _AddPortfolioState extends State<AddPortfolio> {
                             content: Text('Post successful submitted'),
                           ),
                         );
-                       widget.onSuccess();
+                        widget.onSuccess();
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

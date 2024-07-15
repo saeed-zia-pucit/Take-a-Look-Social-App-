@@ -54,7 +54,7 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path:  RouteNames.verify,
+      path: RouteNames.verify,
       builder: (context, state) {
         final email = state.extra;
         return VerifyPage(email: email);
@@ -64,7 +64,7 @@ final GoRouter router = GoRouter(
       path: RouteNames.changePsw,
       builder: (context, state) {
         final token_email = state.extra;
-        return  ChangePswPage(token_email: token_email);
+        return ChangePswPage(token_email: token_email);
       },
     ),
     GoRoute(
@@ -97,9 +97,12 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.profile,
       builder: (context, state) {
-        ProfilePageType profilePageType = state.extra as ProfilePageType;
+        Map<String, dynamic> extras = state.extra as Map<String, dynamic>;
+        ProfilePageType profilePageType = extras['pageType'];
+        String userId = extras['userId'];
         return ProfilePage(
           profilePageType: profilePageType,
+          userId: userId,
         );
       },
     ),
@@ -164,7 +167,9 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouteNames.wishList,
       builder: (context, state) {
-        return const WishListPage();
+        var pageType = state.extra as WishListPageType;
+        // return const WishListPage();
+        return WishListPostPage(pageType: pageType);
       },
     ),
     GoRoute(

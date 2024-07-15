@@ -36,6 +36,7 @@ class SetupEditProfileViewModel extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController bioController = TextEditingController();
   TextEditingController licenseController = TextEditingController();
+  String avatarUrl = '';
   Future<void> getProfile() async {
     try {
       isLoading = true;
@@ -44,6 +45,7 @@ class SetupEditProfileViewModel extends ChangeNotifier {
       firstNameController.text = userModel?.firstname ?? '';
       lastNameController.text = userModel?.lastname ?? '';
       emailController.text = userModel?.email ?? '';
+      avatarUrl = userModel?.avatarUrl ?? '';
       bioController.text = userModel?.bio ?? '';
       licenseController.text = userModel?.license ?? '';
     } catch (_) {} finally {

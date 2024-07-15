@@ -1,20 +1,24 @@
-
 part of 'widgets.dart';
 
 class PostAuthor extends StatelessWidget {
-  const PostAuthor({super.key,
-    required this.homeFeedPageType,
-    required this.post});
+  const PostAuthor(
+      {super.key, required this.homeFeedPageType, required this.post, required  this.onPostDeleted});
 
+  final Function onPostDeleted;
   final HomeFeedPageType homeFeedPageType;
   final PostModel post;
+
   @override
   Widget build(BuildContext context) {
-    PostModel posts=post;
+    PostModel posts = post;
     return GestureDetector(
-      onTap: (){
-        context.push(RouteNames.profile,
-            extra: ProfilePageType.cosmetologist
+      onTap: () {
+        context.push(
+          RouteNames.profile,
+          extra: {
+            'pageType': ProfilePageType.cosmetologist,
+            'userId': "", // Replace userId with the actual user ID variable
+          },
         );
       },
       child: Padding(
@@ -35,7 +39,9 @@ class PostAuthor extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: NetworkImage(posts.imageUrl),
+                      image: posts.authorImageUrl.isEmpty
+                          ? NetworkImage(posts.imageUrl)
+                          : NetworkImage(posts.authorImageUrl),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -44,9 +50,8 @@ class PostAuthor extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text(
-                       posts.authorFirstname + ' ' + posts.authorLastname
-                     ,
+                    Text(
+                      posts.authorFirstname + ' ' + posts.authorLastname,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                       ),
@@ -54,24 +59,74 @@ class PostAuthor extends StatelessWidget {
                     Text(
                       'Curly | ${timeDifference(posts.createdAt)}',
                       style: TextStyle(
-                        fontSize: 10,
-                        color: AppColors.greyColor,
-                        fontWeight: FontWeight.w600
-                      ),
+                          fontSize: 10,
+                          color: AppColors.greyColor,
+                          fontWeight: FontWeight.w600),
                     ),
-
                   ],
                 )
               ],
             ),
-            (homeFeedPageType.isFeed) ?
-            TextButton(
-              onPressed: (){},
-              child: const SizedBox.shrink()/*Text('+ Unfollow')*/,
-            ) :
+            /* (homeFeedPageType.isFeed)
+                ? TextButton(
+                    onPressed: () {},
+                    child: const SizedBox.shrink() */ /*Text('+ Unfollow')*/ /*,
+                  )
+                : IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.bookmark_border,
+                                  color: AppColors.blackColor,
+                                ),
+                                label: Text(
+                                  'Save',
+                                  style: TextStyle(
+                                    color: AppColors.blackColor,
+                                  ),
+                                ),
+                              ),
+                              TextButton.icon(
+                                onPressed: () {},
+                                icon: SvgPicture.asset(AppIcons.editIcon),
+                                label: Text(
+                                  'Edit',
+                                  style: TextStyle(
+                                    color: AppColors.blackColor,
+                                  ),
+                                ),
+                              ),
+                              TextButton.icon(
+                                onPressed: () {},
+                                icon:
+                                    SvgPicture.asset(AppIcons.trashBasketIcon),
+                                label: Text(
+                                  'Delete',
+                                  style: TextStyle(
+                                    color: AppColors.blackColor,
+                                  ),
+                                ),
+                              ),
+                              context.bottomHeightGap,
+                              // Gap(50)
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    icon: const Icon(Icons.more_vert),
+                    padding: EdgeInsets.zero,
+                  ),*/
             IconButton(
-              onPressed: (){
-
+              onPressed: () {
                 showModalBottomSheet(
                   context: context,
                   builder: (context) {
@@ -80,27 +135,9 @@ class PostAuthor extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         TextButton.icon(
-                          onPressed: (){},
-                          icon: Icon(Icons.bookmark_border, color: AppColors.blackColor,),
-                          label: Text(
-                            'Save',
-                            style: TextStyle(
-                              color: AppColors.blackColor,
-                            ),
-                          ),
-                        ),
-                        TextButton.icon(
-                          onPressed: (){},
-                          icon: SvgPicture.asset(AppIcons.editIcon),
-                          label: Text(
-                            'Edit',
-                            style: TextStyle(
-                              color: AppColors.blackColor,
-                            ),
-                          ),
-                        ),
-                        TextButton.icon(
-                          onPressed: (){},
+                          onPressed: () {
+                            deletePost(posts.postId);
+                          },
                           icon: SvgPicture.asset(AppIcons.trashBasketIcon),
                           label: Text(
                             'Delete',
@@ -115,7 +152,6 @@ class PostAuthor extends StatelessWidget {
                     );
                   },
                 );
-
               },
               icon: const Icon(Icons.more_vert),
               padding: EdgeInsets.zero,
@@ -125,6 +161,23 @@ class PostAuthor extends StatelessWidget {
       ),
     );
   }
+
+  Future<void> deletePost(String postId) async {
+    await AppLocalData.updateToken();
+    final token = await AppLocalData.getUserToken;
+    final url = Uri.parse('${AppLocalData.BaseURL}/feed/post/$postId');
+    final response = await http.delete(
+      url,
+      headers: {'accept': '*/*', 'Authorization': 'Bearer $token'},
+    );
+
+    if (response.statusCode == 200) {
+      onPostDeleted();
+    } else {
+      print('Failed to delete post. Status code: ${response.statusCode}');
+    }
+  }
+
   String timeDifference(String createdAt) {
     DateTime now = DateTime.now();
     DateTime createdTime = DateTime.parse(createdAt);

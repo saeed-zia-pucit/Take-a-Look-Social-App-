@@ -5,10 +5,12 @@ class PostLikeComment extends StatefulWidget {
     super.key,
     required this.homeFeedPageType,
     required this.post,
+    required this.userModel,
   });
 
   final HomeFeedPageType homeFeedPageType;
   final PostModel post;
+  final UserModel userModel;
 
   @override
   _PostLikeCommentState createState() => _PostLikeCommentState();
@@ -22,12 +24,10 @@ class _PostLikeCommentState extends State<PostLikeComment> {
 
   void checkIfUserLikedPost() async {
     List<LikeInfo> likedPosts =
-        await feedRepo.getFeedLike(0, 100, widget.post.postId);
-
-    UserModel? userModel = await getIt<ProfileRepo>().getUser();
+        await feedRepo.getFeedLike(0, 500, widget.post.postId);
     for (LikeInfo liked_post in likedPosts) {
       for (LikedBy likeBy in liked_post.likedBy) {
-        var currentUserID = userModel!.id;
+        var currentUserID = widget.userModel.id;
         if (likeBy.userId == currentUserID) {
           setState(() {
             isLiked = true;
@@ -38,9 +38,23 @@ class _PostLikeCommentState extends State<PostLikeComment> {
     }
   }
 
+  void checkIfUserSavedPost() async {
+    List<PostModel> savePostModel =
+        await feedRepo.getFeedSaved(0, 500, widget.post.postId);
+    for (PostModel liked_post in savePostModel) {
+      if (widget.post.postId == liked_post.postId) {
+        setState(() {
+          isBookMark = true;
+        });
+        break;
+      }
+    }
+  }
+
   @override
   void initState() {
     checkIfUserLikedPost();
+    checkIfUserSavedPost();
     super.initState();
   }
 
@@ -96,6 +110,7 @@ class _PostLikeCommentState extends State<PostLikeComment> {
                           builder: (context) => CommentLikesPage(
                             commentLikesPageType: CommentLikesPageType.comments,
                             post: widget.post,
+                            userModel: widget.userModel,
                             onNewComment: () {
                               setState(() {
                                 widget.post.commentsCount++;
@@ -119,10 +134,16 @@ class _PostLikeCommentState extends State<PostLikeComment> {
                 ],
               ),
               IconButton(
-                onPressed: () {
-                  setState(() {
-                    isBookMark = !isBookMark;
-                  });
+                onPressed: () async {
+                  isBookMark = !isBookMark;
+                  if (isBookMark) {
+                    await feedRepo.SaveContent(widget
+                        .post.postId); // Call likeContent when isLiked is true
+                  } else {
+                    await feedRepo.unSaveContent(widget.post
+                        .postId); // Call unlikeContent when isLiked is false
+                  }
+                  setState(() {});
                 },
                 icon: Icon(
                   Icons.bookmark_border,
@@ -137,7 +158,9 @@ class _PostLikeCommentState extends State<PostLikeComment> {
                 AvatarWithSize(
                   height: 30,
                   width: 30,
-                  image: AppImages.avatar,
+                  image: widget.userModel.avatarUrl!.isEmpty
+                      ? AppImages.avatar
+                      : widget.userModel.avatarUrl!,
                 ),
                 const Gap(10),
                 Expanded(
@@ -149,6 +172,7 @@ class _PostLikeCommentState extends State<PostLikeComment> {
                           builder: (context) => CommentLikesPage(
                             commentLikesPageType: CommentLikesPageType.comments,
                             post: widget.post,
+                            userModel: widget.userModel,
                           ),
                         ),
                       ); /*

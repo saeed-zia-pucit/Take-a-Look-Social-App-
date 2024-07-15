@@ -1,4 +1,4 @@
-package com.example.take_a_look
+package com.social.take_a_look
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -7,7 +7,9 @@ class PostModel {
   String createdAt = "";
   String authorId = "";
   String authorFirstname = "";
+  String category = "";
   String authorLastname = "";
+  String authorImageUrl = "";
   int commentsCount = 0;
   int likesCount = 0;
 
@@ -20,7 +22,9 @@ class PostModel {
     this.createdAt = "",
     this.authorId = "",
     this.authorFirstname = "",
+    this.category = "",
     this.authorLastname = "",
+    this.authorImageUrl = "",
     this.commentsCount = 0,
     this.likesCount = 0,
   });
@@ -33,10 +37,12 @@ class PostModel {
     imageUrl = json['imageUrl'];
     createdAt = json['createdAt'];
     authorId = json['authorId'];
+    category = json['category'];
     authorFirstname = json['authorFirstname'];
     authorLastname = json['authorLastname'];
     commentsCount = json['commentsCount'];
     likesCount = json['likesCount'];
+    authorImageUrl = json['authorImageUrl'];
   }
 
   Map<String, dynamic> get toJson => {
@@ -47,9 +53,11 @@ class PostModel {
     'imageUrl': imageUrl,
     'createdAt': createdAt,
     'authorId': authorId,
+    'category': category,
     'authorFirstname': authorFirstname,
     'authorLastname': authorLastname,
     'commentsCount': commentsCount,
     'likesCount': likesCount,
+    'authorImageUrl': authorImageUrl,
   };
 }

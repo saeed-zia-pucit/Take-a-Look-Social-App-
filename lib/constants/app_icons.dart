@@ -24,6 +24,7 @@ class AppIcons {
   static String googleIcon = '${pathSocial}google_icon.svg';
   static String appleIcon = '${pathSocial}apple_icon.svg';
 
+  static String tabBarOther = '${pathTabBar}tab_bar_0.png';
   static String tabBar1 = '${pathTabBar}tab_bar_1.png';
   static String tabBar2 = '${pathTabBar}tab_bar_2.png';
   static String tabBar3 = '${pathTabBar}tab_bar_3.png';

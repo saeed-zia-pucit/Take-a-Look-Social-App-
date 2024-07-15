@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:take_a_look/di_service.dart';
@@ -26,13 +27,22 @@ import 'pages/sign_up_screens/sign_up/view_model/signup_view_model.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // Check if Firebase app is already initialized
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      name: "dev project",
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   await init();
   runApp(const MyApp());
 }
-
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

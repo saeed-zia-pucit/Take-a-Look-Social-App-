@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,6 @@ class SearchUsers extends StatefulWidget {
 }
 
 class _SearchUsersState extends State<SearchUsers> {
-
   @override
   void initState() {
     context.read<FollowViewModel>().searchEditingController.clear();
@@ -25,18 +23,30 @@ class _SearchUsersState extends State<SearchUsers> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FollowViewModel>(
-      builder: (context, viewModel, _) {
-        return Scaffold(
-          body: SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
+    return Consumer<FollowViewModel>(builder: (context, viewModel, _) {
+      return Scaffold(
+        //
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              viewModel.onTapSearch();
+            },
+          ),
+          title: Text('Users'),
+          centerTitle: true,
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
                         child: TextField(
                           controller: viewModel.searchEditingController,
                           decoration: const InputDecoration(
@@ -48,30 +58,30 @@ class _SearchUsersState extends State<SearchUsers> {
                           },
                         ),
                       ),
-                      IconButton(
-                        onPressed: (){
-                          viewModel.onTapSearch();
-                        },
-                        icon: const Icon(Icons.close),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: PagedListView<int, UserModel>(
-                    pagingController: viewModel.pagingController,
-                    builderDelegate: PagedChildBuilderDelegate<UserModel>(
-                      itemBuilder: (context, item, index) => UserItem(
-                        userModel: item,
-                      ),
                     ),
+                    IconButton(
+                      onPressed: () {
+                        viewModel.searchEditingController.clear();
+                        viewModel.callSearchUser();
+                      },
+                      icon: const Icon(Icons.close),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: PagedListView<int, UserModel>(
+                  pagingController: viewModel.pagingController,
+                  builderDelegate: PagedChildBuilderDelegate<UserModel>(
+                    itemBuilder: (context, item, index) =>
+                        UserItem(userModel: item),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }

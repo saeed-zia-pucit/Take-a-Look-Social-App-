@@ -4,6 +4,8 @@ import 'package:take_a_look/pages/sign_up_screens/profile/presentation/pages/pag
 import 'package:take_a_look/pages/sign_up_screens/profile/view_model/profile_view_model.dart';
 
 import '../../pages/hair_color_formula_screens/follow/presentation/pages/pages.dart';
+import '../../pages/hair_color_formula_screens/follow/presentation/pages/search_users.dart';
+import '../../pages/hair_color_formula_screens/follow/view_model/follow_view_model.dart';
 import '../../pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
 import '../../pages/sign_up_screens/profile/presentation/widgets/widgets.dart';
 import '/constants/app_colors.dart';
@@ -23,6 +25,8 @@ class MenuView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    context.read<ProfileViewModel>().getUser();
     return Consumer<ProfileViewModel>(
       builder: (context, viewModel, _) {
         return Scaffold(
@@ -44,7 +48,7 @@ class MenuView extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      AvatarWithRadius(image: AppImages.avatar, radius: 50),
+                      AvatarWithRadius(image: viewModel.avatarUrl.isEmpty?AppImages.avatar:viewModel.avatarUrl, radius: 50),
                       const Gap(10),
                       Text(
                         '${viewModel.firstName} ${viewModel.lastName}',
@@ -63,7 +67,7 @@ class MenuView extends StatelessWidget {
                       ),
 
                       Divider(
-                        height: 50,
+                        height: 30,
                         indent: .15.wp(context),
                         endIndent: .15.wp(context),
                       ),
@@ -85,7 +89,10 @@ class MenuView extends StatelessWidget {
                               context.read<GlobalViewModel>().menuControl(open: false);
                               context.push(
                                 RouteNames.profile,
-                                extra: ProfilePageType.mine,
+                                extra: {
+                                  'pageType': ProfilePageType.mine,
+                                  'userId':"", // Replace userId with the actual user ID variable
+                                },
                               );
                             },
                             text: 'Profile',
@@ -116,6 +123,13 @@ class MenuView extends StatelessWidget {
                               context.push(RouteNames.followFollowing, extra: FollowPageType.following);
                             },
                             text: 'Followings',
+                          ),
+                          ItemOfProfileMenu(
+                            onPressed: (){
+                              context.read<FollowViewModel>().onTapSearch();
+                              if (context.watch<FollowViewModel>().showSearch) const SearchUsers();
+                            },
+                            text: 'Explorer Creator',
                           ),
                           ItemOfProfileMenu(
                             onPressed: () {

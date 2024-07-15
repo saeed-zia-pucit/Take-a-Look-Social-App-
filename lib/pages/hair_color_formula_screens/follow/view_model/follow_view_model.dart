@@ -79,7 +79,7 @@ class FollowViewModel extends ChangeNotifier {
     pagingController.dispose();
     pagingController = PagingController(firstPageKey: 0);
     pagingController.addPageRequestListener((pageKey) {
-      getSearchUser(0, 5);
+      getSearchUser(0, 500);
     });
     showSearch = !showSearch;
     notifyListeners();

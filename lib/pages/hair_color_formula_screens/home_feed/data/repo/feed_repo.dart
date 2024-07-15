@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/data/models/comment_response_model.dart';
@@ -27,7 +28,10 @@ abstract class FeedRepo {
       int page, int size, String commentId);
 
   Future<bool> postComment(String postId, String content);
-  Future<List<CommentResponse>> getFeedCommentsByPostID(int page, int size, String postId);
+
+  Future<List<CommentResponse>> getFeedCommentsByPostID(
+      int page, int size, String postId);
+
   Future<bool> deleteComment(String commentId);
 }
 
@@ -118,6 +122,69 @@ class FeedRepoImpl extends FeedRepo {
   }
 
   @override
+  Future<bool> SaveContent(String contentID) async {
+    try {
+      await AppLocalData.updateToken();
+      final token = await AppLocalData.getUserToken;
+      Response response = await dio.post(
+        '${AppLocalData.BaseURL}/bookmarks',
+        options: Options(
+          headers: headerAuth(token),
+        ),
+        data: jsonEncode({
+          'postId': contentID,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, then the content was successfully liked.
+        print('Content was successfully liked.');
+        return true;
+      } else {
+        // If the server returns a response with a status code other than 200, then something went wrong.
+        print('Failed to like content. Status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Failed to like content. Error: $e');
+      return false;
+    }
+  }
+
+
+  @override
+  Future<bool> unSaveContent(String contentID) async {
+    try {
+      await AppLocalData.updateToken();
+      final token = await AppLocalData.getUserToken;
+      Response response = await dio.delete(
+        '${AppLocalData.BaseURL}/bookmarks',
+        options: Options(
+          headers: headerAuth(token),
+        ),
+        data: jsonEncode({
+          'postId': contentID,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, then the content was successfully unliked.
+        print('Content was successfully unliked.');
+        return true;
+      } else {
+        // If the server returns a response with a status code other than 200, then something went wrong.
+        print('Failed to unlike content. Status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Failed to unlike content. Error: $e');
+      return false;
+    }
+  }
+
+
+
+  @override
   Future<bool> likeContent(String contentID) async {
     try {
       await AppLocalData.updateToken();
@@ -145,54 +212,77 @@ class FeedRepoImpl extends FeedRepo {
   }
 
   @override
-Future<bool> unlikeContent(String contentID) async {
-  try {
-    await AppLocalData.updateToken();
-    final token = await AppLocalData.getUserToken;
-    Response response = await dio.delete(
-      '${AppLocalData.BaseURL}/feed/like/$contentID',
-      options: Options(
-        headers: headerAuth(token),
-      ),
-    );
+  Future<bool> unlikeContent(String contentID) async {
+    try {
+      await AppLocalData.updateToken();
+      final token = await AppLocalData.getUserToken;
+      Response response = await dio.delete(
+        '${AppLocalData.BaseURL}/feed/like/$contentID',
+        options: Options(
+          headers: headerAuth(token),
+        ),
+      );
 
-    if (response.statusCode == 200) {
-      // If the server returns a 200 OK response, then the content was successfully unliked.
-      print('Content was successfully unliked.');
-      return true;
-    } else {
-      // If the server returns a response with a status code other than 200, then something went wrong.
-      print('Failed to unlike content. Status code: ${response.statusCode}');
+      if (response.statusCode == 200) {
+        // If the server returns a 200 OK response, then the content was successfully unliked.
+        print('Content was successfully unliked.');
+        return true;
+      } else {
+        // If the server returns a response with a status code other than 200, then something went wrong.
+        print('Failed to unlike content. Status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Failed to unlike content. Error: $e');
       return false;
     }
-  } catch (e) {
-    print('Failed to unlike content. Error: $e');
-    return false;
   }
-}
-  // content like
- @override
-Future<List<LikeInfo>> getFeedLike(
-    int page, int size, String contentID) async {
-  try {
-    await AppLocalData.updateToken();
-    final token = await AppLocalData.getUserToken;
-    Response response = await dio.get(
-      '${AppLocalData.BaseURL}/feed/like/$contentID?page=$page&size=$size',
-      options: Options(
-        headers: headerAuth(token),
-      ),
-    );
 
-    if (response.statusCode == 200) {
-      List data = response.data;
-      return data.map((e) => LikeInfo.fromJson(e)).toList();
+  // content like
+  @override
+  Future<List<LikeInfo>> getFeedLike(
+      int page, int size, String contentID) async {
+    try {
+      await AppLocalData.updateToken();
+      final token = await AppLocalData.getUserToken;
+      Response response = await dio.get(
+        '${AppLocalData.BaseURL}/feed/like/$contentID?page=$page&size=$size',
+        options: Options(
+          headers: headerAuth(token),
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        List data = response.data;
+        return data.map((e) => LikeInfo.fromJson(e)).toList();
+      }
+      return [];
+    } catch (e) {
+      return [];
     }
-    return [];
-  } catch (e) {
-    return [];
   }
-}
+ @override
+  Future<List<PostModel>> getFeedSaved(
+      int page, int size, String contentID) async {
+    try {
+      await AppLocalData.updateToken();
+      final token = await AppLocalData.getUserToken;
+      Response response = await dio.get(
+        '${AppLocalData.BaseURL}/bookmarks?page=$page&size=$size',
+        options: Options(
+          headers: headerAuth(token),
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        List data = response.data;
+        return data.map((e) => PostModel.fromJson(e)).toList();
+      }
+      return [];
+    } catch (e) {
+      return [];
+    }
+  }
 
   Future<bool> postCommentLike(String commentId, String content) async {
     try {
@@ -217,6 +307,7 @@ Future<List<LikeInfo>> getFeedLike(
       return false;
     }
   }
+
   Future<bool> deleteCommentLike(String commentId, String content) async {
     try {
       await AppLocalData.updateToken();
@@ -264,6 +355,7 @@ Future<List<LikeInfo>> getFeedLike(
       return [];
     }
   }
+
 //post content comments
 
   @override
@@ -295,8 +387,6 @@ Future<List<LikeInfo>> getFeedLike(
       return [];
     }
   }
-
-
 
   Future<bool> postComment(String postId, String content) async {
     try {
@@ -344,7 +434,7 @@ Future<List<LikeInfo>> getFeedLike(
         return data
             .map(
               (e) => CommentResponse.fromJson(e),
-        )
+            )
             .toList();
       }
       return [];

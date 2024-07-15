@@ -17,10 +17,10 @@ class PostContent extends StatelessWidget {
             ),
                    ),
          ),
-        Image.network(
+        Image(
+          image: NetworkImage( post.imageUrl),
           height: context.width - 100,
           width: double.infinity,
-          post.imageUrl,
           fit: BoxFit.cover,
         )
       ],

@@ -6,14 +6,24 @@ import 'package:http_parser/http_parser.dart' show MediaType;
 import '../../../../../core/data/data_source/local/app_local_data.dart';
 
 abstract class AddPortfolioRepo {
-  Future<Response?> postPortfolio(File? image, String content, String additionalUrl, String additionalNote);
+  Future<Response?> postPortfolio(File? image, String content,
+      String additionalUrl, String additionalNote, String selectedCategory);
+
+  Future<Response?> postDraft(File? image, String content, String additionalUrl,
+      String additionalNote, String selectedCategory);
 }
 
 class AddPortfolioRepoImpl extends AddPortfolioRepo {
   AddPortfolioRepoImpl(this.dio);
+
   final Dio dio;
 
-  Future<Response?> postPortfolio(File? image, String content, String additionalUrl, String additionalNote) async {
+  Future<Response?> postPortfolio(
+      File? image,
+      String content,
+      String additionalUrl,
+      String additionalNote,
+      String selectedCategory) async {
     try {
       // Update token
       await AppLocalData.updateToken();
@@ -24,6 +34,7 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
         'content': content,
         'additionalUrl': additionalUrl,
         'additionalNote': additionalNote,
+        'postCategory': selectedCategory.toUpperCase(),
       };
 
       // Create MultipartFile from image
@@ -41,7 +52,6 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
         ),
         'file': imageMapping,
       });
-
       // Send POST request
       Response response = await dio.post(
         '${AppLocalData.BaseURL}/feed/post',
@@ -55,6 +65,7 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
         ),
       );
 
+      print(response);
       if (response.statusCode == 200) {
         print('Post successful');
       } else {
@@ -67,4 +78,64 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
     }
   }
 
+  Future<Response?> postDraft(File? image, String content, String additionalUrl,
+      String additionalNote, String selectedCategory) async {
+    try {
+      // Update token
+      await AppLocalData.updateToken();
+      final token = await AppLocalData.getUserToken;
+
+      // Create post map
+      final post = {
+        'content': content,
+        'additionalUrl': additionalUrl,
+        'additionalNote': additionalNote,
+        'postCategory': selectedCategory.toUpperCase(),
+      };
+
+      // Create MultipartFile from image
+      final imageMapping = await MultipartFile.fromFile(
+        image!.path,
+        filename: image.path.split('/').last,
+        contentType: MediaType('image', 'jpeg'),
+      );
+
+      // Create FormData
+      FormData formData = FormData.fromMap({
+        'post': MultipartFile.fromString(
+          json.encode(post),
+          contentType: MediaType('application', 'json'),
+        ),
+        'file': imageMapping,
+      });
+      // Send POST request
+      Response response = await dio.post(
+        '${AppLocalData.BaseURL}/draft',
+        data: formData,
+        options: Options(
+          headers: {
+            'Accept': '*/*',
+            'Authorization': 'Bearer $token',
+            // 'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      print(response);
+      if (response.statusCode == 200) {
+        print('Post successful');
+      } else {
+        print('Post failed with status: ${response.statusCode}');
+      }
+      return response;
+    } on DioError catch (e) {
+      // Handle DioError
+        print('Unexpected error: ${e.message}');
+
+    } catch (e) {
+      // Handle any other type of error
+
+      print('Unexpected error: $e');
+  }}
 }

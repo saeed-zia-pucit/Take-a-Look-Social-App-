@@ -37,7 +37,7 @@ class FollowRepoImpl extends FollowRepo {
       return [];
     }
   }
-
+ 
   @override
   Future<List<UserModel>> getFollowings(int page, int size) async {
     try {

@@ -7,6 +7,7 @@ class UserModel {
   String? email;
   String? password;
   String? token;
+  String? avatarUrl;
   String? refreshToken;
   String? bio;
   String? license;
@@ -18,6 +19,7 @@ class UserModel {
     this.lastname,
     this.email,
     this.password,
+    this.avatarUrl,
     this.token,
     this.refreshToken,
     this.bio,
@@ -30,6 +32,7 @@ class UserModel {
     lastname = json['lastname'];
     email = json['email'];
     password = json['password'];
+    avatarUrl = json['avatarUrl'];
     token = json['token'];
     refreshToken = json['refreshToken'];
     bio = json['bio'];
@@ -41,6 +44,7 @@ class UserModel {
     'firstname' : firstname,
     'lastname' : lastname,
     'email' : email,
+    'avatarUrl' : avatarUrl,
     'password' : password,
     'token' : token,
     'refreshToken' : refreshToken,
@@ -78,6 +82,7 @@ class UserModel {
     email = json['email'];
     password = json['password'];
     bio = json['bio'];
+    avatarUrl = json['avatarUrl'];
     license = json['license'];
   }
 
@@ -86,6 +91,7 @@ class UserModel {
     firstname = json['firstname'];
     lastname = json['lastname'];
     bio = json['bio'];
+    avatarUrl = json['avatarUrl'];
     license = json['license'];
   }
 
@@ -97,6 +103,7 @@ class UserModel {
     String? password,
     String? token,
     String? refreshToken,
+    String? avatarUrl,
     String? bio,
     String? license,
   }) => UserModel(
@@ -106,6 +113,7 @@ class UserModel {
     email : email ?? this.email,
     password : password ?? this.password,
     token: token ?? this.token,
+    avatarUrl: avatarUrl ?? this.avatarUrl,
     refreshToken: refreshToken ?? this.refreshToken,
     bio: bio ?? this.bio,
     license: license ?? this.license,

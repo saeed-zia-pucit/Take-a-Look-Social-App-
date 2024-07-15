@@ -2,10 +2,11 @@ part of 'widgets.dart';
 
 class CommentItem extends StatefulWidget {
   final CommentResponse comment;
+  final UserModel userModel;
 
   final VoidCallback onDeleteSuccess;
 
-  CommentItem({Key? key, required this.comment, required this.onDeleteSuccess})
+  CommentItem({Key? key, required this.comment, required this.onDeleteSuccess,required this.userModel})
       : super(key: key);
 
   @override
@@ -19,10 +20,9 @@ class _CommentItemState extends State<CommentItem> {
   void checkIfUserLikedPost() async {
     List<LikeInfo> likedPosts =
     await feedRepo.getFeedLikeComments(0, 100, widget.comment.id);
-    UserModel? userModel = await getIt<ProfileRepo>().getUser();
     for (LikeInfo liked_post in likedPosts) {
       for (LikedBy likeBy in liked_post.likedBy) {
-        var currentUserID = userModel!.id;
+        var currentUserID = widget.userModel!.id;
         if (likeBy.userId == currentUserID) {
           setState(() {
             _isCommentLiked = true;
@@ -67,7 +67,7 @@ class _CommentItemState extends State<CommentItem> {
                 AvatarWithSize(
                   height: 40,
                   width: 40,
-                  image: AppImages.avatar,
+                  image: widget.userModel.avatarUrl!.isEmpty ?AppImages.avatar:widget.userModel.avatarUrl!,
                 ),
                 const Gap(10),
                 Expanded(

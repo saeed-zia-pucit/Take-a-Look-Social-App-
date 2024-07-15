@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:take_a_look/core/extensions/context_extension.dart';
+import 'package:http/http.dart' as http;
 
 import '../../../../../constants/app_colors.dart';
 import '../../../../../constants/app_icons.dart';

@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "565842633783",
-    "project_id": "take-a-look-ac060",
-    "storage_bucket": "take-a-look-ac060.appspot.com"
+    "project_number": "641084071848",
+    "project_id": "take-a-look-5622b",
+    "storage_bucket": "take-a-look-5622b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:565842633783:android:b015f452dee4cf9634cbb2",
+        "mobilesdk_app_id": "1:641084071848:android:a80b6cc156c623968cc79d",
         "android_client_info": {
-          "package_name": "com.example.take_a_look"
+          "package_name": "com.social.take_a_look"
         }
       },
       "oauth_client": [
         {
-          "client_id": "565842633783-7219n6052uvh64c3ff5ifujqtgqgrb7l.apps.googleusercontent.com",
+          "client_id": "641084071848-l8kjtbqtjqg0t7hclcs2ajnn45ka7h85.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCtkrqCDwzPxyS892oatuJjLmUXBXWC-sE"
+          "current_key": "AIzaSyATw9wbjok_70l2Z2fJWkUI4tuzcvkSPA0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "565842633783-7219n6052uvh64c3ff5ifujqtgqgrb7l.apps.googleusercontent.com",
+              "client_id": "641084071848-l8kjtbqtjqg0t7hclcs2ajnn45ka7h85.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "565842633783-g5a6emecjc628i0kgd017mm3386od548.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.takeALook"
-              }
             }
           ]
         }

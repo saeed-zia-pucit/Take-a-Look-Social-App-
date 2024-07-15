@@ -99,7 +99,7 @@ void getItInit() async {
   // ..registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance,)
 
   /// Repository
-    ..registerLazySingleton<SocialAuth>(() => SocialAuthImpl())
+    ..registerLazySingleton<SocialAuth>(() => SocialAuthImpl(getIt()))
     ..registerLazySingleton<SignUpRepo>(() => SignUpRepoImpl(getIt()))
     ..registerLazySingleton<SignInRepo>(() => SignInRepoImpl(getIt()))
     ..registerLazySingleton<ForgetRepo>(() => ForgetRepoImpl(getIt()))

@@ -7,8 +7,10 @@ import '../../../../../core/data/models/user_model.dart';
 
 abstract class ProfileRepo {
   Future<UserModel?> getUser();
-  Future<int?> getFollowingsCount();
-  Future<int?> getFollowersCount();
+  Future<UserModel?> getUserById(String userId);
+  Future<UserModel> get_User();
+  Future<int?> getFollowingsCount(String? id);
+  Future<int?> getFollowersCount(String? id);
 }
 
 class ProfileRepoImpl extends ProfileRepo {
@@ -33,11 +35,43 @@ class ProfileRepoImpl extends ProfileRepo {
   }
 
   @override
-  Future<int?> getFollowingsCount() async {
+  Future<UserModel?> getUserById(String userId) async {
+    await AppLocalData.updateToken();
+    final token = await AppLocalData.getUserToken;
+    Response response = await dio.get(
+      '/users/$userId',
+      options: Options(
+        headers: headerWithAuth(token),
+      ),
+    );
+    if ((response.statusCode == 200) || (response.statusCode == 201)) {
+      return UserModel.fromGetUser(response.data);
+    }
+    return null;
+  }
+
+ @override
+  Future<UserModel> get_User() async {
+    await AppLocalData.updateToken();
+    final token = await AppLocalData.getUserToken;
+    Response response = await dio.get(
+      '/users',
+      options: Options(
+        headers: headerWithAuth(token),
+      ),
+    );
+    if ((response.statusCode == 200) || (response.statusCode == 201)) {
+      return UserModel.fromGetUser(response.data);
+    }
+    return UserModel();
+  }
+
+  @override
+  Future<int?> getFollowingsCount(String? id) async {
     final token = await AppLocalData.getUserToken;
     // await AppLocalData.updateToken();
     Response response = await dio.get(
-      '/social/following/count',
+      '/social/id/following/count',
       options: Options(
         headers: headerWithAuth(token),
       ),
@@ -50,11 +84,11 @@ class ProfileRepoImpl extends ProfileRepo {
   }
 
   @override
-  Future<int?> getFollowersCount() async {
+  Future<int?> getFollowersCount(String? id) async {
     final token = await AppLocalData.getUserToken;
     // await AppLocalData.updateToken();
     Response response = await dio.get(
-      '/social/followers/count',
+      '/social/id/followers/count',
       options: Options(
         headers: headerWithAuth(token),
       ),

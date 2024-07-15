@@ -17,6 +17,7 @@ class AddPortfolioViewModel extends ChangeNotifier {
 
   TextEditingController contentController = TextEditingController();
   TextEditingController additionalUrlController = TextEditingController();
+  var selectedCategory = "";
   TextEditingController additionalNoteController = TextEditingController();
 
   File? _selectedImage;
@@ -37,7 +38,7 @@ class AddPortfolioViewModel extends ChangeNotifier {
     }
   }
 
-  void setImage(String imagePath) {
+  void setImage(imagePath) {
   _selectedImage = File(imagePath);
   notifyListeners();
 }
@@ -47,6 +48,17 @@ class AddPortfolioViewModel extends ChangeNotifier {
       contentController.text,
       additionalUrlController.text,
       additionalNoteController.text,
+      selectedCategory
+    );
+    return response;
+  }
+  Future<Response?> postDraft() async {
+    Response? response = await addPortfolioRepo.postDraft(
+      _selectedImage,
+      contentController.text,
+      additionalUrlController.text,
+      additionalNoteController.text,
+      selectedCategory
     );
     return response;
   }

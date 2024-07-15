@@ -1,22 +1,36 @@
-
 part of 'widgets.dart';
 
 class PostItem extends StatelessWidget {
-  const PostItem({super.key, required this.homeFeedPageType,required this.post});
+  PostItem(
+      {super.key,
+      required this.homeFeedPageType,
+      required this.post,
+      required this.userModel,
+      required this.onPostDeleted});
 
   final HomeFeedPageType homeFeedPageType;
+  final Function onPostDeleted;
   final PostModel post;
+  late UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PostAuthor(homeFeedPageType: homeFeedPageType,post: post),
+        PostAuthor(
+          homeFeedPageType: homeFeedPageType,
+          post: post,
+          onPostDeleted: () {
+            onPostDeleted();
+          },
+        ),
         PostContent(post: post),
-        PostLikeComment(homeFeedPageType: homeFeedPageType,post: post),
+        PostLikeComment(
+            homeFeedPageType: homeFeedPageType,
+            post: post,
+            userModel: userModel),
         const Gap(20),
       ],
     );
   }
-
 }

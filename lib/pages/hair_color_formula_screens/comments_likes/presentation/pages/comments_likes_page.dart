@@ -5,12 +5,14 @@ class CommentLikesPage extends StatefulWidget {
     super.key,
     required this.commentLikesPageType,
     required this.post,
+    required this.userModel,
     this.onNewComment,
     this.onDeleteComment,
   });
 
   final CommentLikesPageType commentLikesPageType;
   final PostModel post;
+  final UserModel userModel;
 
   final VoidCallback? onNewComment;
   final VoidCallback? onDeleteComment;
@@ -59,7 +61,7 @@ class _CommentLikesPageState extends State<CommentLikesPage> {
                   child: Row(
                     children: [
                       AvatarWithSize(
-                        image: AppImages.avatar,
+                        image: widget.userModel.avatarUrl!.isEmpty?AppImages.avatar:widget.userModel.avatarUrl!,
                         height: 25,
                         width: 25,
                       ),
@@ -77,6 +79,7 @@ class _CommentLikesPageState extends State<CommentLikesPage> {
                     children: _comments
                         .map((comment) => CommentItem(
                               comment: comment,
+                      userModel: widget.userModel,
                               onDeleteSuccess: () {
                                 //remove the specific record from the list
                                 setState(() {

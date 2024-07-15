@@ -14,7 +14,7 @@ class AvatarWithSize extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(image.contains("www")) {
+    if(image.contains("http")) {
       return Container(
       height: height,
       width: width,

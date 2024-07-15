@@ -30,7 +30,7 @@ class ColorItem extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 5, left: 10, right: 10, top: 10),
             child: DecoratedBox(
               decoration: BoxDecoration(
-                image: (read.currentPageIndex == 0) ?
+                image: (read.currentPageIndex == 0||read.currentPageIndex == 1) ?
                 DecorationImage(
                   image: AssetImage(AppImages.hairs[index]),
                   fit: BoxFit.cover,

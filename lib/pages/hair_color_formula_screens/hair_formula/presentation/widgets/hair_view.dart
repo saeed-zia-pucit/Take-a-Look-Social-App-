@@ -13,9 +13,13 @@ class HairView extends StatefulWidget {
 final GlobalKey globalKey = GlobalKey();
 
 class _HairViewState extends State<HairView> {
+
+  String _selectedCategory = 'Other';
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<AddPortfolioViewModel>(context, listen: false);
+
+    model.selectedCategory=_selectedCategory;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -82,6 +86,39 @@ class _HairViewState extends State<HairView> {
                 ),
               ),
               const Gap(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Post Category:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  DropdownButton<String>(
+                    value: _selectedCategory,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _selectedCategory = newValue!;
+                        model.selectedCategory=_selectedCategory;
+                      });
+                    },
+                    items: <String>[
+                      "Other",
+                      "Brunette",
+                      "Blonde",
+                      "Red",
+                      "Black"
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+              const Gap(20),
               ElevatedButton(
                 onPressed: () async {
                   try {
@@ -106,7 +143,7 @@ class _HairViewState extends State<HairView> {
                         content: Text('Saving post, Please wait!'),
                       ),
                     );
-                    final result = await model.postPortfolio();
+                    final result = await model.postDraft();
                     if (result?.statusCode == 200) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

@@ -32,6 +32,7 @@ class NotificationViewModel extends ChangeNotifier {
   //   }
   // }
 
+
   Future<void> getNotifications(int page, int size) async {
     notifications = await NotificationRepo.getNotifications(page, size);
     final isLastPage = notifications.length < _pageSize;

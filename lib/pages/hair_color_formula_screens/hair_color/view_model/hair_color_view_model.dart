@@ -63,46 +63,88 @@ class HairColorViewModel extends ChangeNotifier {
     ),
   ];
 
+  // List<ColorModel> primaryColors = [
+  //   ColorModel(
+  //     name: "1",
+  //     color: Colors.black,
+  //   ),
+  //   ColorModel(
+  //     name: "2",
+  //     color: Colors.black.withOpacity(.9),
+  //   ),
+  //   ColorModel(
+  //     name: "3",
+  //     color: Colors.black.withOpacity(.8),
+  //   ),
+  //   ColorModel(
+  //     name: "4",
+  //     color: Colors.black.withOpacity(.7),
+  //   ),
+  //   ColorModel(
+  //     name: "5",
+  //     color: Colors.black.withOpacity(.6),
+  //   ),
+  //   ColorModel(
+  //     name: "6",
+  //     color: Colors.black.withOpacity(.5),
+  //   ),
+  //   ColorModel(
+  //     name: "7",
+  //     color: Colors.black.withOpacity(.4),
+  //   ),
+  //   ColorModel(
+  //     name: "8",
+  //     color: Colors.black.withOpacity(.3),
+  //   ),
+  //   ColorModel(
+  //     name: "9",
+  //     color: Colors.black.withOpacity(.2),
+  //   ),
+  //   ColorModel(
+  //     name: "10",
+  //     color: Colors.black.withOpacity(.1),
+  //   ),
+  // ];
   List<ColorModel> primaryColors = [
     ColorModel(
       name: "1",
-      color: Colors.black,
+      color: const Color(0xff000000),
     ),
     ColorModel(
       name: "2",
-      color: Colors.black.withOpacity(.9),
+      color: const Color(0xff302E2E),
     ),
     ColorModel(
       name: "3",
-      color: Colors.black.withOpacity(.8),
+      color: const Color(0xff4F4C4C),
     ),
     ColorModel(
       name: "4",
-      color: Colors.black.withOpacity(.7),
+      color: const Color(0xff65615D),
     ),
     ColorModel(
       name: "5",
-      color: Colors.black.withOpacity(.6),
+      color: const Color(0xff7F7C75),
     ),
     ColorModel(
       name: "6",
-      color: Colors.black.withOpacity(.5),
+      color: const Color(0xffA09E97),
     ),
     ColorModel(
       name: "7",
-      color: Colors.black.withOpacity(.4),
+      color: const Color(0xffC7C4B4),
     ),
     ColorModel(
       name: "8",
-      color: Colors.black.withOpacity(.3),
+      color: const Color(0xffD7D2C8),
     ),
     ColorModel(
       name: "9",
-      color: Colors.black.withOpacity(.2),
+      color: const Color(0xffEBE8E3),
     ),
     ColorModel(
       name: "10",
-      color: Colors.black.withOpacity(.1),
+      color: const Color(0xffF7F5F0),
     ),
   ];
 

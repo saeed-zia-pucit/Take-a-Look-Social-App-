@@ -21,6 +21,7 @@ class ProfileViewModel extends ChangeNotifier {
   String lastName = '';
   String emailName = '';
   String bio = '';
+  String avatarUrl = '';
   String license = '';
   int followersCount = 0;
   int followingsCount = 0;
@@ -30,14 +31,37 @@ class ProfileViewModel extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       currentUser = await profileRepo.getUser();
-      followersCount = await profileRepo.getFollowersCount() ?? 0;
-      followingsCount = await profileRepo.getFollowingsCount() ?? 0;
       print(firstName);
       firstName = currentUser!.firstname ?? '';
       lastName = currentUser!.lastname ?? '';
       emailName = currentUser!.email ?? '';
+      avatarUrl = currentUser!.avatarUrl ?? '';
       bio = currentUser!.bio ?? '';
       license = currentUser!.license ?? '';
+      notifyListeners();
+      followersCount = await profileRepo.getFollowersCount(currentUser!.id) ?? 0;
+      followingsCount = await profileRepo.getFollowingsCount(currentUser!.id) ?? 0;
+      notifyListeners();
+    } catch (_) {} finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+  Future<void> getUserById(String userId) async {
+    try {
+      isLoading = true;
+      notifyListeners();
+      currentUser = await profileRepo.getUserById(userId);
+      print(firstName);
+      firstName = currentUser!.firstname ?? '';
+      lastName = currentUser!.lastname ?? '';
+      emailName = currentUser!.email ?? '';
+      avatarUrl = currentUser!.avatarUrl ?? '';
+      bio = currentUser!.bio ?? '';
+      license = currentUser!.license ?? '';
+      notifyListeners();
+      followersCount = await profileRepo.getFollowersCount(userId) ?? 0;
+      followingsCount = await profileRepo.getFollowingsCount(userId) ?? 0;
       notifyListeners();
     } catch (_) {} finally {
       isLoading = false;

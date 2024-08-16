@@ -12,6 +12,9 @@ abstract class FeedRepo {
   //get
   Future<List<PostModel>> getFeed(int page, int size);
 
+  Future<List<PostModel>> getDraft(int page, int size);
+  Future<List<PostModel>> getSavedPost(int page, int size);
+
   Future<List<PostModel>> getFeedByID(String postId);
 
   Future<List<PostModel>> getFeedByUserId(int page, int size, String userId);
@@ -47,6 +50,58 @@ class FeedRepoImpl extends FeedRepo {
       final token = await AppLocalData.getUserToken;
       Response response = await dio.get(
         '${AppLocalData.BaseURL}/feed/post?page=$page&size=$size',
+        options: Options(
+          headers: headerAuth(token),
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        List data = response.data;
+        return data
+            .map(
+              (e) => PostModel.fromJson(e),
+            )
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<PostModel>> getDraft(int page, int size) async {
+    try {
+      await AppLocalData.updateToken();
+      final token = await AppLocalData.getUserToken;
+      Response response = await dio.get(
+        '${AppLocalData.BaseURL}/draft?page=$page&size=$size',
+        options: Options(
+          headers: headerAuth(token),
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        List data = response.data;
+        return data
+            .map(
+              (e) => PostModel.fromJson(e),
+            )
+            .toList();
+      }
+      return [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<PostModel>> getSavedPost(int page, int size) async {
+    try {
+      await AppLocalData.updateToken();
+      final token = await AppLocalData.getUserToken;
+      Response response = await dio.get(
+        '${AppLocalData.BaseURL}/bookmarks?page=$page&size=$size',
         options: Options(
           headers: headerAuth(token),
         ),
@@ -121,7 +176,6 @@ class FeedRepoImpl extends FeedRepo {
     }
   }
 
-  @override
   Future<bool> SaveContent(String contentID) async {
     try {
       await AppLocalData.updateToken();
@@ -151,8 +205,6 @@ class FeedRepoImpl extends FeedRepo {
     }
   }
 
-
-  @override
   Future<bool> unSaveContent(String contentID) async {
     try {
       await AppLocalData.updateToken();
@@ -182,9 +234,6 @@ class FeedRepoImpl extends FeedRepo {
     }
   }
 
-
-
-  @override
   Future<bool> likeContent(String contentID) async {
     try {
       await AppLocalData.updateToken();
@@ -211,7 +260,6 @@ class FeedRepoImpl extends FeedRepo {
     }
   }
 
-  @override
   Future<bool> unlikeContent(String contentID) async {
     try {
       await AppLocalData.updateToken();
@@ -261,7 +309,8 @@ class FeedRepoImpl extends FeedRepo {
       return [];
     }
   }
- @override
+
+  @override
   Future<List<PostModel>> getFeedSaved(
       int page, int size, String contentID) async {
     try {

@@ -1,8 +1,8 @@
-
 part of 'widgets.dart';
 
 class ShowColor extends StatelessWidget {
-  ShowColor({super.key,
+  ShowColor({
+    super.key,
     required this.title,
     required this.chooseColorTitle,
     required this.hairColorPageType,
@@ -26,7 +26,8 @@ class ShowColor extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Text(
                     title,
                     style: const TextStyle(
@@ -35,10 +36,10 @@ class ShowColor extends StatelessWidget {
                   ),
                 ),
                 if (hairColorPageType.index != 0)
-                TextButton(
-                  onPressed: (){},
-                  child: const Text('View level'),
-                ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text('View level'),
+                  ),
               ],
             ),
             Expanded(
@@ -49,18 +50,15 @@ class ShowColor extends StatelessWidget {
             ),
           ],
         ),
-
-        if (watch.currentPageIndex < 3)
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: ChooseColor(
-            colors: (hairColorPageType.isPrimaryColor)
-                ? watch.primaryColors
-                : (hairColorPageType.isNaturalLevel)
-                ? watch.naturalLevelColors
-                : watch.desiredTones,
+        if (watch.currentPageIndex < 2)
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ChooseColor(
+              colors: (hairColorPageType.isPrimaryColor)
+                  ? watch.primaryColors
+                  : watch.naturalLevelColors,
+            ),
           ),
-        ),
       ],
     );
   }

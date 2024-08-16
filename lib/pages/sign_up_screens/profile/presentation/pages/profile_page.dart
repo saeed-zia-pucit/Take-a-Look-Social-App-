@@ -29,8 +29,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    // final read = context.read<ProfileViewModel>();
-
     return Consumer<ProfileViewModel>(builder: (context, viewModel, _) {
       return Stack(
         children: [
@@ -56,10 +54,32 @@ class _ProfilePageState extends State<ProfilePage> {
                           );
                           await viewModel.getUser();
                         }
-                      : () {},
+                      : viewModel.isFollower
+                          ? () async {
+                              bool unfollowed = await context
+                                  .read<ProfileViewModel>()
+                                  .unfollowUser(widget.userId
+                                  );
+                              if (unfollowed) {
+                                await viewModel
+                                    .getUserById(widget.userId);
+                              }
+                            }
+                          : () async {
+                              bool followed = await context
+                                  .read<ProfileViewModel>()
+                                  .followUser(widget.userId
+                                  );
+                              if (followed) {
+                                await viewModel
+                                    .getUserById(widget.userId);
+                              }
+                            },
                   child: (profilePageType.isMine)
                       ? const Text('Edit')
-                      : const Text('Follow'),
+                      : viewModel.isFollower
+                          ? const Text('Unfollow')
+                          : const Text('Follow'),
                 ),
               ],
             ),
@@ -80,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         Column(
                           children: [
                             Text(
-                              '0',
+                              '${viewModel.postCount}',
                               style: GoogleFonts.nunito(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                             ),
@@ -237,27 +257,43 @@ class _ProfilePageState extends State<ProfilePage> {
                         const Gap(20),
                         Column(
                           children: [
-                            Container(
-                              height: 70.h(context),
-                              width: 70.h(context),
-                              decoration: BoxDecoration(
-                                color: AppColors.secondaryColor,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: SvgPicture.asset(AppIcons.save),
+                            GestureDetector(
+                              onTap: () {
+                                if (profilePageType.isMine) {
+                                  context.push(RouteNames.wishList,
+                                      extra: WishListPageType.save);
+                                }
+                              },
+                              child: Container(
+                                height: 70.h(context),
+                                width: 70.h(context),
+                                decoration: BoxDecoration(
+                                  color: AppColors.secondaryColor,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: SvgPicture.asset(AppIcons.save),
+                                ),
                               ),
                             ),
                             const Gap(10),
-                            Text(
-                              'Saved',
-                              style: GoogleFonts.nunito(
-                                fontSize: 12,
+                            GestureDetector(
+                              onTap: () {
+                                if (profilePageType.isMine) {
+                                  context.push(RouteNames.wishList,
+                                      extra: WishListPageType.save);
+                                }
+                              },
+                              child: Text(
+                                'Saved',
+                                style: GoogleFonts.nunito(
+                                  fontSize: 12,
+                                ),
                               ),
-                            ),
+                            )
                           ],
-                        ),
+                        )
                       ],
                     ),
                     const Gap(30),

@@ -33,7 +33,11 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
     if (i == 0) {
       imageUri = read.avatarUrl.isEmpty ? AppImages.avatar : read.avatarUrl;
       i++;
+      if (read.avatarUrl.isNotEmpty) {
+        imageUri= read.avatarUrl;
+      }
     }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(

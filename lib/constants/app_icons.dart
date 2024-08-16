@@ -1,6 +1,7 @@
 
 class AppIcons {
   static String path = 'assets/svg/';
+  static String imagesPath = 'assets/images/';
   static String pathOnBoard = '${path}onboard/';
   static String pathSocial = '${path}social/';
   static String pathTabBar = '${path}tab_bar/';
@@ -31,6 +32,9 @@ class AppIcons {
   static String tabBar4 = '${pathTabBar}tab_bar_4.png';
   static String tabBar5 = '${pathTabBar}tab_bar_5.png';
 
+  static String linkIcon = '${imagesPath}link.png';
+
+  static String eduIcon = '${path}education.svg';
   static String backIcon = '${path}back_icon.svg';
   static String checkCircleIcon = '${path}check_circle.svg';
   static String congratsIcon = '${path}congrats_icon.svg';

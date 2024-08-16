@@ -11,30 +11,60 @@ class WishListPostPage extends StatefulWidget {
 
 class _WishListPostPageState extends State<WishListPostPage> {
   late WishListPageType pageType;
-
   late ValueNotifier<List<PostModel>> futurePostsNotifier;
   List<PostModel> allPosts = [];
-  late Future<UserModel> userModel;
   late UserModel userDataModel;
+  bool isLoading = false;
 
   @override
   void initState() {
     try {
       pageType = widget.pageType;
-      fetchPosts();
+      if (pageType.wishlist) {
+        fetchDraft();
+      } else {
+        fetchSavePost();
+      }
     } catch (e) {
       print(e);
     }
     super.initState();
   }
 
-  // Fetch the posts
-  Future<void> fetchPosts() async {
+  Future<void> fetchDraft() async {
+    setState(() => isLoading = true);
     futurePostsNotifier = ValueNotifier<List<PostModel>>([]);
-    await getIt<FeedRepoImpl>().getFeed(0, 500).then((posts) {
+    await getIt<FeedRepoImpl>().getDraft(0, 500).then((posts) async {
       allPosts = posts;
+      userDataModel = await getIt<ProfileRepo>().get_User();
+      try {
+        if (userDataModel.id!.isEmpty) {
+          userDataModel = await getIt<ProfileRepo>().get_User();
+        }
+      } catch (e) {
+        userDataModel = await getIt<ProfileRepo>().get_User();
+        print(e);
+      }
       futurePostsNotifier.value = allPosts; // Update the notifier
-    });
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error fetching data: $error')),
+      );
+    }).whenComplete(() => setState(() => isLoading = false));
+  }
+
+  Future<void> fetchSavePost() async {
+    setState(() => isLoading = true);
+    futurePostsNotifier = ValueNotifier<List<PostModel>>([]);
+    await getIt<FeedRepoImpl>().getSavedPost(0, 500).then((posts) async {
+      allPosts = posts;
+      userDataModel = await getIt<ProfileRepo>().get_User();
+      futurePostsNotifier.value = allPosts; // Update the notifier
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error fetching data: $error')),
+      );
+    }).whenComplete(() => setState(() => isLoading = false));
   }
 
   @override
@@ -43,70 +73,65 @@ class _WishListPostPageState extends State<WishListPostPage> {
       // Return the Scaffold widget
       return Stack(
         children: [
-          Scaffold(
-            backgroundColor: AppColors.whiteColor,
-            // Add the AppBar widget
-            appBar: AppBar(
-              centerTitle: true,
-              title: Text(
-                pageType!.wishlist ? 'Wishlist' : 'Saved Post',
-              ),
-            ),
-            body: CustomScrollView(
-              slivers: [
-                Section(
-                  item: ValueListenableBuilder<List<PostModel>>(
-                    valueListenable: futurePostsNotifier,
-                    builder: (context, value, child) {
-                      return SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (context, index) {
-                            final post = value[index];
-                            if (userDataModel.id!.isEmpty) {
-                              Future.delayed(Duration(seconds: 2), () {
-                                fetchPosts();
-                              });
-                            }
-                            //  // This triggers a rebuild after the delay
-                            if (post != null) {
-                              if (userDataModel.id!.isEmpty) {
-                                Future.delayed(Duration(seconds: 2), () {
-                                  // fetchPosts();
-                                });
-                                userDataModel =
-                                    AppLocalData.getUserModel as UserModel;
-                              }
-                              return PostItem(
-                                homeFeedPageType: pageType.wishlist
-                                    ? HomeFeedPageType.feed
-                                    : HomeFeedPageType.feed,
-                                post: post,
-                                userModel: userDataModel,
-                                onPostDeleted: () {
-                                  updatePosts();
-                                },
-                              );
-                            }
-                            if (post == null) {
-                              return const Padding(
-                                padding: EdgeInsets.only(top: 50.0),
-                                child: Center(
-                                  child: Text('No data found'),
-                                ),
-                              );
-                            }
-                            return null;
-                          },
-                          childCount: value.length,
-                        ),
-                      );
-                    },
-                  ),
-                  child: SizedBox.shrink(),
+          if (isLoading) ...[
+            Scaffold(
+              backgroundColor: AppColors.whiteColor,
+              // Add the AppBar widget
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(
+                  pageType.wishlist ? 'Wishlist' : 'Saved Post',
                 ),
-              ],
-            ),
-          )
+              ),
+              body: const Center(child: CircularProgressIndicator()),
+            )
+          ] else ...[
+            Scaffold(
+              backgroundColor: AppColors.whiteColor,
+              // Add the AppBar widget
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(
+                  pageType.wishlist ? 'Wishlist' : 'Saved Post',
+                ),
+              ),
+              body: CustomScrollView(
+                slivers: [
+                  Section(
+                    item: ValueListenableBuilder<List<PostModel>>(
+                      valueListenable: futurePostsNotifier,
+                      builder: (context, value, child) {
+                        return SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final post = value[index];
+                              //  // This triggers a rebuild after the delay
+                              if (post != null) {
+                                return PostItem(
+                                  homeFeedPageType: pageType.wishlist
+                                      ? HomeFeedPageType.feed
+                                      : HomeFeedPageType.feed,
+                                  post: post,
+                                  userModel: userDataModel,
+                                  onPostDeleted: () {
+                                    updatePosts();
+                                  },
+                                );
+                              }
+
+                              return null;
+                            },
+                            childCount: value.length,
+                          ),
+                        );
+                      },
+                    ),
+                    child: SizedBox.shrink(),
+                  ),
+                ],
+              ),
+            )
+          ],
         ],
       );
     } catch (e) {
@@ -116,7 +141,11 @@ class _WishListPostPageState extends State<WishListPostPage> {
   }
 
   void updatePosts() {
-    fetchPosts();
+    if (pageType.wishlist) {
+      fetchDraft();
+    } else {
+      fetchSavePost();
+    }
     setState(() {});
   }
 }

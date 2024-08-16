@@ -53,7 +53,7 @@ class _HairColorPageState extends State<HairColorPage> {
                 if (read.currentPageIndex != 3)
                   TextButton(
                     onPressed: () {},
-                    child: Text('Steps ${read.currentPageIndex + 1}/4'),
+                    child: Text('Steps ${read.currentPageIndex + 1}/3'),
                   )
                 else
                   TextButton(
@@ -68,9 +68,9 @@ class _HairColorPageState extends State<HairColorPage> {
               children: [
                 Expanded(
                   child: PageView(
-                    physics: watch.currentPageIndex == 2
-                        ? const NeverScrollableScrollPhysics()
-                        : const PageScrollPhysics(),
+                    physics: /*watch.currentPageIndex == 2
+                        *//*? const NeverScrollableScrollPhysics()
+                        :*/ const PageScrollPhysics(),
                     onPageChanged: (index) {
                       read.onNextStep(index);
                     },
@@ -83,7 +83,8 @@ class _HairColorPageState extends State<HairColorPage> {
                         hairColorPageType: HairColorPageType.naturalLevel,
                       ),
                       ShowColor(
-                        title: 'Select client current color',
+                        // title: 'Select client current color',
+                        title: 'Choose client desired Tones',
                         chooseColorTitle: 'Blonde',
                         selectedColor: watch.selectedColors[1],
                         hairColorPageType: HairColorPageType.primaryColor,
@@ -98,12 +99,12 @@ class _HairColorPageState extends State<HairColorPage> {
                         showLabel: true,
                         pickerAreaHeightPercent: 0.8,
                       ),*/
-                      ShowColor(
+                     /* ShowColor(
                         title: 'Choose client desired Tones',
                         chooseColorTitle: 'Ashes',
                         selectedColor: watch.selectedColors[2],
                         hairColorPageType: HairColorPageType.desiredColor,
-                      ),
+                      ),*/
                       GetFormula(
                         colors: read.selectedColors,
                       )
@@ -118,7 +119,7 @@ class _HairColorPageState extends State<HairColorPage> {
                     horizontal: 20,
                   ),
                   child: ElevatedButton(
-                    onPressed: (watch.currentPageIndex == 3)
+                    onPressed: (watch.currentPageIndex == 2)
                         ? () {
                             read.onSubmit(context, true);
                           }
@@ -126,7 +127,7 @@ class _HairColorPageState extends State<HairColorPage> {
                             read.onNextStep(read.currentPageIndex + 1);
                           },
                     child: Text(
-                      (watch.currentPageIndex == 3) ? 'Submit' : 'Next',
+                      (watch.currentPageIndex == 2) ? 'Submit' : 'Next',
                     ),
                   ),
                 ),

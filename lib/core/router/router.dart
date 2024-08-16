@@ -1,4 +1,6 @@
 
+import 'package:take_a_look/pages/sign_up_screens/eLearning/presentation/pages/webview_screen.dart';
+
 import '../../pages/hair_color_formula_screens/comments_likes/presentation/pages/pages.dart';
 import '../../pages/hair_color_formula_screens/follow/presentation/pages/pages.dart';
 import '../../pages/hair_color_formula_screens/hair_color/data/models/color_model.dart';
@@ -7,6 +9,7 @@ import '../../pages/hair_color_formula_screens/hair_formula/presentation/pages/p
 import '../../pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
 import '../../pages/hair_color_formula_screens/wishlist/presentation/pages/pages.dart';
 import '../../pages/sign_up_screens/about_term_privacy/presentation/pages/pages.dart';
+import '../../pages/sign_up_screens/eLearning/presentation/pages/pages.dart';
 import '../../pages/sign_up_screens/miscellaneous/presentation/pages/pages.dart';
 import '../../pages/sign_up_screens/note/presentation/pages/pages.dart';
 import '../../pages/sign_up_screens/notification/presentation/pages/pages.dart';

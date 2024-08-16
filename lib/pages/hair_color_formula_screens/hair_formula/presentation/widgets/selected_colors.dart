@@ -35,11 +35,12 @@ class SelectedColors extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
-            const Text('Current Color'),
+            // const Text('Current Color'),
+            const Text('Desired Tones'),
             Text(colors[1].name),
           ],
         ),
-        Column(
+        /*Column(
           children: [
             Container(
               height: 40,
@@ -52,7 +53,7 @@ class SelectedColors extends StatelessWidget {
             const Text('Desired Tones'),
             Text(colors[2].name),
           ],
-        ),
+        ),*/
       ],
     );
   }

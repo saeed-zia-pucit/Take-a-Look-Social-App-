@@ -13,13 +13,16 @@ class HairView extends StatefulWidget {
 final GlobalKey globalKey = GlobalKey();
 
 class _HairViewState extends State<HairView> {
-
   String _selectedCategory = 'Other';
+
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<AddPortfolioViewModel>(context, listen: false);
+    if (widget.hairColor.length == 3) {
+      widget.hairColor.removeAt(2);
+    }
 
-    model.selectedCategory=_selectedCategory;
+    model.selectedCategory = _selectedCategory;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -100,7 +103,7 @@ class _HairViewState extends State<HairView> {
                     onChanged: (String? newValue) {
                       setState(() {
                         _selectedCategory = newValue!;
-                        model.selectedCategory=_selectedCategory;
+                        model.selectedCategory = _selectedCategory;
                       });
                     },
                     items: <String>[

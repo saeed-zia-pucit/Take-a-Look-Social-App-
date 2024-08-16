@@ -7,6 +7,7 @@ import '../../pages/hair_color_formula_screens/follow/presentation/pages/pages.d
 import '../../pages/hair_color_formula_screens/follow/presentation/pages/search_users.dart';
 import '../../pages/hair_color_formula_screens/follow/view_model/follow_view_model.dart';
 import '../../pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
+import '../../pages/hair_color_formula_screens/wishlist/presentation/pages/pages.dart';
 import '../../pages/sign_up_screens/profile/presentation/widgets/widgets.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
@@ -107,6 +108,7 @@ class MenuView extends StatelessWidget {
                           ItemOfProfileMenu(
                             onPressed: (){
                               context.read<GlobalViewModel>().menuControl(open: false);
+                              context.push(RouteNames.eLearning);
                             },
                             text: 'E-learning',
                           ),
@@ -148,7 +150,7 @@ class MenuView extends StatelessWidget {
                           ItemOfProfileMenu(
                             onPressed: () {
                               context.read<GlobalViewModel>().menuControl(open: false);
-                              context.push(RouteNames.wishList);
+                              context.push(RouteNames.wishList,extra: WishListPageType.wishlist);
                             },
                             text: 'Wishlist',
                           ),

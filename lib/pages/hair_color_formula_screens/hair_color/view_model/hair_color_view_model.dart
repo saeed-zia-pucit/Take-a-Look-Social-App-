@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:take_a_look/core/router/router.dart';
@@ -108,44 +107,85 @@ class HairColorViewModel extends ChangeNotifier {
   List<ColorModel> primaryColors = [
     ColorModel(
       name: "1",
-      color: const Color(0xff000000),
+      color: const Color(0xff2b191c),
     ),
     ColorModel(
       name: "2",
-      color: const Color(0xff302E2E),
+      color: const Color(0xff6b4622),
     ),
     ColorModel(
       name: "3",
-      color: const Color(0xff4F4C4C),
+      color: const Color(0xff7a6761),
     ),
     ColorModel(
       name: "4",
-      color: const Color(0xff65615D),
+      color: const Color(0xff301a24),
     ),
     ColorModel(
       name: "5",
-      color: const Color(0xff7F7C75),
+      color: const Color(0xff322d2a),
     ),
     ColorModel(
       name: "6",
-      color: const Color(0xffA09E97),
+      color: const Color(0xff432e2e),
     ),
     ColorModel(
       name: "7",
-      color: const Color(0xffC7C4B4),
+      color: const Color(0xff633c1f),
     ),
     ColorModel(
       name: "8",
-      color: const Color(0xffD7D2C8),
+      color: const Color(0xff683e1a),
     ),
     ColorModel(
       name: "9",
-      color: const Color(0xffEBE8E3),
+      color: const Color(0xff731c23),
     ),
     ColorModel(
       name: "10",
-      color: const Color(0xffF7F5F0),
+      color: const Color(0xff50424c),
     ),
+    ColorModel(
+      name: "11",
+      color: const Color(0xff59231d),
+    ),
+    ColorModel(
+      name: "12",
+      color: const Color(0xff533833),
+    ),
+    ColorModel(
+      name: "13",
+      color: const Color(0xffb20f18),
+    ),
+    ColorModel(
+      name: "14",
+      color: const Color(0xffbc6c2f),
+    ),
+    ColorModel(
+      name: "15",
+      color: const Color(0xff1e3d36),
+    ),
+    ColorModel(
+      name: "16",
+      color: const Color(0xffd36d5d),
+    ),
+    ColorModel(
+      name: "17",
+      color: const Color(0xff8f3018),
+    ),
+    ColorModel(
+      name: "18",
+      color: const Color(0xffee1b27),
+    ),
+    ColorModel(
+      name: "19",
+      color: const Color(0xfff7712a),
+    ),
+    ColorModel(
+      name: "20",
+      color: const Color(0xfffdd93a),
+    ),
+
   ];
 
   List<ColorModel> desiredTones = [
@@ -169,7 +209,6 @@ class HairColorViewModel extends ChangeNotifier {
       name: "Golden (yellow)",
       color: const Color(0xffFFDF00),
     ),*/
-
   ];
 
   List<List<ColorModel>> allColors = [];
@@ -183,12 +222,11 @@ class HairColorViewModel extends ChangeNotifier {
       name: '',
       color: Colors.white,
     ),
-    ColorModel(
+    /*ColorModel(
       name: '',
       color: Colors.white,
-    ),
+    ),*/
   ];
-
 
   void initPage() {
     pageTitle = 'Natural Level';
@@ -196,17 +234,17 @@ class HairColorViewModel extends ChangeNotifier {
     allColors = [
       naturalLevelColors,
       primaryColors,
-      desiredTones,
+      // desiredTones,
     ];
     selectedColors = [
       ColorModel(name: '', color: Colors.white),
       ColorModel(name: '', color: Colors.white),
-      ColorModel(name: '', color: Colors.white),
+      // ColorModel(name: '', color: Colors.white),
     ];
     colorItemsSelect = [
       List.generate(naturalLevelColors.length, (index) => false),
       List.generate(primaryColors.length, (index) => false),
-      List.generate(desiredTones.length, (index) => false),
+      // List.generate(desiredTones.length, (index) => false),
     ];
     colorItemSelect = colorItemsSelect.first;
     pageController.jumpToPage(0);
@@ -220,25 +258,30 @@ class HairColorViewModel extends ChangeNotifier {
     currentPageIndex = index;
 
     switch (currentPageIndex) {
-      case 0: {
-        pageTitle = 'Natural Level';
-        selectedColorName = selectedColors[0].name;
-        colorItemSelect = colorItemsSelect[0];
-      } break;
-      case 1: {
-        pageTitle = 'Primary color';
-        selectedColorName = selectedColors[1].name;
-        colorItemSelect = colorItemsSelect[1];
-      } break;
-      case 2: {
+      case 0:
+        {
+          pageTitle = 'Natural Level';
+          selectedColorName = selectedColors[0].name;
+          colorItemSelect = colorItemsSelect[0];
+        }
+        break;
+      case 1:
+        {
+          // pageTitle = 'Primary color';
+          pageTitle = 'Desired Tones';
+          selectedColorName = selectedColors[1].name;
+          colorItemSelect = colorItemsSelect[1];
+        }
+        break;
+      /* case 2: {
         pageTitle = 'Desired Tones';
         selectedColorName = selectedColors[2].name;
         colorItemSelect = colorItemsSelect[2];
-      } break;
-      case 3: {
-        pageTitle = 'Get Formula';
-      }
-
+      } break;*/
+      case 2:
+        {
+          pageTitle = 'Get Formula';
+        }
     }
     pageController.animateToPage(
       currentPageIndex,
@@ -249,7 +292,8 @@ class HairColorViewModel extends ChangeNotifier {
   }
 
   void onTapColorItem(int index, int pageIndex, ColorModel colorModel) {
-    colorItemsSelect[pageIndex] = List.generate(colorItemsSelect[pageIndex].length, (index) => false);
+    colorItemsSelect[pageIndex] =
+        List.generate(colorItemsSelect[pageIndex].length, (index) => false);
     colorItemsSelect[pageIndex][index] = true;
     colorItemSelect = colorItemsSelect[pageIndex];
     selectedColors[pageIndex] = colorModel;
@@ -261,15 +305,13 @@ class HairColorViewModel extends ChangeNotifier {
     isLoadingFormula = isStart;
     Future.delayed(const Duration(seconds: 2)).then((value) {
       isLoadingFormula = false;
-      context.go(
-        RouteNames.hairFormula,
-        extra: selectedColors
-      );
+      context.go(RouteNames.hairFormula, extra: selectedColors);
     });
     notifyListeners();
   }
 
-  void updateSelectedColor(int index, Color color, List<ColorModel> selectedColors) {
+  void updateSelectedColor(
+      int index, Color color, List<ColorModel> selectedColors) {
     selectedColors[index].color = color;
     notifyListeners();
   }

@@ -17,6 +17,9 @@ sealed class RouteNames {
   static const aboutTermPrivacy = '/aboutTermPrivacy';
   static const settings = '/settings';
   static const note = '/note';
+  static const eLearning = '/eLearning';
+  static const followLinks = '/followLinks';
+  static const colorTheory = '/colorTheory';
   static const addNote = '/addNote';
   static const notification = '/notification';
   static const hairColor = '/hairColor';
@@ -134,6 +137,25 @@ final GoRouter router = GoRouter(
         return const NotePage();
       },
     ),
+    GoRoute(
+      path: RouteNames.followLinks,
+      builder: (context, state) {
+        return const FollowLinks();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.colorTheory,
+      builder: (context, state) {
+        return const ColorTheory();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.eLearning,
+      builder: (context, state) {
+        return const ELearning();
+      },
+    ),
+
     GoRoute(
       path: RouteNames.addNote,
       builder: (context, state) {

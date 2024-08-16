@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 
 import '../../../../../core/data/data_source/local/app_local_data.dart';
@@ -7,13 +6,15 @@ import '../../../../../di_service.dart';
 
 abstract class FollowRepo {
   Future<List<UserModel>> getFollowers(int page, int size);
+
   Future<List<UserModel>> getFollowings(int page, int size);
+
   Future<List<UserModel>> getSearchUser(String text, int page, int size);
 }
 
 class FollowRepoImpl extends FollowRepo {
-
   FollowRepoImpl(this.dio);
+
   final Dio dio;
 
   @override
@@ -30,14 +31,18 @@ class FollowRepoImpl extends FollowRepo {
 
       if (response.statusCode == 200) {
         List data = response.data;
-        return data.map((e) => UserModel.fromJsonFollow(e),).toList();
+        return data
+            .map(
+              (e) => UserModel.fromJsonFollow(e),
+            )
+            .toList();
       }
       return [];
     } catch (e) {
       return [];
     }
   }
- 
+
   @override
   Future<List<UserModel>> getFollowings(int page, int size) async {
     try {
@@ -52,7 +57,11 @@ class FollowRepoImpl extends FollowRepo {
 
       if (response.statusCode == 200) {
         List data = response.data;
-        return data.map((e) => UserModel.fromJsonFollow(e),).toList();
+        return data
+            .map(
+              (e) => UserModel.fromJsonFollow(e),
+            )
+            .toList();
       }
       return [];
     } catch (e) {
@@ -74,7 +83,11 @@ class FollowRepoImpl extends FollowRepo {
 
       if (response.statusCode == 200) {
         List data = response.data;
-        return data.map((e) => UserModel.fromJsonFollow(e),).toList();
+        return data
+            .map(
+              (e) => UserModel.fromJsonFollow(e),
+            )
+            .toList();
       }
       return [];
     } catch (e) {

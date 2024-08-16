@@ -17,15 +17,16 @@ class GetFormula extends StatelessWidget {
             color: colors[0].color,
           ),
           GetFormulaItem(
-            text1: 'Natural Level',
+            text1: 'Desired Tone',
+            // text1: 'Natural Level',
             text2: colors[1].name,
             color: colors[1].color,
           ),
-          GetFormulaItem(
+         /* GetFormulaItem(
             text1: 'Desired Tone',
             text2: colors[2].name,
             color: colors[2].color,
-          ),
+          ),*/
         ],
       ),
     );

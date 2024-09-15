@@ -22,7 +22,7 @@ class PostItem extends StatelessWidget {
           post: post,
           onPostDeleted: () {
             onPostDeleted();
-          },
+          }, userModel: userModel,
         ),
         PostContent(post: post),
         PostLikeComment(

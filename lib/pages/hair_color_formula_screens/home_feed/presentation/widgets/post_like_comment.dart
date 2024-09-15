@@ -74,15 +74,14 @@ class _PostLikeCommentState extends State<PostLikeComment> {
                       isLiked = !isLiked;
                       if (isLiked) {
                         likes++;
-                        await feedRepo.likeContent(widget.post
-                            .postId); // Call likeContent when isLiked is true
+                        setState(() {});
+                        await feedRepo.likeContent(widget.post.postId); // Call likeContent when isLiked is true
                       } else {
                         likes--;
-                        await feedRepo.unlikeContent(widget.post
-                            .postId); // Call unlikeContent when isLiked is false
+                        setState(() {});
+                        await feedRepo.unlikeContent(widget.post.postId); // Call unlikeContent when isLiked is false
                       }
-
-                      setState(() {});
+                      //setState(() {});
                     },
                     icon: Icon(
                       CupertinoIcons.heart_fill,

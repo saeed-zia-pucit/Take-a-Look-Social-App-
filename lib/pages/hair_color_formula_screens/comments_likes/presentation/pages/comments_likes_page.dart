@@ -27,18 +27,17 @@ class _CommentLikesPageState extends State<CommentLikesPage> {
 
   List<CommentResponse> _comments = [];
   final feedRepo = getIt<FeedRepoImpl>();
+  
+  Future<List<CommentResponse>> getComments()async{
+    List<CommentResponse> comments = await feedRepo
+        .getFeedCommentsByPostID(0, 100, widget.post.postId);
+    return comments;
+  }
 
   @override
   void initState() {
     commentLikesPageType = widget.commentLikesPageType;
     // Do something with the comments
-    feedRepo
-        .getFeedCommentsByPostID(0, 100, widget.post.postId)
-        .then((comments) {
-      setState(() {
-        _comments = comments;
-      });
-    });
     super.initState();
   }
 
@@ -66,32 +65,77 @@ class _CommentLikesPageState extends State<CommentLikesPage> {
                         width: 25,
                       ),
                       const Gap(10),
-                      Text(_comments.isEmpty
-                          ? 'No comments'
-                          : _comments.length == 1
-                              ? '${_comments[0].firstname} ${_comments[0].lastname}'
-                              : '${_comments[0].firstname} ${_comments[0].lastname} & ${_comments.length - 1} others commented')
+                      FutureBuilder(future: getComments(), builder: (context,snapshot){
+                        if(snapshot.connectionState == ConnectionState.waiting){
+                          return const SizedBox.shrink();
+                        }
+                        else{
+                          if(snapshot.data!.isNotEmpty){
+                            var data = snapshot.data;
+                            return Text(data!.length == 1
+                                ? '${data[0].firstname} ${data[0].lastname}'
+                                : '${data[0].firstname} ${data[0].lastname} & ${data.length - 1} others commented');
+                          }
+                          else {
+                            return const Text('No Comments');
+                          }
+                        }
+                      }),
                     ],
                   ),
                 ),
                 if (commentLikesPageType.isComments)
-                  Column(
-                    children: _comments
-                        .map((comment) => CommentItem(
-                              comment: comment,
-                      userModel: widget.userModel,
-                              onDeleteSuccess: () {
-                                //remove the specific record from the list
-                                setState(() {
-                                  _comments.remove(comment);
-                                });
+                  FutureBuilder(future: getComments(), builder: (context,snapshot){
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                      return const CircularProgressIndicator();
+                    }
+                    else{
+                      if(snapshot.data!.isNotEmpty){
+                        var data = snapshot.data;
+                        return ListView.builder(
+                          itemCount: data!.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context,index){
+                          return CommentItem(
+                            comment: data[index],
+                            userModel: widget.userModel,
+                            onDeleteSuccess: () {
+                              //remove the specific record from the list
+                              setState(() {
+                                _comments.remove(data[index]);
+                              });
 
-                                // Call the onNewComment callback
-                                widget.onDeleteComment?.call();
-                              },
-                            ))
-                        .toList(),
-                  ),
+                              // Call the onNewComment callback
+                              widget.onDeleteComment?.call();
+                            },
+                          );
+                        });
+                      }
+                      else {
+                        return const SizedBox.shrink();
+                      }
+                    }
+                  }),
+                  
+                  // Column(
+                  //   children: _comments
+                  //       .map((comment) => CommentItem(
+                  //             comment: comment,
+                  //     userModel: widget.userModel,
+                  //             onDeleteSuccess: () {
+                  //               //remove the specific record from the list
+                  //               setState(() {
+                  //                 _comments.remove(comment);
+                  //               });
+                  //
+                  //               // Call the onNewComment callback
+                  //               widget.onDeleteComment?.call();
+                  //             },
+                  //           ))
+                  //       .toList(),
+                  // ),
+                
                 if (commentLikesPageType.isLikes)
                   const Column(
                     children: [
@@ -136,16 +180,17 @@ class _CommentLikesPageState extends State<CommentLikesPage> {
                         // / Clear the text in the TextEditingController
                         commentController.clear();
                         if (isPosted) {
-                          List<CommentResponse> comments =
-                              await feedRepo.getFeedCommentsByPostID(
-                                  0, 100, widget.post.postId);
-                          // Do something with the comments
-                          setState(() {
-                            _comments = comments;
-                          });
-
-                          // Call the onNewComment callback
                           widget.onNewComment?.call();
+                          // List<CommentResponse> comments =
+                          //     await feedRepo.getFeedCommentsByPostID(
+                          //         0, 100, widget.post.postId);
+                          // // Do something with the comments
+                          // setState(() {
+                          //   _comments = comments;
+                          // });
+                          //
+                          // // Call the onNewComment callback
+                          // widget.onNewComment?.call();
                         }else{
                           // Show a snackbar
                           ScaffoldMessenger.of(context).showSnackBar(

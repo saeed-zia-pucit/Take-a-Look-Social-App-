@@ -156,7 +156,7 @@ class FeedRepoImpl extends FeedRepo {
       await AppLocalData.updateToken();
       final token = await AppLocalData.getUserToken;
       Response response = await dio.get(
-        '/feed/post/user/$userId?page=$page&size=$size',
+        '${AppLocalData.BaseURL}/feed/post/user/$userId?page=$page&size=$size',
         options: Options(
           headers: headerWithAuth(token),
         ),

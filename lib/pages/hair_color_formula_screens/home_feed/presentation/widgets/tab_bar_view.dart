@@ -5,7 +5,7 @@ class TabBarMenuView extends StatelessWidget {
 
   TabBarMenuView({Key? key, required this.onTabSelected}) : super(key: key);
 
-  List<String> categories = ["Other", "Brunette", "Blonde", "Red", "Black"];
+  List<String> categories = ["Other", "Brunet", "Blonde", "Red", "Black"];
 
   @override
   Widget build(BuildContext context) {

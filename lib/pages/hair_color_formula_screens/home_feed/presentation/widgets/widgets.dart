@@ -41,3 +41,5 @@ part 'post_item.dart';
 part 'post_like_comment.dart';
 
 part 'tab_bar_view.dart';
+
+part 'update_portfolio.dart';

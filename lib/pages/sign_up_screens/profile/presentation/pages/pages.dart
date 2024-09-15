@@ -2,12 +2,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:take_a_look/core/extensions/widget_extension.dart';
 import 'package:take_a_look/core/view_model/global_view_model.dart';
+import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
 import 'package:take_a_look/pages/sign_up_screens/profile/view_model/profile_view_model.dart';
 import 'package:take_a_look/pages/sign_up_screens/setup_edit_profile/view_model/setup_edit_profile_view_model.dart';
 
+import '../../../../../core/data/data_source/local/app_local_data.dart';
 import '../../../../../core/data/models/user_model.dart';
+import '../../../../../di_service.dart';
 import '../../../../hair_color_formula_screens/follow/view_model/follow_view_model.dart';
+import '../../../../hair_color_formula_screens/home_feed/data/models/post_model.dart';
+import '../../../../hair_color_formula_screens/home_feed/data/repo/feed_repo.dart';
 import '../../../../hair_color_formula_screens/wishlist/presentation/pages/pages.dart';
+import '../../data/repo/profile_repo.dart';
 import '../widgets/widgets.dart';
 import '/constants/app_colors.dart';
 import '/constants/app_images.dart';
@@ -23,5 +29,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../../core/router/router.dart';
 import '../../../setup_edit_profile/presentation/pages/pages.dart';
+import '../../../../hair_color_formula_screens/home_feed/presentation/widgets/widgets.dart';
 
 part 'profile_page.dart';

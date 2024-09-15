@@ -2,11 +2,16 @@ part of 'widgets.dart';
 
 class PostAuthor extends StatelessWidget {
   const PostAuthor(
-      {super.key, required this.homeFeedPageType, required this.post, required  this.onPostDeleted});
+      {super.key,
+      required this.homeFeedPageType,
+      required this.post,
+      required this.onPostDeleted,
+      required this.userModel});
 
   final Function onPostDeleted;
   final HomeFeedPageType homeFeedPageType;
   final PostModel post;
+  final UserModel userModel;
 
   @override
   Widget build(BuildContext context) {
@@ -125,37 +130,86 @@ class PostAuthor extends StatelessWidget {
                     icon: const Icon(Icons.more_vert),
                     padding: EdgeInsets.zero,
                   ),*/
-            IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: (context) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        TextButton.icon(
-                          onPressed: () {
-                            deletePost(posts.postId);
-                          },
-                          icon: SvgPicture.asset(AppIcons.trashBasketIcon),
-                          label: Text(
-                            'Delete',
-                            style: TextStyle(
-                              color: AppColors.blackColor,
+            Visibility(
+              visible: post.authorId == userModel.id,
+              child:IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          TextButton.icon(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: MediaQuery.of(context).viewInsets.bottom, // Padding to adjust for the keyboard
+                                    ),
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                        children: [
+                                          UpdatePortfolio(
+                                            onSuccess: () {
+                                              onPostDeleted();
+                                              Navigator.pop(context);
+                                            },
+                                            userModel: userModel,
+                                            content: post.content,
+                                            selectedCategory: post.category,
+                                            postId: post.postId,
+                                          ),
+                                          context.bottomHeightGap,
+                                          // Gap(50)
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            icon: SvgPicture.asset(AppIcons.editIcon),
+                            label: Text(
+                              'Edit',
+                              style: TextStyle(
+                                color: AppColors.blackColor,
+                              ),
                             ),
                           ),
-                        ),
-                        context.bottomHeightGap,
-                        // Gap(50)
-                      ],
-                    );
-                  },
-                );
-              },
-              icon: const Icon(Icons.more_vert),
-              padding: EdgeInsets.zero,
-            ),
+                          TextButton.icon(
+                            onPressed: () {
+                              deletePost(posts.postId);
+                              Navigator.pop(context);
+                            },
+                            icon: SvgPicture.asset(AppIcons.trashBasketIcon),
+                            label: Text(
+                              'Delete',
+                              style: TextStyle(
+                                color: AppColors.blackColor,
+                              ),
+                            ),
+                          ),
+                          context.bottomHeightGap,
+                          // Gap(50)
+                        ],
+                      );
+                    },
+                  );
+                },
+                icon: const Icon(Icons.more_vert),
+                padding: EdgeInsets.zero,
+              ),
+            )
+
           ],
         ),
       ),
@@ -163,6 +217,7 @@ class PostAuthor extends StatelessWidget {
   }
 
   Future<void> deletePost(String postId) async {
+    final Dio dio = Dio();
     await AppLocalData.updateToken();
     final token = await AppLocalData.getUserToken;
     final url = Uri.parse('${AppLocalData.BaseURL}/feed/post/$postId');
@@ -171,7 +226,18 @@ class PostAuthor extends StatelessWidget {
       headers: {'accept': '*/*', 'Authorization': 'Bearer $token'},
     );
 
-    if (response.statusCode == 200) {
+    // Response response = await dio.delete(
+    //   '${AppLocalData.BaseURL}/feed/post/$postId',
+    //   options:  Options(
+    //     headers: {
+    //       'Accept': '*/*',
+    //       'Authorization': 'Bearer $token',
+    //     },
+    //   ),
+    // );
+    print('dfffffffffffffffffffffffffffffffffffg');
+    if (response.statusCode == 500) {
+      print('ddddddddddddddddddddddddddddddddddddddddddd');
       onPostDeleted();
     } else {
       print('Failed to delete post. Status code: ${response.statusCode}');
@@ -180,9 +246,13 @@ class PostAuthor extends StatelessWidget {
 
   String timeDifference(String createdAt) {
     DateTime now = DateTime.now();
-    DateTime createdTime = DateTime.parse(createdAt);
-
+    DateTime createdTime = DateTime.parse(createdAt+'z').toUtc();
+    print('before');
+    print(createdTime.timeZoneName);
+    Locale local =Locale('pk','PK');
     Duration difference = now.difference(createdTime);
+    print('After');
+    print(createdTime.timeZoneName);
 
     if (difference.inMinutes < 60) {
       return '${difference.inMinutes} minutes ago';

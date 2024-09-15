@@ -14,6 +14,7 @@ final GlobalKey globalKey = GlobalKey();
 
 class _HairViewState extends State<HairView> {
   String _selectedCategory = 'Other';
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,120 +58,141 @@ class _HairViewState extends State<HairView> {
             ),
           ),
         ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            HairItem(),
-            HairItem(),
-            HairItem(),
-            HairItem(),
-          ],
-        ),
+        // const Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     HairItem(),
+        //     HairItem(),
+        //     HairItem(),
+        //     HairItem(),
+        //   ],
+        // ),
         Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Additional Notes',
-              ),
-              Text(
-                'Dark blonde is the combination of yellow and black, while light brown is the combination of brown and white. The base color of dark blonde is gold, while that of light brown is brown. Both colors are just separated by one shade.',
-                style: TextStyle(fontSize: 12, color: AppColors.greyColor),
-              ),
+              // const Text(
+              //   'Additional Notes',
+              // ),
+              // Text(
+              //   'Dark blonde is the combination of yellow and black, while light brown is the combination of brown and white. The base color of dark blonde is gold, while that of light brown is brown. Both colors are just separated by one shade.',
+              //   style: TextStyle(fontSize: 12, color: AppColors.greyColor),
+              // ),
               const Gap(20),
-              TextField(
-                controller: model.contentController,
-                maxLines: 3,
-                decoration: const InputDecoration(
-                  alignLabelWithHint: true,
-                  hintText: 'Add Portfolio...',
-                  // labelText: 'Add Portfolio...',
+              if(_isLoading)
+                const Center(
+                  child: CircularProgressIndicator(),
                 ),
-              ),
-              const Gap(20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              if(!_isLoading)
+              Column(
                 children: [
-                  const Text(
-                    'Post Category:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                  TextField(
+                    controller: model.contentController,
+                    maxLines: 3,
+                    decoration: const InputDecoration(
+                      alignLabelWithHint: true,
+                      hintText: 'Add Caption...',
+                      // labelText: 'Add Portfolio...',
                     ),
                   ),
-                  DropdownButton<String>(
-                    value: _selectedCategory,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        _selectedCategory = newValue!;
-                        model.selectedCategory = _selectedCategory;
-                      });
+                  const Gap(20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Post Category:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      DropdownButton<String>(
+                        value: _selectedCategory,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedCategory = newValue!;
+                            model.selectedCategory = _selectedCategory;
+                          });
+                        },
+                        items: <String>[
+                          "Other",
+                          "Brunet",
+                          "Blonde",
+                          "Red",
+                          "Black"
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+                  const Gap(20),
+                  ElevatedButton(
+                    onPressed: () async {
+                      try {
+                        setState(() {
+                          _isLoading=true;
+                        });
+                        // Disable the button
+                        (context as Element).markNeedsBuild();
+                        await Future.delayed(Duration(seconds: 3));
+                        // Enable the button
+                        (context as Element).markNeedsBuild();
+                        // Usage
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Saving image!, Please wait!'),
+                          ),
+                        );
+                        Uint8List imageData = await capturePng();
+                        String imagePath =
+                        await saveImage(imageData, 'filtered_image');
+                        model.setImage(imagePath);
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Saving post, Please wait!'),
+                          ),
+                        );
+                        final result = await model.postDraft();
+                        if (result?.statusCode == 200) {
+                          setState(() {
+                            _isLoading=false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Post successful submitted'),
+                            ),
+                          );
+                          //move to the next page
+                          context.pushReplacement(
+                            RouteNames.homeFeed,
+                            extra: HomeFeedPageType.feed,
+                          );
+                        } else {
+                          setState(() {
+                            _isLoading=false;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Post submission failed'),
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        setState(() {
+                          _isLoading=false;
+                        });
+                        print(e);
+                      }
                     },
-                    items: <String>[
-                      "Other",
-                      "Brunette",
-                      "Blonde",
-                      "Red",
-                      "Black"
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
+                    child: const Text('Send'),
                   ),
                 ],
-              ),
-              const Gap(20),
-              ElevatedButton(
-                onPressed: () async {
-                  try {
-                    // Disable the button
-                    (context as Element).markNeedsBuild();
-                    await Future.delayed(Duration(seconds: 3));
-                    // Enable the button
-                    (context as Element).markNeedsBuild();
-                    // Usage
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Saving image!, Please wait!'),
-                      ),
-                    );
-                    Uint8List imageData = await capturePng();
-                    String imagePath =
-                        await saveImage(imageData, 'filtered_image');
-                    model.setImage(imagePath);
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Saving post, Please wait!'),
-                      ),
-                    );
-                    final result = await model.postDraft();
-                    if (result?.statusCode == 200) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Post successful submitted'),
-                        ),
-                      );
-                      //move to the next page
-                      context.pushReplacement(
-                        RouteNames.homeFeed,
-                        extra: HomeFeedPageType.feed,
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Post submission failed'),
-                        ),
-                      );
-                    }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-                child: const Text('Send'),
-              ),
+              )
             ],
           ),
         ),

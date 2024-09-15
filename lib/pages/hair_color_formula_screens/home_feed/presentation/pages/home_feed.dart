@@ -26,11 +26,15 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
     try {
       setupGetIt();
       userModel = getIt<ProfileRepo>().get_User();
+      AppLocalData.getUserModel.then((userModel){
+        userDataModel = userModel!;
+      });
       // Call the fetchPosts method when the widget is initialized
       fetchPosts();
     } catch (e) {
       print(e);
     }
+
     getFcmToken();
     super.initState();
   }
@@ -169,7 +173,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                 Section(
                   child: Column(
                     children: [
-                      if (homeFeedPageType.isFeed) const LocationItem(),
+                      //if (homeFeedPageType.isFeed) const LocationItem(),
                       FutureBuilder<UserModel>(
                         future: userModel,
                         builder: (context, snapshot) {
@@ -188,7 +192,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                             }
                           }
                           // Show a loading spinner or another placeholder widget while waiting
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         },
                       )
                     ],
@@ -202,19 +206,24 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
                             final post = value[index];
-                            if (userDataModel.id!.isEmpty) {
-                              Future.delayed(Duration(seconds: 2), () {
-                                fetchPosts();
-                              });
-                            }
+
                             //  // This triggers a rebuild after the delay
                             if (post != null) {
+
+                              // AppLocalData.getUserModel.then((userModel){
+                              //   userDataModel = userModel!;
+                              // });
                               if (userDataModel.id!.isEmpty) {
+                                print('ttttttttttttttttttttttt');
                                 Future.delayed(Duration(seconds: 2), () {
                                   // fetchPosts();
                                 });
-                                userDataModel =
-                                    AppLocalData.getUserModel as UserModel;
+
+                              }
+                              if (userDataModel.id!.isEmpty) {
+                                Future.delayed(Duration(seconds: 2), () {
+                                  fetchPosts();
+                                });
                               }
                               return PostItem(
                                 homeFeedPageType: homeFeedPageType,
@@ -278,7 +287,10 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
     } else {
       filteredPosts = allPosts
           .where(
-              (post) => post.category.toLowerCase() == category.toLowerCase())
+              (post){
+                print(post.category.toLowerCase());
+                return  post.category.toLowerCase() == category.toLowerCase();
+              })
           .toList();
     }
     futurePostsNotifier.value = filteredPosts; // Update the notifier

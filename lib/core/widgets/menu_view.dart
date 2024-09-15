@@ -75,16 +75,16 @@ class MenuView extends StatelessWidget {
 
                       Column(
                         children: [
-                          ItemOfProfileMenu(
-                            onPressed: () {
-                              context.read<GlobalViewModel>().menuControl(open: false);
-                              context.push(
-                                RouteNames.homeFeed,
-                                extra: HomeFeedPageType.home,
-                              );
-                            },
-                            text: 'Home',
-                          ),
+                          // ItemOfProfileMenu(
+                          //   onPressed: () {
+                          //     context.read<GlobalViewModel>().menuControl(open: false);
+                          //     context.push(
+                          //       RouteNames.homeFeed,
+                          //       extra: HomeFeedPageType.home,
+                          //     );
+                          //   },
+                          //   text: 'Home',
+                          // ),
                           ItemOfProfileMenu(
                             onPressed: (){
                               context.read<GlobalViewModel>().menuControl(open: false);

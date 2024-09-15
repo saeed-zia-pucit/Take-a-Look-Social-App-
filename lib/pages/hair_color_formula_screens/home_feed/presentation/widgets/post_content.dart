@@ -17,12 +17,33 @@ class PostContent extends StatelessWidget {
             ),
                    ),
          ),
-        Image(
-          image: NetworkImage( post.imageUrl),
+        Image.network(
+          post.imageUrl,
           height: context.width - 100,
           width: double.infinity,
           fit: BoxFit.cover,
-        )
+          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress){
+            if (loadingProgress == null) {
+              return child; // Image is fully loaded, display it.
+            } else {
+              // Show a CircularProgressIndicator while loading.
+              return SizedBox(
+                height: context.width - 100,
+                width: double.infinity,
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+          },
+        ),
+        // Image(
+        //   image: NetworkImage( post.imageUrl,
+        //   ),
+        //   height: context.width - 100,
+        //   width: double.infinity,
+        //   fit: BoxFit.cover,
+        // )
       ],
     );
   }

@@ -12,6 +12,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late ProfilePageType profilePageType;
+  late UserModel userDataModel;
+  late Future<UserModel> userModel;
 
   @override
   void initState() {
@@ -23,8 +25,24 @@ class _ProfilePageState extends State<ProfilePage> {
         context.read<ProfileViewModel>().getUserById(widget.userId);
       }
     });
+    userModel = getIt<ProfileRepo>().get_User();
+    AppLocalData.getUserModel.then((userModel){
+      userDataModel = userModel!;
+    });
 
     super.initState();
+  }
+
+  Future<List<PostModel>> fetchPosts(String? userID) async {
+   // futurePostsNotifier = ValueNotifier<List<PostModel>>([]);
+    List<PostModel> posts = await getIt<FeedRepoImpl>().getFeedByUserId(0, 500,userID!).then((posts) {
+      return posts;
+    });
+   return posts;
+  }
+  void updatePosts(String? userID) {
+    fetchPosts(userID);
+    setState(() {});
   }
 
   @override
@@ -154,7 +172,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Text(
                                   // 'Lavish Productline',
                                   '${viewModel.firstName} ${viewModel.lastName}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     // color: AppColors.primaryColor,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -164,9 +182,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   // 'lavishproductline@gmail.com | TL0548569 ',
                                   // (viewModel.license.isEmpty) ?
                                   // '${viewModel.emailName} | Student' :
-                                  '${viewModel.emailName}',
+                                  viewModel.emailName,
                                   // '${viewModel.emailName} | ${viewModel.license}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     // color: AppColors.primaryColor,
                                     fontSize: 12,
                                     fontWeight: FontWeight.w400,
@@ -207,54 +225,54 @@ class _ProfilePageState extends State<ProfilePage> {
                     const Gap(30),
                     Row(
                       children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 70.h(context),
-                              width: 70.h(context),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: AppColors.greyColor),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: const Icon(
-                                Icons.add,
-                                size: 34,
-                              ),
-                            ),
-                            const Gap(10),
-                            Text(
-                              'Add Portfolio',
-                              style: GoogleFonts.nunito(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Gap(20),
-                        Column(
-                          children: [
-                            Container(
-                              height: 70.h(context),
-                              width: 70.h(context),
-                              decoration: BoxDecoration(
-                                color: AppColors.primaryColor,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: SvgPicture.asset(AppIcons.instaIcon),
-                              ),
-                            ),
-                            const Gap(10),
-                            Text(
-                              'Gallery',
-                              style: GoogleFonts.nunito(
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Gap(20),
+                        // Column(
+                        //   children: [
+                        //     Container(
+                        //       height: 70.h(context),
+                        //       width: 70.h(context),
+                        //       decoration: BoxDecoration(
+                        //         border: Border.all(color: AppColors.greyColor),
+                        //         borderRadius: BorderRadius.circular(20),
+                        //       ),
+                        //       child: const Icon(
+                        //         Icons.add,
+                        //         size: 34,
+                        //       ),
+                        //     ),
+                        //     const Gap(10),
+                        //     Text(
+                        //       'Add Portfolio',
+                        //       style: GoogleFonts.nunito(
+                        //         fontSize: 12,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        // const Gap(20),
+                        // Column(
+                        //   children: [
+                        //     Container(
+                        //       height: 70.h(context),
+                        //       width: 70.h(context),
+                        //       decoration: BoxDecoration(
+                        //         color: AppColors.primaryColor,
+                        //         borderRadius: BorderRadius.circular(20),
+                        //       ),
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.all(20),
+                        //         child: SvgPicture.asset(AppIcons.instaIcon),
+                        //       ),
+                        //     ),
+                        //     const Gap(10),
+                        //     Text(
+                        //       'Gallery',
+                        //       style: GoogleFonts.nunito(
+                        //         fontSize: 12,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
+                        // const Gap(20),
                         Column(
                           children: [
                             GestureDetector(
@@ -297,20 +315,65 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                     const Gap(30),
-                    GridView.builder(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return ItemOfProfilePost(haveIcon: index.isOdd);
-                      },
-                    ),
+                    FutureBuilder(future: userModel, builder: (context,snapshot1){
+                      if(snapshot1.connectionState == ConnectionState.waiting){
+                        return const CircularProgressIndicator();
+                      }
+                      else{
+                        if(snapshot1.hasData){
+                          userDataModel = snapshot1.data!;
+                          return FutureBuilder(future: fetchPosts(viewModel.currentUser!.id), builder: (context,snapshot){
+                            if(snapshot.connectionState == ConnectionState.waiting){
+                              return const CircularProgressIndicator();
+                            }
+                            else{
+                              if(snapshot.data!.isNotEmpty){
+                                var data = snapshot.data;
+                                return ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: data!.length,
+                                    itemBuilder: (context,index){
+                                      HomeFeedPageType homeFeedPageType = HomeFeedPageType.feed;
+                                      return PostItem(
+                                        homeFeedPageType: homeFeedPageType,
+                                        post: data[index],
+                                        userModel: userDataModel,
+                                        onPostDeleted: () {
+                                          updatePosts(userDataModel.id);
+                                        },
+                                      );
+                                    });
+                              }
+                              else{
+                                return const Text("You have not made a post!");
+                              }
+                            }
+
+                          });
+                        }
+                        else{
+                          return const Text("Something went wrong!");
+                        }
+                      }
+
+                    })
+
+
+                    // GridView.builder(
+                    //   padding: const EdgeInsets.only(bottom: 20),
+                    //   gridDelegate:
+                    //       const SliverGridDelegateWithFixedCrossAxisCount(
+                    //           crossAxisCount: 3,
+                    //           mainAxisSpacing: 10,
+                    //           crossAxisSpacing: 10),
+                    //   shrinkWrap: true,
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   itemCount: 10,
+                    //   itemBuilder: (context, index) {
+                    //     return ItemOfProfilePost(haveIcon: index.isOdd);
+                    //   },
+                    // ),
                   ],
                 ),
               ),

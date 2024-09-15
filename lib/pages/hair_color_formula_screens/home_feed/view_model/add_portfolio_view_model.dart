@@ -52,6 +52,19 @@ class AddPortfolioViewModel extends ChangeNotifier {
     );
     return response;
   }
+
+  Future<Response?> updatePortfolio(String postId) async {
+    Response? response = await addPortfolioRepo.updatePortfolio(
+        postId,
+        _selectedImage,
+        contentController.text,
+        additionalUrlController.text,
+        additionalNoteController.text,
+        selectedCategory
+    );
+    return response;
+  }
+
   Future<Response?> postDraft() async {
     Response? response = await addPortfolioRepo.postDraft(
       _selectedImage,

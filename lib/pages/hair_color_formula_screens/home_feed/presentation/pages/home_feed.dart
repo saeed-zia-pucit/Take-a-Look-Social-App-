@@ -25,18 +25,22 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
     homeFeedPageType = widget.homeFeedPageType;
     try {
       setupGetIt();
-      userModel = getIt<ProfileRepo>().get_User();
-      AppLocalData.getUserModel.then((userModel){
-        userDataModel = userModel!;
-      });
+      userModel = getUserModel();
       // Call the fetchPosts method when the widget is initialized
       fetchPosts();
     } catch (e) {
+      print('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
       print(e);
     }
 
+
     getFcmToken();
     super.initState();
+  }
+
+  Future<UserModel> getUserModel()async{
+    userModel = getIt<ProfileRepo>().get_User();
+    return userModel;
   }
 
   getFcmToken() async {
@@ -175,7 +179,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                     children: [
                       //if (homeFeedPageType.isFeed) const LocationItem(),
                       FutureBuilder<UserModel>(
-                        future: userModel,
+                        future: getUserModel(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.done) {
@@ -202,6 +206,58 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                   item: ValueListenableBuilder<List<PostModel>>(
                     valueListenable: futurePostsNotifier,
                     builder: (context, value, child) {
+                      return FutureBuilder(future: getUserModel(), builder: (context,snapshot){
+                        if(snapshot.connectionState == ConnectionState.done){
+                          userDataModel = snapshot.data!;
+                          return SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                                  (context, index) {
+                                final post = value[index];
+
+                                //  // This triggers a rebuild after the delay
+                                if (post != null) {
+
+                                  // AppLocalData.getUserModel.then((userModel){
+                                  //   userDataModel = userModel!;
+                                  // });
+                                  // if (userDataModel.id!.isEmpty) {
+                                  //   print('ttttttttttttttttttttttt');
+                                  //   Future.delayed(Duration(seconds: 2), () {
+                                  //     // fetchPosts();
+                                  //   });
+                                  //
+                                  // }
+                                  // if (userDataModel.id!.isEmpty) {
+                                  //   Future.delayed(Duration(seconds: 2), () {
+                                  //     fetchPosts();
+                                  //   });
+                                  // }
+                                  return PostItem(
+                                    homeFeedPageType: homeFeedPageType,
+                                    post: post,
+                                    userModel: userDataModel,
+                                    onPostDeleted: () {
+                                      updatePosts();
+                                    },
+                                  );
+                                }
+                                if (post == null) {
+                                  return const Padding(
+                                    padding: EdgeInsets.only(top: 50.0),
+                                    child: Center(
+                                      child: Text('No data found'),
+                                    ),
+                                  );
+                                }
+                                return null;
+                              },
+                              childCount: value.length,
+                            ),
+                          );
+                        }
+                        return Center(child: CircularProgressIndicator());
+
+                      });
                       return SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
@@ -213,18 +269,18 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                               // AppLocalData.getUserModel.then((userModel){
                               //   userDataModel = userModel!;
                               // });
-                              if (userDataModel.id!.isEmpty) {
-                                print('ttttttttttttttttttttttt');
-                                Future.delayed(Duration(seconds: 2), () {
-                                  // fetchPosts();
-                                });
-
-                              }
-                              if (userDataModel.id!.isEmpty) {
-                                Future.delayed(Duration(seconds: 2), () {
-                                  fetchPosts();
-                                });
-                              }
+                              // if (userDataModel.id!.isEmpty) {
+                              //   print('ttttttttttttttttttttttt');
+                              //   Future.delayed(Duration(seconds: 2), () {
+                              //     // fetchPosts();
+                              //   });
+                              //
+                              // }
+                              // if (userDataModel.id!.isEmpty) {
+                              //   Future.delayed(Duration(seconds: 2), () {
+                              //     fetchPosts();
+                              //   });
+                              // }
                               return PostItem(
                                 homeFeedPageType: homeFeedPageType,
                                 post: post,

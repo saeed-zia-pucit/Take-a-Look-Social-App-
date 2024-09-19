@@ -247,12 +247,8 @@ class PostAuthor extends StatelessWidget {
   String timeDifference(String createdAt) {
     DateTime now = DateTime.now();
     DateTime createdTime = DateTime.parse(createdAt+'z').toUtc();
-    print('before');
     print(createdTime.timeZoneName);
-    Locale local =Locale('pk','PK');
     Duration difference = now.difference(createdTime);
-    print('After');
-    print(createdTime.timeZoneName);
 
     if (difference.inMinutes < 60) {
       return '${difference.inMinutes} minutes ago';

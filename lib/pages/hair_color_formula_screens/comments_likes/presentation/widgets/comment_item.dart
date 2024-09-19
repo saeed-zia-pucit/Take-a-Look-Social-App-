@@ -168,7 +168,7 @@ class _CommentItemState extends State<CommentItem> {
 
   String timeDifference(String createdAt) {
     DateTime now = DateTime.now();
-    DateTime createdTime = DateTime.parse(createdAt);
+    DateTime createdTime = DateTime.parse(createdAt+'z').toUtc();
 
     Duration difference = now.difference(createdTime);
 

@@ -15,7 +15,7 @@ import geolocator_apple
 import google_sign_in_ios
 import path_provider_foundation
 import sign_in_with_apple
-import sqflite
+import sqflite_darwin
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FacebookAuthDesktopPlugin.register(with: registry.registrar(forPlugin: "FacebookAuthDesktopPlugin"))

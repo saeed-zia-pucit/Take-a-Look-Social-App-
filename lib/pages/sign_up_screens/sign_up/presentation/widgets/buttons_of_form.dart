@@ -24,18 +24,18 @@ class ButtonsOfForm extends StatelessWidget {
             child: const Text('Sign Up'),
           ),
           const Gap(30),
-          Text(
-            'Continue with',
-            style: GoogleFonts.nunito(
-              fontSize: 12,
-              color: AppColors.whiteColor,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          // Text(
+          //   'Continue with',
+          //   style: GoogleFonts.nunito(
+          //     fontSize: 12,
+          //     color: AppColors.whiteColor,
+          //     fontWeight: FontWeight.w400,
+          //   ),
+          // ),
           const Gap(30),
-          context.facebookButton(context),
-          context.googleButton(context),
-          context.appleButton(context),
+          // context.facebookButton(context),
+          // context.googleButton(context),
+          // context.appleButton(context),
         ],
       ),
     );

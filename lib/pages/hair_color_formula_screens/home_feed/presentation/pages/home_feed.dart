@@ -16,7 +16,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
   List<PostModel> allPosts = [];
   late Future<UserModel> userModel;
   late UserModel userDataModel;
-  late FirebaseMessaging messaging;
+  // late FirebaseMessaging messaging;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
     }
 
 
-    getFcmToken();
+    // getFcmToken();
     super.initState();
   }
 
@@ -43,74 +43,74 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
     return userModel;
   }
 
-  getFcmToken() async {
-    // Initialize the Firebase Messaging instance
-    messaging = FirebaseMessaging.instance;
-    // Get the token
-    var fcmToken = await messaging.getToken();
-    pushFcmToken(fcmToken.toString());
-    //2 second delay
-  }
+  // getFcmToken() async {
+  //   // Initialize the Firebase Messaging instance
+  //   messaging = FirebaseMessaging.instance;
+  //   // Get the token
+  //   var fcmToken = await messaging.getToken();
+  //   pushFcmToken(fcmToken.toString());
+  //   //2 second delay
+  // }
 
-  Future<void> pushFcmToken(String fcmToken) async {
-    await AppLocalData.updateToken();
-    final token = await AppLocalData.getUserToken;
-    final url = Uri.parse('${AppLocalData.BaseURL}/notifications/token');
-    final response = await http.put(
-      url,
-      headers: {
-        'accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode({'token': fcmToken}),
-    );
+  // Future<void> pushFcmToken(String fcmToken) async {
+  //   await AppLocalData.updateToken();
+  //   final token = await AppLocalData.getUserToken;
+  //   final url = Uri.parse('${AppLocalData.BaseURL}/notifications/token');
+  //   final response = await http.put(
+  //     url,
+  //     headers: {
+  //       'accept': 'application/json',
+  //       'Authorization': 'Bearer $token',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: jsonEncode({'token': fcmToken}),
+  //   );
 
-    if (response.statusCode == 200) {
-      await Future.delayed(const Duration(seconds: 4));
-      // Subscribe to the topic
-      await messaging.subscribeToTopic(userDataModel.id!);
-      requestPermission();
-      listenToMessages();
-      print('FCM Token pushed successfully.');
-    } else {
-      print('Failed to push FCM Token. Status code: ${response.statusCode}');
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     await Future.delayed(const Duration(seconds: 4));
+  //     // Subscribe to the topic
+  //     await messaging.subscribeToTopic(userDataModel.id!);
+  //     requestPermission();
+  //     listenToMessages();
+  //     print('FCM Token pushed successfully.');
+  //   } else {
+  //     print('Failed to push FCM Token. Status code: ${response.statusCode}');
+  //   }
+  // }
 
-  void requestPermission() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // void requestPermission() async {
+  //   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
+  //   NotificationSettings settings = await messaging.requestPermission(
+  //     alert: true,
+  //     badge: true,
+  //     sound: true,
+  //   );
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
-    } else if (settings.authorizationStatus ==
-        AuthorizationStatus.provisional) {
-      print('User granted provisional permission');
-    } else {
-      print('User declined or has not accepted permission');
-    }
-  }
+  //   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+  //     print('User granted permission');
+  //   } else if (settings.authorizationStatus ==
+  //       AuthorizationStatus.provisional) {
+  //     print('User granted provisional permission');
+  //   } else {
+  //     print('User declined or has not accepted permission');
+  //   }
+  // }
 
-  void listenToMessages() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('Got a message whilst in the foreground!');
-      print('Message data: ${message.data}');
+  // void listenToMessages() {
+  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //     print('Got a message whilst in the foreground!');
+  //     print('Message data: ${message.data}');
 
-      if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification}');
-      }
-    });
+  //     if (message.notification != null) {
+  //       print('Message also contained a notification: ${message.notification}');
+  //     }
+  //   });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('Message clicked!');
-    });
-  }
+  //   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  //     print('Message clicked!');
+  //   });
+  // }
 
   // Fetch the posts
   Future<void> fetchPosts() async {

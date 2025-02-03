@@ -92,14 +92,14 @@ class SocialAuthButton extends StatelessWidget {
 extension SocialButtonExtension on BuildContext {
   Widget facebookButton(BuildContext context) => SocialAuthButton(
         onPressed: () async {
-          var user = await getIt.get<SocialAuth>().signInWithFacebook();
-          if (user == null) return;
-          if (context.mounted) {
-            context.go(
-              RouteNames.homeFeed,
-              extra: HomeFeedPageType.feed,
-            );
-          }
+          // var user = await getIt.get<SocialAuth>().signInWithFacebook();
+          // if (user == null) return;
+          // if (context.mounted) {
+          //   context.go(
+          //     RouteNames.homeFeed,
+          //     extra: HomeFeedPageType.feed,
+          //   );
+          // }
         },
         socialButtonType: SocialButtonType.facebook,
         text: 'Continue with Facebook',
@@ -107,24 +107,24 @@ extension SocialButtonExtension on BuildContext {
 
   Widget googleButton(BuildContext context) => SocialAuthButton(
         onPressed: () async {
-          var user = await getIt.get<SocialAuth>().signInWithGoogle();
-          if (user == null) {
-            return;
-          } else {
-            print('User: $user');
-            final response = await getIt.get<SocialAuth>().socialSignUp(
-                UserModel(
-                  firstname: user.displayName!.split(' ')[0],
-                  lastname: user.displayName!.split(' ')[1],
-                  email: user.email,
-                ),
-                "GOOGLE");
-            if (response != null) {
-              callLogin(context, user.email!, true);
-            } else {
-              callLogin(context, user.email!, false);
-            }
-          }
+          // var user = await getIt.get<SocialAuth>().signInWithGoogle();
+          // if (user == null) {
+          //   return;
+          // } else {
+          //   print('User: $user');
+          //   final response = await getIt.get<SocialAuth>().socialSignUp(
+          //       UserModel(
+          //         firstname: user.displayName!.split(' ')[0],
+          //         lastname: user.displayName!.split(' ')[1],
+          //         email: user.email,
+          //       ),
+          //       "GOOGLE");
+          //   if (response != null) {
+          //     callLogin(context, user.email!, true);
+          //   } else {
+          //     callLogin(context, user.email!, false);
+          //   }
+          // }
         },
         socialButtonType: SocialButtonType.google,
         text: 'Continue with Google',
@@ -161,14 +161,14 @@ extension SocialButtonExtension on BuildContext {
       // (Platform.isIOS) ?
       SocialAuthButton(
         onPressed: () async {
-          var user = await getIt.get<SocialAuth>().signInWithApple();
-          if (user == null) return;
-          if (context.mounted) {
-            context.go(
-              RouteNames.homeFeed,
-              extra: HomeFeedPageType.feed,
-            );
-          }
+          // var user = await getIt.get<SocialAuth>().signInWithApple();
+          // if (user == null) return;
+          // if (context.mounted) {
+          //   context.go(
+          //     RouteNames.homeFeed,
+          //     extra: HomeFeedPageType.feed,
+          //   );
+          // }
         },
         socialButtonType: SocialButtonType.apple,
         text: 'Continue with Apple',

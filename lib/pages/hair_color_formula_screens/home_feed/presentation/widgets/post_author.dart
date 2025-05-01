@@ -62,7 +62,7 @@ class PostAuthor extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Curly | ${timeDifference(posts.createdAt)}',
+                      'Post | ${timeDifference(posts.createdAt)}',
                       style: TextStyle(
                           fontSize: 10,
                           color: AppColors.greyColor,
@@ -220,7 +220,7 @@ class PostAuthor extends StatelessWidget {
     final Dio dio = Dio();
     await AppLocalData.updateToken();
     final token = await AppLocalData.getUserToken;
-    final url = Uri.parse('${AppLocalData.BaseURL}/feed/post/$postId');
+    final url = Uri.parse('${AppLocalData.BaseURL}/draft/$postId');
     final response = await http.delete(
       url,
       headers: {'accept': '*/*', 'Authorization': 'Bearer $token'},
@@ -241,6 +241,8 @@ class PostAuthor extends StatelessWidget {
       onPostDeleted();
     } else {
       print('Failed to delete post. Status code: ${response.statusCode}');
+
+      onPostDeleted();
     }
   }
 

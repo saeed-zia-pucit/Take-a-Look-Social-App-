@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>${FLUTTER_BUILD_NUMBER}</string>
 	<key>FacebookAppID</key>
 	<string>433782829241020</string>
 	<key>FacebookDisplayName</key>
@@ -64,5 +64,10 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
+	<key>NSCameraUsageDescription</key>
+    <string>We need access to your camera to take photos for profile picture.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>We need access to your microphone for video recording.</string>
 </dict>
 </plist>

@@ -8,7 +8,7 @@ import 'package:take_a_look/core/data/models/user_model.dart';
 
 class AppLocalData {
   static Box<dynamic> box = Hive.box('appBox');
-  static String BaseURL = "http://3.142.45.117:8445/api";
+  static String BaseURL = "http://3.144.233.61:8445/api";
 
   static Future<void> saveUserToken(String? token) async {
     await box.put('token', token);

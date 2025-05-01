@@ -38,7 +38,7 @@ class _EnableLocationPageState extends State<EnableLocationPage> {
                     );
                   }
                 },
-                child: const Text('Enable'),
+                child: const Text('Continue'),
               ),
               const Gap(0)
             ],

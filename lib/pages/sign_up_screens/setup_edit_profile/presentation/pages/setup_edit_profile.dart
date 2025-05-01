@@ -219,10 +219,8 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
     );
 
     if (pickedFile != null) {
-      _selectedImage = File(pickedFile.path);
-      //uploading  meassage
+      cropImage(pickedFile);
 
-      uploadImage(_selectedImage);
     }
   }
 
@@ -280,6 +278,53 @@ class _SetupEditProfilePageState extends State<SetupEditProfilePage> {
       // Handle error
     }
   }
+
+  void cropImage(XFile pickedFile) async{
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: pickedFile.path,
+      compressFormat: ImageCompressFormat.jpg,
+      compressQuality: 100,
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: 'Cropper',
+          toolbarColor: Colors.deepOrange,
+          toolbarWidgetColor: Colors.white,
+          initAspectRatio: CropAspectRatioPreset.square,
+          lockAspectRatio: false,
+          aspectRatioPresets: [
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.square,
+            CropAspectRatioPreset.ratio4x3,
+            CropAspectRatioPresetCustom(),
+          ],
+        ),
+        IOSUiSettings(
+          title: 'Cropper',
+          aspectRatioPresets: [
+            CropAspectRatioPreset.original,
+            CropAspectRatioPreset.square,
+            CropAspectRatioPreset.ratio4x3,
+            CropAspectRatioPresetCustom(),
+          ],
+        ),
+        WebUiSettings(
+          context: context,
+          presentStyle: WebPresentStyle.dialog,
+          size: const CropperSize(
+            width: 520,
+            height: 520,
+          ),
+        ),
+      ],
+    );
+
+    if(croppedFile!=null){
+        _selectedImage = File(croppedFile.path);
+        //uploading  meassage
+
+        uploadImage(_selectedImage);
+    }
+  }
 }
 
 enum SetupEditProfileType {
@@ -291,4 +336,13 @@ extension SetupEditProfileTypeExtension on SetupEditProfileType {
   bool get isSetup => SetupEditProfileType.setup == this;
 
   bool get isEdit => SetupEditProfileType.edit == this;
+}
+
+
+class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
+  @override
+  (int, int)? get data => (2, 3);
+
+  @override
+  String get name => '2x3 (customized)';
 }

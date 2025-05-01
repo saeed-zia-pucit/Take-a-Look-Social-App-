@@ -17,12 +17,12 @@ if (localPropertiesFile.exists()) {
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
+    flutterVersionCode = '5'
 }
 
 def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
+    flutterVersionName = '2.0.0'
 }
 
 android {
@@ -37,7 +37,7 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 
     sourceSets {
@@ -57,7 +57,7 @@ android {
         release {
             keyAlias 'take-look-key-alias'
             keyPassword '123456'
-            storeFile file('D:/Personal/Take-a-Look-Social-App-/android/app/take-look-release-key.jks')
+            storeFile file('key/take-look-release-key.jks')
             storePassword '123456'
         }
     }

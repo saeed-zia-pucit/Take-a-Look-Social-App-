@@ -9,6 +9,14 @@ class FieldsOfForm extends StatelessWidget {
 
     final read = context.read<SignUpViewModel>();
 
+    if(kDebugMode){
+      read.firstNameController.text = "tester";
+      read.lastNameController.text = "dev";
+      read.emailController.text = "tester@gmail.com";
+      read.passwordController.text = "Abc123@@";
+      read.confirmPasswordController.text = "Abc123@@";
+    }
+
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(

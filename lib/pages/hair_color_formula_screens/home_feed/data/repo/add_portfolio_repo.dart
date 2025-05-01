@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:take_a_look/di_service.dart';
 import 'package:http_parser/http_parser.dart' show MediaType;
+
 import '../../../../../core/data/data_source/local/app_local_data.dart';
 
 abstract class AddPortfolioRepo {
@@ -42,20 +43,36 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
       print(selectedCategory.toUpperCase());
 
       // Create MultipartFile from image
-      final imageMapping = await MultipartFile.fromFile(
-        image!.path,
-        filename: image.path.split('/').last,
-        contentType: MediaType('image', 'png'),
-      );
+      var imageMapping;
+      if(image!=null){
+        imageMapping = await MultipartFile.fromFile(
+          image.path,
+          filename: image.path.split('/').last,
+          contentType: MediaType('image', 'png'),
+        );
+      }
+
+
 
       // Create FormData
-      FormData formData = FormData.fromMap({
-        'post': MultipartFile.fromString(
-          json.encode(post),
-          contentType: MediaType('application', 'json'),
-        ),
-        'file': imageMapping,
-      });
+      FormData formData ;
+
+      if(imageMapping!=null){
+        formData = FormData.fromMap({
+          'post': MultipartFile.fromString(
+            json.encode(post),
+            contentType: MediaType('application', 'json'),
+          ),
+          'file': imageMapping,
+        });
+      }else{
+        formData = FormData.fromMap({
+          'post': MultipartFile.fromString(
+            json.encode(post),
+            contentType: MediaType('application', 'json'),
+          ),
+        });
+      }
       // Send POST request
       Response response = await dio.post(
         '${AppLocalData.BaseURL}/feed/post',
@@ -138,7 +155,7 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
 
       // Send POST request
       Response response = await dio.put(
-        '${AppLocalData.BaseURL}/feed/post/$postId',
+        '${AppLocalData.BaseURL}/draft/$postId',
         data: formData,
         options: Options(
           headers: {
@@ -178,20 +195,33 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
       };
 
       // Create MultipartFile from image
-      final imageMapping = await MultipartFile.fromFile(
-        image!.path,
-        filename: image.path.split('/').last,
-        contentType: MediaType('image', 'jpeg'),
-      );
+      var imageMapping;
+      if (image != null) {
+        imageMapping = await MultipartFile.fromFile(
+          image.path,
+          filename: image.path.split('/').last,
+          contentType: MediaType('image', 'jpeg'),
+        );
+      }
 
       // Create FormData
-      FormData formData = FormData.fromMap({
-        'post': MultipartFile.fromString(
-          json.encode(post),
-          contentType: MediaType('application', 'json'),
-        ),
-        'file': imageMapping,
-      });
+      FormData formData;
+      if (imageMapping != null) {
+        formData = FormData.fromMap({
+          'post': MultipartFile.fromString(
+            json.encode(post),
+            contentType: MediaType('application', 'json'),
+          ),
+          'file': imageMapping,
+        });
+      } else {
+        formData = FormData.fromMap({
+          'post': MultipartFile.fromString(
+            json.encode(post),
+            contentType: MediaType('application', 'json'),
+          ),
+        });
+      }
       // Send POST request
       Response response = await dio.post(
         '${AppLocalData.BaseURL}/draft',

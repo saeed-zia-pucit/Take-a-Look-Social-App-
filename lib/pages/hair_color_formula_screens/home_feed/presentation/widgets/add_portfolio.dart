@@ -17,6 +17,21 @@ class _AddPortfolioState extends State<AddPortfolio> {
   bool _isImageAttached = false;
   String _selectedCategory = 'Other';
 
+
+  @override
+  void initState() {
+    final model = Provider.of<AddPortfolioViewModel>(context, listen: false);
+
+    if(model.contentController.text.isEmpty){
+      model.contentController.text = 'Formula:\nCaption:';
+      int size = model.contentController.text.length;
+      model.contentController.selection = TextSelection.fromPosition(
+        TextPosition(offset: size),
+      );
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<AddPortfolioViewModel>(context, listen: false);
@@ -106,7 +121,7 @@ class _AddPortfolioState extends State<AddPortfolio> {
                     maxLines: 3,
                     decoration: const InputDecoration(
                       alignLabelWithHint: true,
-                      hintText: 'Add Caption...',
+                      hintText: 'Formula:\nCaption:',
                       // labelText: 'Add Portfolio...',
                     ),
                   ),
@@ -213,6 +228,15 @@ class _AddPortfolioState extends State<AddPortfolio> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () async {
+                      if(!_isImageAttached){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Image required for post'),
+                          ),
+                        );
+                        return;
+                      }
+                      print("_isImageAttached $_isImageAttached");
                       setState(() {
                         _isLoading = true;
                       });

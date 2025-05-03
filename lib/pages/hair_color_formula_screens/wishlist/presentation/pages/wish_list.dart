@@ -109,7 +109,7 @@ class _WishListPostPageState extends State<WishListPostPage> {
                               if (post != null) {
                                 return PostItem(
                                   homeFeedPageType: pageType.wishlist
-                                      ? HomeFeedPageType.feed
+                                      ? HomeFeedPageType.wishList
                                       : HomeFeedPageType.feed,
                                   post: post,
                                   userModel: userDataModel,

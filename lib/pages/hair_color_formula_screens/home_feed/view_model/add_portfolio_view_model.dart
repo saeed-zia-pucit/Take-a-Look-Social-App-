@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
 
 import '../data/repo/add_portfolio_repo.dart';
 
@@ -53,14 +54,15 @@ class AddPortfolioViewModel extends ChangeNotifier {
     return response;
   }
 
-  Future<Response?> updatePortfolio(String postId) async {
+  Future<Response?> updatePortfolio(String postId,HomeFeedPageType homeFeedPageType) async {
     Response? response = await addPortfolioRepo.updatePortfolio(
         postId,
         _selectedImage,
         contentController.text,
         additionalUrlController.text,
         additionalNoteController.text,
-        selectedCategory
+        selectedCategory,
+        homeFeedPageType
     );
     return response;
   }

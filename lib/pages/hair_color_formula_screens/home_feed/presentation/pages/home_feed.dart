@@ -377,6 +377,7 @@ class Section extends MultiSliver {
 enum HomeFeedPageType {
   feed,
   home,
+  wishList
 }
 
 extension HomeFeedPageTypeExtension on HomeFeedPageType {

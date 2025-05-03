@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart' show MediaType;
+import 'package:take_a_look/pages/hair_color_formula_screens/home_feed/presentation/pages/pages.dart';
 
 import '../../../../../core/data/data_source/local/app_local_data.dart';
 
@@ -10,8 +11,14 @@ abstract class AddPortfolioRepo {
   Future<Response?> postPortfolio(File? image, String content,
       String additionalUrl, String additionalNote, String selectedCategory);
 
-  Future<Response?> updatePortfolio(String postId,File? image, String content,
-      String additionalUrl, String additionalNote, String selectedCategory);
+  Future<Response?> updatePortfolio(
+      String postId,
+      File? image,
+      String content,
+      String additionalUrl,
+      String additionalNote,
+      String selectedCategory,
+      HomeFeedPageType homeFeedPageType);
 
   Future<Response?> postDraft(File? image, String content, String additionalUrl,
       String additionalNote, String selectedCategory);
@@ -44,7 +51,7 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
 
       // Create MultipartFile from image
       var imageMapping;
-      if(image!=null){
+      if (image != null) {
         imageMapping = await MultipartFile.fromFile(
           image.path,
           filename: image.path.split('/').last,
@@ -52,12 +59,10 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
         );
       }
 
-
-
       // Create FormData
-      FormData formData ;
+      FormData formData;
 
-      if(imageMapping!=null){
+      if (imageMapping != null) {
         formData = FormData.fromMap({
           'post': MultipartFile.fromString(
             json.encode(post),
@@ -65,7 +70,7 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
           ),
           'file': imageMapping,
         });
-      }else{
+      } else {
         formData = FormData.fromMap({
           'post': MultipartFile.fromString(
             json.encode(post),
@@ -106,7 +111,8 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
       String content,
       String additionalUrl,
       String additionalNote,
-      String selectedCategory) async {
+      String selectedCategory,
+      HomeFeedPageType homeFeedPageType) async {
     try {
       // Update token
       await AppLocalData.updateToken();
@@ -123,18 +129,17 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
 
       // Create MultipartFile from image
       late var imageMapping;
-      if(image!=null){
-         imageMapping = await MultipartFile.fromFile(
+      if (image != null) {
+        imageMapping = await MultipartFile.fromFile(
           image.path,
           filename: image.path.split('/').last,
           contentType: MediaType('image', 'png'),
         );
       }
 
-
       // Create FormData
       late FormData formData;
-      if(image!=null){
+      if (image != null) {
         formData = FormData.fromMap({
           'post': MultipartFile.fromString(
             json.encode(post),
@@ -142,20 +147,24 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
           ),
           'file': imageMapping,
         });
-      }
-      else{
+      } else {
         formData = FormData.fromMap({
           'post': MultipartFile.fromString(
             json.encode(post),
             contentType: MediaType('application', 'json'),
           ),
-
         });
       }
 
+      var endpoint = "";
+      if (homeFeedPageType == HomeFeedPageType.wishList) {
+        endpoint = '${AppLocalData.BaseURL}/draft/$postId';
+      } else {
+        endpoint = '${AppLocalData.BaseURL}/feed/post/$postId';
+      }
       // Send POST request
       Response response = await dio.put(
-        '${AppLocalData.BaseURL}/draft/$postId',
+        endpoint,
         data: formData,
         options: Options(
           headers: {
@@ -245,11 +254,11 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
       return response;
     } on DioError catch (e) {
       // Handle DioError
-        print('Unexpected error: ${e.message}');
-
+      print('Unexpected error: ${e.message}');
     } catch (e) {
       // Handle any other type of error
 
       print('Unexpected error: $e');
-  }}
+    }
+  }
 }

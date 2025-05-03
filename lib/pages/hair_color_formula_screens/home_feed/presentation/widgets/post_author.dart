@@ -167,6 +167,7 @@ class PostAuthor extends StatelessWidget {
                                             content: post.content,
                                             selectedCategory: post.category,
                                             postId: post.postId,
+                                            homeFeedPageType: homeFeedPageType,
                                           ),
                                           context.bottomHeightGap,
                                           // Gap(50)
@@ -187,7 +188,7 @@ class PostAuthor extends StatelessWidget {
                           ),
                           TextButton.icon(
                             onPressed: () {
-                              deletePost(posts.postId);
+                              deletePost(posts.postId,homeFeedPageType);
                               Navigator.pop(context);
                             },
                             icon: SvgPicture.asset(AppIcons.trashBasketIcon),
@@ -216,11 +217,20 @@ class PostAuthor extends StatelessWidget {
     );
   }
 
-  Future<void> deletePost(String postId) async {
+  Future<void> deletePost(String postId,HomeFeedPageType pageType) async {
     final Dio dio = Dio();
     await AppLocalData.updateToken();
     final token = await AppLocalData.getUserToken;
-    final url = Uri.parse('${AppLocalData.BaseURL}/draft/$postId');
+    Uri url = Uri();
+    if( pageType == HomeFeedPageType.wishList){
+       url = Uri.parse('${AppLocalData.BaseURL}/draft/$postId');
+
+    }else{
+       url = Uri.parse('${AppLocalData.BaseURL}/feed/post/$postId');
+
+    }
+
+    //final url = Uri.parse('${AppLocalData.BaseURL}/draft/$postId');
     final response = await http.delete(
       url,
       headers: {'accept': '*/*', 'Authorization': 'Bearer $token'},

@@ -57,7 +57,7 @@ android {
         release {
             keyAlias 'take-look-key-alias'
             keyPassword '123456'
-            storeFile file('key/take-look-release-key.jks')
+            storeFile file('take-look-release-key.jks')
             storePassword '123456'
         }
     }

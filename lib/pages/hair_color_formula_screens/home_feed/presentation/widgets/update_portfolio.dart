@@ -1,13 +1,22 @@
 part of 'widgets.dart';
 
 class UpdatePortfolio extends StatefulWidget {
-  const UpdatePortfolio(
-      {super.key, required this.onSuccess, required this.userModel, required this.content, required this.selectedCategory, required this.postId});
+  const UpdatePortfolio({
+    super.key,
+    required this.onSuccess,
+    required this.userModel,
+    required this.content,
+    required this.selectedCategory,
+    required this.postId,
+    required this.fromHome,
+  });
   final String content;
   final String postId;
   final String selectedCategory;
   final Function onSuccess;
   final UserModel userModel;
+
+  final bool fromHome;
 
   @override
   _UpdatePortfolioState createState() => _UpdatePortfolioState();
@@ -18,7 +27,7 @@ class _UpdatePortfolioState extends State<UpdatePortfolio> {
   bool _isLoading = false;
   late String _selectedCategory;
   //final model = Provider.of<AddPortfolioViewModel>(context, listen: false);
-  late var model;
+  late AddPortfolioViewModel model;
   @override
   initState(){
      model = Provider.of<AddPortfolioViewModel>(context, listen: false);
@@ -206,7 +215,8 @@ class _UpdatePortfolioState extends State<UpdatePortfolio> {
                           content: Text('Saving post, Please wait!'),
                         ),
                       );
-                      final result = await model.updatePortfolio(widget.postId);
+                      final result = await model.updatePortfolio(widget.postId,
+                          fromHome: widget.fromHome);
                       setState(() {
                         _isLoading = false;
                       });

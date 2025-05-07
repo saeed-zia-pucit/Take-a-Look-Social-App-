@@ -6,12 +6,14 @@ class PostItem extends StatelessWidget {
       required this.homeFeedPageType,
       required this.post,
       required this.userModel,
+      required this.fromHome,
       required this.onPostDeleted});
 
   final HomeFeedPageType homeFeedPageType;
   final Function onPostDeleted;
   final PostModel post;
   late UserModel userModel;
+  bool fromHome;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class PostItem extends StatelessWidget {
       children: [
         PostAuthor(
           homeFeedPageType: homeFeedPageType,
+          fromHome: fromHome,
           post: post,
           onPostDeleted: () {
             onPostDeleted();

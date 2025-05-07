@@ -108,6 +108,7 @@ class _WishListPostPageState extends State<WishListPostPage> {
                               //  // This triggers a rebuild after the delay
                               if (post != null) {
                                 return PostItem(
+                                  fromHome: false,
                                   homeFeedPageType: pageType.wishlist
                                       ? HomeFeedPageType.feed
                                       : HomeFeedPageType.feed,

@@ -6,12 +6,15 @@ class PostAuthor extends StatelessWidget {
       required this.homeFeedPageType,
       required this.post,
       required this.onPostDeleted,
-      required this.userModel});
+    required this.userModel,
+    required this.fromHome,
+  });
 
   final Function onPostDeleted;
   final HomeFeedPageType homeFeedPageType;
   final PostModel post;
   final UserModel userModel;
+  final bool fromHome;
 
   @override
   Widget build(BuildContext context) {
@@ -167,6 +170,7 @@ class PostAuthor extends StatelessWidget {
                                             content: post.content,
                                             selectedCategory: post.category,
                                             postId: post.postId,
+                                            fromHome: fromHome,
                                           ),
                                           context.bottomHeightGap,
                                           // Gap(50)
@@ -187,7 +191,7 @@ class PostAuthor extends StatelessWidget {
                           ),
                           TextButton.icon(
                             onPressed: () {
-                              deletePost(posts.postId);
+                              deletePost(posts.postId, fromHome: fromHome);
                               Navigator.pop(context);
                             },
                             icon: SvgPicture.asset(AppIcons.trashBasketIcon),
@@ -216,11 +220,14 @@ class PostAuthor extends StatelessWidget {
     );
   }
 
-  Future<void> deletePost(String postId) async {
+  Future<void> deletePost(String postId, {required fromHome}) async {
     final Dio dio = Dio();
     await AppLocalData.updateToken();
     final token = await AppLocalData.getUserToken;
-    final url = Uri.parse('${AppLocalData.BaseURL}/draft/$postId');
+    var url = Uri.parse('${AppLocalData.BaseURL}/draft/$postId');
+    if (fromHome) {
+      url = Uri.parse('${AppLocalData.BaseURL}/feed/post/$postId');
+    }
     final response = await http.delete(
       url,
       headers: {'accept': '*/*', 'Authorization': 'Bearer $token'},

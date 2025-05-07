@@ -53,14 +53,15 @@ class AddPortfolioViewModel extends ChangeNotifier {
     return response;
   }
 
-  Future<Response?> updatePortfolio(String postId) async {
+  Future<Response?> updatePortfolio(String postId,{required fromHome}) async {
     Response? response = await addPortfolioRepo.updatePortfolio(
         postId,
         _selectedImage,
         contentController.text,
         additionalUrlController.text,
         additionalNoteController.text,
-        selectedCategory
+        selectedCategory,
+        fromHome,
     );
     return response;
   }

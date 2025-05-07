@@ -338,7 +338,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                       return PostItem(
                                         homeFeedPageType: homeFeedPageType,
                                         post: data[index],
-                                        userModel: userDataModel,
+                                                fromHome: true,
+                                                userModel: userDataModel,
                                         onPostDeleted: () {
                                           updatePosts(userDataModel.id);
                                         },

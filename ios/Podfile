@@ -1,15 +1,17 @@
-# Uncomment this line to define a global platform for your project
+# Set the minimum iOS version for your project
 platform :ios, '13.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
+# Define the project and its build configurations
 project 'Runner', {
   'Debug' => :debug,
   'Profile' => :release,
   'Release' => :release,
 }
 
+# Determine the path to Flutter SDK
 def flutter_root
   generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
   unless File.exist?(generated_xcode_build_settings_path)
@@ -23,8 +25,10 @@ def flutter_root
   raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
 end
 
+# Load Flutter's CocoaPods helper
 require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
 
+# Set up all Flutter iOS pods
 flutter_ios_podfile_setup
 
 target 'Runner' do
@@ -32,16 +36,20 @@ target 'Runner' do
   use_modular_headers!
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
   target 'RunnerTests' do
     inherit! :search_paths
   end
 end
 
+# Additional build settings
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+
+    # Force standard architecture to avoid issues on Apple Silicon
     target.build_configurations.each do |config|
-              config.build_settings['ARCHS'] = '$(ARCHS_STANDARD)'
-            end
+      config.build_settings['ARCHS'] = '$(ARCHS_STANDARD)'
+    end
   end
 end

@@ -11,7 +11,7 @@ abstract class AddPortfolioRepo {
       String additionalUrl, String additionalNote, String selectedCategory);
 
   Future<Response?> updatePortfolio(String postId,File? image, String content,
-      String additionalUrl, String additionalNote, String selectedCategory);
+      String additionalUrl, String additionalNote, String selectedCategory,bool fromHome);
 
   Future<Response?> postDraft(File? image, String content, String additionalUrl,
       String additionalNote, String selectedCategory);
@@ -106,7 +106,9 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
       String content,
       String additionalUrl,
       String additionalNote,
-      String selectedCategory) async {
+      String selectedCategory,
+      bool fromHome
+      ) async {
     try {
       // Update token
       await AppLocalData.updateToken();
@@ -153,9 +155,14 @@ class AddPortfolioRepoImpl extends AddPortfolioRepo {
         });
       }
 
+      String path = '${AppLocalData.BaseURL}/draft/$postId';
+
+      if(fromHome){
+        path = '${AppLocalData.BaseURL}/feed/post/$postId';
+      }
       // Send POST request
       Response response = await dio.put(
-        '${AppLocalData.BaseURL}/draft/$postId',
+        path,
         data: formData,
         options: Options(
           headers: {

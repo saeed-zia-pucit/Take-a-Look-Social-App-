@@ -235,6 +235,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                                   return PostItem(
                                     homeFeedPageType: homeFeedPageType,
                                     post: post,
+                                    fromHome: true,
                                     userModel: userDataModel,
                                     onPostDeleted: () {
                                       updatePosts();
@@ -282,6 +283,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
                               //   });
                               // }
                               return PostItem(
+                                fromHome: true,
                                 homeFeedPageType: homeFeedPageType,
                                 post: post,
                                 userModel: userDataModel,

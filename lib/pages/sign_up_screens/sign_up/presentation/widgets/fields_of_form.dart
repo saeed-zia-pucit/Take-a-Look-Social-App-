@@ -12,7 +12,7 @@ class FieldsOfForm extends StatelessWidget {
     if(kDebugMode){
       read.firstNameController.text = "tester";
       read.lastNameController.text = "dev";
-      read.emailController.text = "tester@gmail.com";
+      read.emailController.text = "tester1@gmail.com";
       read.passwordController.text = "Abc123@@";
       read.confirmPasswordController.text = "Abc123@@";
     }

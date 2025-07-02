@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:take_a_look/pages/sign_in_screens/sign_in/view_model/sign_in_view_model.dart';
 import 'package:take_a_look/pages/sign_up_screens/profile/view_model/profile_view_model.dart';

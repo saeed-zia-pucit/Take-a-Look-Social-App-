@@ -9,6 +9,11 @@ class SignInForm extends StatelessWidget {
 
     final read = context.read<SignInViewModel>();
 
+    if (kDebugMode) {
+      read.emailController.text = "saeedzia34@gmail.com";
+      read.passwordController.text = "Admin@123";
+    }
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(20),
